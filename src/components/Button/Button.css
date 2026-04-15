@@ -1,0 +1,64 @@
+/* Button.css – Styles for the Button component
+ *
+ * Each variant maps to a modifier class: uiverse-btn--<variant>
+ * To add a new variant, add a new block at the bottom following the same pattern.
+ */
+
+/* ── Base styles shared by all variants ── */
+.uiverse-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  letter-spacing: 0.3px;
+  outline: none;
+  font-family: inherit;
+}
+
+.uiverse-btn:active {
+  transform: scale(0.97);
+}
+
+/* ── Primary variant – main call-to-action ── */
+.uiverse-btn--primary {
+  background-color: #4f46e5;
+  color: #ffffff;
+  border-color: #4f46e5;
+}
+
+.uiverse-btn--primary:hover {
+  background-color: #4338ca;
+  border-color: #4338ca;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+}
+
+/* ── Secondary variant – less prominent action ── */
+.uiverse-btn--secondary {
+  background-color: #ffffff;
+  color: #4f46e5;
+  border-color: #4f46e5;
+}
+
+.uiverse-btn--secondary:hover {
+  background-color: #eef2ff;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.15);
+}
+
+/* ── Danger variant – destructive or warning action ── */
+.uiverse-btn--danger {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
+.uiverse-btn--danger:hover {
+  background-color: #dc2626;
+  border-color: #dc2626;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+}

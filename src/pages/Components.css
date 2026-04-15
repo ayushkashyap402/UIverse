@@ -1,0 +1,154 @@
+/* Components.css – Styles for the Components showcase page */
+
+.components-page {
+  min-height: 100vh;
+  background-color: #f4f6fb;
+}
+
+/* ── Navbar ── */
+.components-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #4f46e5;
+}
+
+.nav-tagline {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* ── Page layout ── */
+.components-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.components-heading {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.components-subheading {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 48px;
+}
+
+/* ── Component section ── */
+.component-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.section-description {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+/* ── Button preview row ── */
+.component-preview {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* ── Code block ── */
+.code-block {
+  background: #1e1e2e;
+  border-radius: 8px;
+  padding: 16px 20px;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  color: #cdd6f4;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  white-space: pre;
+}
+
+/* ── Components table ── */
+.components-table-wrapper {
+  overflow-x: auto;
+}
+
+.components-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.components-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: #f8fafc;
+  border-bottom: 2px solid #e2e8f0;
+  color: #444;
+  font-weight: 600;
+}
+
+.components-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+}
+
+.components-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Status badges ── */
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-stable {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-beta {
+  background: #fef9c3;
+  color: #ca8a04;
+}
+
+.status-planned {
+  background: #f1f5f9;
+  color: #64748b;
+}
