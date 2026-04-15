@@ -2,23 +2,20 @@
 //
 // Props:
 //   text     (string)  – Label displayed inside the button
-//   variant  (string)  – Visual style: "primary" | "secondary" | "danger"
+//   variant  (string)  – "primary" | "secondary" | "danger"
+//   size     (string)  – "sm" | "md" (default) | "lg"
 //   onClick  (func)    – Optional click handler
 //
-// Usage:
-//   <Button text="Click me" variant="primary" onClick={() => alert('Hi!')} />
-//
-// To add a new variant:
-//   1. Add the variant name to the prop below
-//   2. Add a matching CSS class in Button.css
+// To add a new variant: add CSS class uiverse-btn--<name> in Button.css
+// To add a new size:    add CSS class uiverse-btn--<size> in Button.css
 
 import React from 'react'
 import './Button.css'
 
-function Button({ text = 'Button', variant = 'primary', onClick }) {
+function Button({ text = 'Button', variant = 'primary', size = 'md', onClick }) {
   return (
     <button
-      className={`uiverse-btn uiverse-btn--${variant}`}
+      className={`uiverse-btn uiverse-btn--${variant} uiverse-btn--${size}`}
       onClick={onClick}
     >
       {text}
