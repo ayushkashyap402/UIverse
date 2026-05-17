@@ -39,14 +39,13 @@ function Navbar() {
         <Link to="/components" className={`navbar-link ${location.pathname === '/components' ? 'active' : ''}`}>
           Components
         </Link>
-        <a
-          href="https://github.com"
-          target="_blank"
-          rel="noreferrer"
+        <Link
+          to="/docs"
           className="navbar-link navbar-github"
+          onClick={closeMenu}
         >
-          GitHub ↗
-        </a>
+          Get Started
+        </Link>
       </div>
       <button onClick = {handleOpenNavbar}
         className = "nav-btn"
