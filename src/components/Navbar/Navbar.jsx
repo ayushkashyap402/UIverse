@@ -3,11 +3,15 @@
 
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { FaBars, FaTimes } from 'react-icons/fa'
+
 import './Navbar.css'
 
 function Navbar() {
   const location = useLocation()
   const [scrolled, setScrolled] = useState(false)
+  const[isOpen, setIsOpen] = useState(false)
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -15,14 +19,20 @@ function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const handleOpenNavbar = () =>{
+    setIsOpen(prev=> !prev)
+  }
+  const closeMenu =() =>{
+    setIsOpen(false)
+  }
+
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
-      <Link to="/" className="navbar-logo">
+      <Link to="/" className="navbar-logo" onClick={closeMenu}>
         <span className="navbar-logo-icon">⬡</span>
         UIverse
       </Link>
-
-      <div className="navbar-links">
+      <div className={`navbar-links ${isOpen ? "active" : ""}`}>
         <Link to="/" className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}>
           Home
         </Link>
@@ -38,6 +48,11 @@ function Navbar() {
           GitHub ↗
         </a>
       </div>
+      <button onClick = {handleOpenNavbar}
+        className = "nav-btn"
+        aria-label='toggle navigation button'>
+          {isOpen ? <FaTimes />:<FaBars/> }
+        </button>
     </nav>
   )
 }
