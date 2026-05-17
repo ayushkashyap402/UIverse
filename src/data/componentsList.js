@@ -51,4 +51,15 @@ export const componentsList = [
     status: 'Planned',
     description: 'Responsive top navigation bar with logo and links.',
   },
+
+
+  // New Alert component
+  {
+    id: 7,
+    name: 'Alert',
+    category: 'Feedback',
+    status: 'Stable',
+    description:
+      'Reusable alert component for success, error, warning, and informational messages.',
+  },
 ]
