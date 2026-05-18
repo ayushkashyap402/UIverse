@@ -1,52 +1,53 @@
-/* Navbar.css */
-
+/* ================= ROOT VARIABLES ================= */
 :root {
-  
-  
   --nav-text: #e5e7eb;
   --nav-muted: #9ca3af;
-  --nav-primary: #0d00ff;
+  --nav-primary: #4f46e5;
   --nav-primary-light: #6366f1;
   --nav-hover: rgba(255, 255, 255, 0.06);
+
+  --surface: rgba(31, 34, 44, 0.85);
+  --border: rgba(255, 255, 255, 0.08);
 }
 
-
-
+/* ================= NAVBAR ================= */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+
   padding: 0 32px;
+  height: 64px;
 
   position: sticky;
   top: 0;
   z-index: 1000;
 
-  background: rgba(31, 34, 44, 0.82);
+  background: var(--surface);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 
-  transition:
-    background 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+  border-bottom: 1px solid var(--border);
+
+  transition: all 0.3s ease;
 }
 
 .navbar--scrolled {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
 }
 
+/* ================= LOGO ================= */
 .navbar-logo {
   display: flex;
   align-items: center;
   gap: 10px;
+
   text-decoration: none;
-  font-size: 1.20rem;
+  font-size: 1.2rem;
   font-weight: 800;
   letter-spacing: -0.5px;
   color: white;
+
   transition: transform 0.2s ease;
 }
 
@@ -65,8 +66,7 @@
   filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.45));
 }
 
-
-
+/* ================= LINKS ================= */
 .navbar-links {
   display: flex;
   align-items: center;
@@ -76,15 +76,14 @@
 .navbar-link {
   position: relative;
   padding: 10px 16px;
-  border-radius: 12px;
-  font-size: 0.80rem;
+  border-radius: 10px;
+
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--nav-muted);
+  text-decoration: none;
 
-  transition:
-    color 0.25s ease,
-    background 0.25s ease,
-    transform 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .navbar-link:hover {
@@ -93,20 +92,13 @@
   transform: translateY(-1px);
 }
 
-
+/* Active Link */
 .navbar-link.active {
   color: white;
-  background: linear-gradient(
-    135deg,
-    rgba(61, 53, 208, 0.22),
-    rgba(97, 99, 255, 0.14)
-  );
-  border: 0px solid rgba(49, 53, 255, 0.25);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 4px 14px rgba(6, 2, 95, 0.18);
+  background: rgba(99, 102, 241, 0.15);
 }
 
+/* Underline animation */
 .navbar-link::after {
   content: "";
   position: absolute;
@@ -115,7 +107,7 @@
   width: 0%;
   height: 2px;
   background: var(--nav-primary-light);
-  border-radius: 99px;
+  border-radius: 999px;
   transition: width 0.25s ease;
 }
 
@@ -124,10 +116,9 @@
   width: calc(100% - 32px);
 }
 
-
-
+/* ================= GITHUB BUTTON ================= */
 .navbar-github {
-  margin-left: 6px;
+  margin-left: 8px;
 
   background: linear-gradient(
     135deg,
@@ -139,7 +130,10 @@
   font-weight: 600;
   padding: 10px 16px;
   border-radius: 12px;
+
   box-shadow: 0 6px 18px rgba(79, 70, 229, 0.28);
+
+  transition: all 0.25s ease;
 }
 
 .navbar-github:hover {
@@ -147,37 +141,69 @@
   box-shadow: 0 10px 24px rgba(5, 1, 75, 0.4);
 }
 
+/* ================= THEME TOGGLE ================= */
+.theme-toggle {
+  margin-left: 8px;
 
-.nav-btn {
-  display: none;
-  width: 42px;
-  height: 42px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 36px;
+  height: 36px;
+
   border-radius: 10px;
+  border: 1px solid var(--border);
+
   background: rgba(255, 255, 255, 0.04);
   color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(99, 102, 241, 0.15);
+  transform: rotate(15deg) scale(1.05);
+}
+
+.theme-toggle:active {
+  transform: rotate(180deg) scale(0.9);
+}
+
+/* ================= MOBILE BUTTON ================= */
+.nav-btn {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--border);
+
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+
   font-size: 1.3rem;
   cursor: pointer;
 
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .nav-btn:hover {
-  background: rgba(81, 0, 255, 0.08);
-  transform: scale(1.03);
+  background: rgba(99, 102, 241, 0.15);
+  transform: scale(1.05);
 }
 
- /* Mobile Styles  */
-
+/* ================= MOBILE STYLES ================= */
 @media (max-width: 768px) {
   .navbar {
-    height: 68px;
     padding: 0 20px;
-    
+    height: 68px;
   }
 
   .nav-btn {
@@ -186,21 +212,25 @@
 
   .navbar-links {
     position: absolute;
-    top: 82px;
+    top: 80px;
     right: 20px;
+
     width: 230px;
+
     display: none;
     flex-direction: column;
     align-items: stretch;
-    gap: 6px;
+
+    gap: 8px;
     padding: 18px;
+
     background: rgba(39, 43, 54, 0.96);
 
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 18px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
 
     box-shadow:
       0 20px 40px rgba(0, 0, 0, 0.45),
@@ -216,7 +246,6 @@
   .navbar-link {
     width: 100%;
     padding: 12px 14px;
-    border-radius: 12px;
   }
 
   .navbar-github {
@@ -225,7 +254,7 @@
   }
 }
 
-
+/* ================= ANIMATION ================= */
 @keyframes menuFade {
   from {
     opacity: 0;
