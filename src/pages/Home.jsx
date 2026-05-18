@@ -25,7 +25,7 @@ function Home() {
           <Link to="/components">
             <Button text="Browse Components →" variant="primary" size="lg" />
           </Link>
-          <a href="https://github.com" target="_blank" rel="noreferrer">
+          <a href="https://github.com/ayushkashyap402/UIverse" target="_blank" rel="noreferrer">
             <Button text="⭐ Star on GitHub" variant="secondary" size="lg" />
           </a>
         </div>
@@ -84,7 +84,7 @@ function Home() {
             </div>
           </div>
           <div className="contribute-cta">
-            <a href="https://github.com" target="_blank" rel="noreferrer">
+            <a href="https://github.com/ayushkashyap402/UIverse" target="_blank" rel="noreferrer">
               <Button text="Fork on GitHub" variant="primary" size="lg" />
             </a>
           </div>

@@ -40,7 +40,7 @@ function Navbar() {
           Components
         </Link>
         <a
-          href="https://github.com"
+          href="https://github.com/ayushkashyap402/UIverse"
           target="_blank"
           rel="noreferrer"
           className="navbar-link navbar-github"
