@@ -4,6 +4,7 @@ import Button from '../components/Button/Button.jsx'
 import Navbar from '../components/Navbar/Navbar.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert'
+import NavbarC from '../components/NavBar C/NavBarC.jsx'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
 
@@ -316,7 +317,66 @@ function Components() {
     </div>
   </div>
 </section>
+          {/* Navbar Component*/}
+          <section className="comp-section" id="navbar">
+           <div className="comp-section-header">
+            <h2>Navbar</h2>
+            <span className="comp-badge comp-badge--stable">Stable</span>
+            </div>
 
+              <p className="comp-section-desc">
+                 Responsive reusable navbar component with dynamic links.
+              </p>
+
+              <div className="comp-preview">
+               <NavbarC
+                  logo="UIverse"
+                  links={[
+                  { label: "Home", href: "#" },
+                  { label: "About", href: "#" },
+                  { label: "Docs", href: "#" },
+                  { label: "Contact", href: "#" },
+                ]}/>
+               </div>
+
+            <div className="code-block">
+                <div className="code-block-header">
+                 <span>JSX</span>
+
+                <button className="copy-btn"
+                  onClick={() => handleCopy(
+                `<Navbar
+                  logo="UIverse"
+                  links={[
+                   { label: "Home", href: "#" },  
+                   { label: "About", href: "#" },
+                   { label: "Docs", href: "#" },
+                   { label: "Contact", href: "#" },]}/>`
+                  )}>
+                {copied ? (
+                <>
+                  <CheckIcon /> Copied
+                </>
+                 ) : (
+                <>
+                  <CopyIcon /> Copy
+                </>
+              )}
+             </button>
+            </div>
+
+            <pre>
+            {`<Navbar
+  logo="UIverse"
+  links={[
+    { label: "Home", href: "#" },
+    { label: "About", href: "#" },
+    { label: "Docs", href: "#" },
+    { label: "Contact", href: "#" },
+  ]}
+/>`}</pre>
+         </div>
+         </section>
           {/* ── All Components Table ── */}
 
           {/* ================= ALL COMPONENTS ================= */}
