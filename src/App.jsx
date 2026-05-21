@@ -6,6 +6,8 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Components from './pages/Components.jsx'
 
+import ColorWall from './pages/ColorWall.jsx';
+
 function App() {
   return (
     <Routes>
@@ -14,6 +16,9 @@ function App() {
 
       {/* Components showcase page */}
       <Route path="/components" element={<Components />} />
+
+      {/* Color Wall */}
+      <Route path="/color-wall" element={<ColorWall />} />
     </Routes>
   )
 }
