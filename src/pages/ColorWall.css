@@ -308,3 +308,138 @@
   margin-left: 0.5rem;
   vertical-align: middle;
 }
+
+/* ── Phase 4: Contrast Checker Styling ── */
+.contrast-section {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 4rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.contrast-section h2 {
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.contrast-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.contrast-controls {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.control-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-2);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--bg-alt);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-2);
+}
+
+/* Customizing the native color picker input */
+.picker-wrapper input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+}
+
+.picker-wrapper input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.picker-wrapper input[type="color"]::-webkit-color-swatch {
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+
+.picker-wrapper span {
+  font-family: monospace;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.contrast-score {
+  margin-top: auto;
+  padding: 1rem;
+  background-color: var(--bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.score-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.score-badge.pass {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.score-badge.fail {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.contrast-preview {
+  flex: 1.5;
+  min-width: 300px;
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  /* The transition makes it smoothly fade when the user changes the color picker! */
+  transition: background-color 0.3s ease, color 0.3s ease; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contrast-preview h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.contrast-preview p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.contrast-section{
+    margin-top: 5rem;
+}

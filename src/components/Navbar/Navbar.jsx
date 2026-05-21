@@ -113,6 +113,12 @@ function Navbar() {
           Components
         </Link>
 
+        {/* color wall page */}
+        <Link to="/color-wall" onClick={closeMenu}
+          className={`navbar-link ${location.pathname === '/color-wall' ? 'active' : ''}`}>
+          Color Wall
+        </Link>
+
         {/* GitHub */}
         <a
           href="https://github.com/ayushkashyap402/UIverse"
@@ -130,6 +136,8 @@ function Navbar() {
         >
           {dark ? <SunIcon /> : <MoonIcon />}
         </button>
+
+
 
       </div>
 
