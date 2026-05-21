@@ -6,6 +6,7 @@ import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
+import FooterC from '../components/FooterC/footerC.jsx'
 
 /* ================= SECTIONS ================= */
 
@@ -314,6 +315,75 @@ function Components() {
         </tbody>
       </table>
     </div>
+  </div>
+</section>
+
+<section className="comp-section" id="footer">
+  <div className="comp-section-header">
+    <h2>Footer</h2>
+
+    <span className="comp-badge comp-badge--stable">
+      Stable
+    </span>
+  </div>
+
+  <p className="comp-section-desc">
+    Responsive reusable footer component with dynamic links and social icons.
+  </p>
+
+  {/* Preview */}
+  <div className="comp-preview">
+    <FooterC
+      logo="UIverse"
+      description="Reusable modern React components for developers."
+      links={[
+        { label: "Home", href: "#" },
+        { label: "About", href: "#" },
+        { label: "Docs", href: "#" },
+        { label: "Contact", href: "#" },
+      ]}    />
+  </div>
+
+  {/* Code Block */}
+  <div className="code-block">
+    <div className="code-block-header">
+      <span>JSX</span>
+
+      <button
+        className="copy-btn"
+        onClick={() =>
+          handleCopy(`<Footer
+  logo="UIverse"
+  links={[
+    { label: "Home", href: "#" },
+    { label: "About", href: "#" },
+    { label: "Docs", href: "#" },
+    { label: "Contact", href: "#" },
+  ]}
+/>`)
+        }
+      >
+        {copied ? (
+          <>
+            <CheckIcon /> Copied
+          </>
+        ) : (
+          <>
+            <CopyIcon /> Copy
+          </>
+        )}
+      </button>
+    </div>
+
+    <pre>{`<Footer
+  logo="UIverse"
+  links={[
+    { label: "Home", href: "#" },
+    { label: "About", href: "#" },
+    { label: "Docs", href: "#" },
+    { label: "Contact", href: "#" },
+  ]}
+/>`}</pre>
   </div>
 </section>
 
