@@ -1,4 +1,4 @@
-/* use var(--bg) so it automatically flips to black in dark mode! */
+/* 1. Page Layout & Headers */
 .color-wall-page {
   min-height: 100vh;
   background-color: var(--bg);
@@ -32,104 +32,7 @@
   font-size: 1.5rem;
 }
 
-/* ── CSS Grid makes the cards responsive automatically ── */
-.palette-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.palette-card {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden; /* Keeps the color swatches inside the rounded corners */
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Adds a nice hover lift effect */
-.palette-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-
-/* ── Flexbox trick for the color bars ── */
-.palette-swatches {
-  display: flex;
-  height: 120px;
-}
-
-.swatch {
-  flex: 1; /* Makes all swatches share the width equally */
-  transition: flex 0.2s ease; /* Animates the width change */
-  cursor: pointer;
-}
-
-.swatch:hover {
-  flex: 1.5; /* Makes the hovered color expand slightly! */
-}
-
-.palette-info {
-  padding: 1.2rem;
-}
-
-.palette-info h3 {
-  margin-bottom: 0.8rem;
-  color: var(--text);
-  font-size: 1.1rem;
-}
-
-.hex-codes {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.hex-codes span {
-  font-size: 0.75rem;
-  color: var(--text-2);
-  background-color: var(--bg-alt);
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  font-family: monospace;
-}
-
-/* Make it obvious that the hex code text is clickable */
-.clickable-hex {
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.clickable-hex:hover {
-  background-color: var(--accent);
-  color: var(--brand);
-}
-
-/* The floating notification */
-.copy-toast {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--surface);
-  color: var(--text);
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border);
-  font-size: 0.9rem;
-  z-index: 1000;
-  animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translate(-50%, 20px); }
-  to { opacity: 1; transform: translate(-50%, 0); }
-}
-
-
-/* ── Tab Navigation ── */
+/* 2. Tab Navigation */
 .wall-tabs {
   display: flex;
   gap: 1rem;
@@ -160,43 +63,102 @@
   border-color: var(--brand);
 }
 
-/* ── Palette Info Header (Title & Heart) ── */
-.palette-info-header {
+/* 3. Contrast Checker Section */
+.contrast-section {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.contrast-section h2 {
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.contrast-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.contrast-controls {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.control-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-2);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.contrast-score {
+  margin-top: auto;
+  padding: 1rem;
+  background-color: var(--bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.8rem;
 }
 
-.palette-info-header h3 {
-  margin-bottom: 0; /* Override the old margin */
+.score-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
 }
 
-.favorite-btn {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  padding: 0.2rem;
-  border-radius: 50%;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.score-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
-.favorite-btn:hover {
-  transform: scale(1.2);
+.score-badge.pass {
+  background-color: #dcfce7;
+  color: #166534;
 }
 
-.empty-state {
-  grid-column: 1 / -1; /* Makes it span the whole grid */
-  text-align: center;
-  color: var(--muted);
-  padding: 3rem;
-  background-color: var(--surface);
+.score-badge.fail {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.contrast-preview {
+  flex: 1.5;
+  min-width: 300px;
+  padding: 2.5rem;
   border-radius: 12px;
-  border: 1px dashed var(--border);
+  border: 1px solid var(--border);
+  transition: background-color 0.3s ease, color 0.3s ease; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* ── Builder Section Styling ── */
+.contrast-preview h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.contrast-preview p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* 4. Builder Section */
 .builder-section {
   background-color: var(--surface);
   border: 1px solid var(--border);
@@ -272,25 +234,6 @@
   border: 1px solid var(--border-2);
 }
 
-.color-picker-input {
-  -webkit-appearance: none;
-  border: none;
-  width: 100%;
-  height: 50px;
-  border-radius: 8px;
-  cursor: pointer;
-  background: transparent;
-}
-
-.color-picker-input::-webkit-color-swatch-wrapper {
-  padding: 0;
-}
-
-.color-picker-input::-webkit-color-swatch {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-
 .picker-hex-label {
   font-family: monospace;
   font-size: 0.85rem;
@@ -298,53 +241,10 @@
   font-weight: 600;
 }
 
-/* Custom Tag Badge */
-.custom-badge {
-  font-size: 0.7rem;
-  background-color: var(--accent-2);
-  color: var(--brand-2);
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  margin-left: 0.5rem;
-  vertical-align: middle;
-}
-
-/* ── Phase 4: Contrast Checker Styling ── */
-.contrast-section {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2rem;
-  margin-bottom: 4rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.contrast-section h2 {
-  color: var(--text);
-  margin-bottom: 1.5rem;
-  font-size: 1.4rem;
-}
-
-.contrast-container {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.contrast-controls {
-  flex: 1;
-  min-width: 280px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.control-group label {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--text-2);
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+/* Shared Native Color Picker Customization */
+.picker-wrapper,
+.picker-container {
+  /* Used in both Builder and Contrast Checker */
 }
 
 .picker-wrapper {
@@ -357,18 +257,34 @@
   border: 1px solid var(--border-2);
 }
 
-/* Customizing the native color picker input */
-.picker-wrapper input[type="color"] {
+.picker-wrapper span {
+  font-family: monospace;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.picker-wrapper input[type="color"],
+.color-picker-input {
   -webkit-appearance: none;
   border: none;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
   cursor: pointer;
   background: transparent;
 }
 
-.picker-wrapper input[type="color"]::-webkit-color-swatch-wrapper {
+.picker-wrapper input[type="color"] {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.color-picker-input {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.picker-wrapper input[type="color"]::-webkit-color-swatch-wrapper,
+.color-picker-input::-webkit-color-swatch-wrapper {
   padding: 0;
 }
 
@@ -377,69 +293,166 @@
   border-radius: 50%;
 }
 
-.picker-wrapper span {
-  font-family: monospace;
-  color: var(--text);
-  font-weight: 500;
+.color-picker-input::-webkit-color-swatch {
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
 
-.contrast-score {
-  margin-top: auto;
-  padding: 1rem;
-  background-color: var(--bg);
-  border-radius: 8px;
+/* 5. Palette Grid & Cards */
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.palette-card {
+  background-color: var(--surface);
   border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.palette-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.palette-swatches {
+  display: flex;
+  height: 120px;
+}
+
+.swatch {
+  flex: 1;
+  transition: flex 0.2s ease;
+  cursor: pointer;
+}
+
+.swatch:hover {
+  flex: 1.5;
+}
+
+.palette-info {
+  padding: 1.2rem;
+}
+
+.palette-info-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.8rem;
 }
 
-.score-number {
-  font-size: 1.5rem;
-  font-weight: 800;
+.palette-info-header h3 {
+  margin-bottom: 0;
   color: var(--text);
-}
-
-.score-badge {
-  padding: 0.4rem 0.8rem;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.score-badge.pass {
-  background-color: #dcfce7;
-  color: #166534;
-}
-
-.score-badge.fail {
-  background-color: #fee2e2;
-  color: #991b1b;
-}
-
-.contrast-preview {
-  flex: 1.5;
-  min-width: 300px;
-  padding: 2.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  /* The transition makes it smoothly fade when the user changes the color picker! */
-  transition: background-color 0.3s ease, color 0.3s ease; 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.contrast-preview h3 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}
-
-.contrast-preview p {
   font-size: 1.1rem;
-  line-height: 1.6;
 }
 
-.contrast-section{
-    margin-top: 5rem;
+.hex-codes {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
+
+.hex-codes span {
+  font-size: 0.75rem;
+  color: var(--text-2);
+  background-color: var(--bg-alt);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-family: monospace;
+}
+
+.clickable-hex {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clickable-hex:hover {
+  background-color: var(--accent);
+  color: var(--brand);
+}
+
+.palette-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.favorite-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 50%;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.favorite-btn:hover {
+  transform: scale(1.2);
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 50%;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  opacity: 0.6;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+  background-color: #fee2e2;
+  transform: scale(1.1);
+}
+
+.custom-badge {
+  font-size: 0.7rem;
+  background-color: var(--accent-2);
+  color: var(--brand-2);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+/* 6. UI Utilities (Empty States, Toasts) */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--muted);
+  padding: 3rem;
+  background-color: var(--surface);
+  border-radius: 12px;
+  border: 1px dashed var(--border);
+}
+
+.copy-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--surface);
+  color: var(--text);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  z-index: 1000;
+  animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+```

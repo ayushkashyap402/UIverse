@@ -110,6 +110,16 @@ function ColorWall() {
     setSavedPaletteName(customName);
     setTimeout(() => setSavedPaletteName(null), 2500);
   };
+  // ── delete custom palette ──
+  const deleteCustomPalette = (paletteName) => {
+    // remove from custom palettes
+    setCustomPalettes(customPalettes.filter(p => p.name !== paletteName));
+    
+    // if favorite -> remove from there too
+    if (favorites.includes(paletteName)) {
+      setFavorites(favorites.filter(name => name !== paletteName));
+    }
+  };
 
   // Filter master list based on active tab
   const displayedPalettes = activeTab === 'all' 
@@ -127,7 +137,7 @@ function ColorWall() {
           <p>Explore, save, and test beautiful color combinations.</p>
         </div>
 
-        {/* ── CUSTOM PALETTE BUILDER FORM ── */}
+        {/* CUSTOM PALETTE BUILDER FORM */}
         <section className="builder-section">
           <h2>Create Custom Palette</h2>
           <form onSubmit={handleSaveCustomPalette} className="builder-form">
@@ -158,7 +168,7 @@ function ColorWall() {
           </form>
         </section>
 
-        {/* ── PALETTE EXPLORER ── */}
+        {/* PALETTE EXPLORER */}
         <section className="color-wall-section">
           <div className="wall-tabs">
             <button 
@@ -197,15 +207,29 @@ function ColorWall() {
                   <div className="palette-info">
                     <div className="palette-info-header">
                       <h3>
-                        {preset.name}
+                        {preset.name} 
                         {preset.isCustom && <span className="custom-badge">Custom</span>}
                       </h3>
-                      <button 
-                        className="favorite-btn" 
-                        onClick={() => toggleFavorite(preset.name)}
-                      >
-                        {favorites.includes(preset.name) ? '❤️' : '🤍'}
-                      </button>
+                      
+                      {/* Grouping the buttons together */}
+                      <div className="palette-actions">
+                        {/* Only show the trash can IF it is a custom palette */}
+                        {preset.isCustom && (
+                          <button 
+                            className="delete-btn" 
+                            onClick={() => deleteCustomPalette(preset.name)}
+                            title="Delete custom palette"
+                          >
+                            🗑️
+                          </button>
+                        )}
+                        <button 
+                          className="favorite-btn" 
+                          onClick={() => toggleFavorite(preset.name)}
+                        >
+                          {favorites.includes(preset.name) ? '❤️' : '🤍'}
+                        </button>
+                      </div>
                     </div>
 
                     <div className="hex-codes">
