@@ -82,6 +82,20 @@ const CheckIcon = () => (
     <polyline points="20 6 9 17 4 12"/>
   </svg>
 )
+const SnippetCopyButton = ({ code }) => {
+  const [isCopied, setIsCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 1800);
+  };
+  return (
+    <button className="copy-btn" onClick={handleCopy}>
+      {isCopied ? <><CheckIcon /> Copied</> : <><CopyIcon /> Copy</>}
+    </button>
+  );
+};
+
 
 /* ================= COMPONENT ================= */
 
@@ -351,9 +365,7 @@ function Components() {
               <div className="code-block">
                 <div className="code-block-header">
                   <span>CSS (form-styles.css)</span>
-                  <button className="copy-btn" onClick={() => handleCopy(`.uv-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; width: 100%; }\n.uv-label { font-size: 14px; font-weight: 500; color: var(--text); }\n.uv-required { color: #ef4444; margin-left: 4px; }\n.uv-input { padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; font-size: 15px; background: var(--surface); outline: none; transition: all 0.2s; font-family: inherit; width: 100%; color: var(--text); }\n.uv-input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px var(--accent); }\n.uv-input.error { border-color: #ef4444; }\n.uv-helper { font-size: 12px; color: var(--muted); }\n.uv-helper.error { color: #ef4444; }\n.uv-button { padding: 12px 24px; background: var(--brand); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; width: 100%; }\n.uv-button:hover { background: var(--brand-dark); }\n.uv-check-radio-label { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; color: var(--text); }\n.uv-checkbox, .uv-radio { width: 16px; height: 16px; accent-color: var(--brand); cursor: pointer; }\n.uv-file-input { font-size: 14px; color: var(--text); }\n.uv-file-input::file-selector-button { padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); cursor: pointer; margin-right: 12px; transition: 0.2s; }\n.uv-file-input::file-selector-button:hover { background: var(--border); }\n.uv-slider { width: 100%; accent-color: var(--brand); }\n.uv-otp-container { display: flex; gap: 8px; }\n.uv-otp-input { width: 44px; height: 52px; text-align: center; font-size: 18px; font-weight: 600; border: 1px solid var(--border); border-radius: 6px; outline: none; background: var(--surface); color: var(--text); }\n.uv-otp-input:focus { border-color: var(--brand); }\n.uv-rating { display: flex; gap: 4px; font-size: 24px; color: var(--border); cursor: pointer; }\n.uv-rating .active { color: #f59e0b; }\n.uv-toggle-input { display: none; }\n.uv-toggle-pill { width: 44px; height: 24px; background: var(--border); border-radius: 12px; position: relative; transition: 0.2s; }\n.uv-toggle-pill.active { background: var(--brand); }\n.uv-toggle-circle { width: 20px; height: 20px; background: var(--surface); border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.2s; }\n.uv-toggle-pill.active .uv-toggle-circle { transform: translateX(20px); }\n.uv-address-row { display: flex; gap: 12px; }`)}>
-                    Copy CSS
-                  </button>
+                  <SnippetCopyButton code={`.uv-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; width: 100%; }\n.uv-label { font-size: 14px; font-weight: 500; color: var(--text); }\n.uv-required { color: #ef4444; margin-left: 4px; }\n.uv-input { padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; font-size: 15px; background: var(--surface); outline: none; transition: all 0.2s; font-family: inherit; width: 100%; color: var(--text); }\n.uv-input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px var(--accent); }\n.uv-input.error { border-color: #ef4444; }\n.uv-helper { font-size: 12px; color: var(--muted); }\n.uv-helper.error { color: #ef4444; }\n.uv-button { padding: 12px 24px; background: var(--brand); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; width: 100%; }\n.uv-button:hover { background: var(--brand-dark); }\n.uv-check-radio-label { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; color: var(--text); }\n.uv-checkbox, .uv-radio { width: 16px; height: 16px; accent-color: var(--brand); cursor: pointer; }\n.uv-file-input { font-size: 14px; color: var(--text); }\n.uv-file-input::file-selector-button { padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); cursor: pointer; margin-right: 12px; transition: 0.2s; }\n.uv-file-input::file-selector-button:hover { background: var(--border); }\n.uv-slider { width: 100%; accent-color: var(--brand); }\n.uv-otp-container { display: flex; gap: 8px; }\n.uv-otp-input { width: 44px; height: 52px; text-align: center; font-size: 18px; font-weight: 600; border: 1px solid var(--border); border-radius: 6px; outline: none; background: var(--surface); color: var(--text); }\n.uv-otp-input:focus { border-color: var(--brand); }\n.uv-rating { display: flex; gap: 4px; font-size: 24px; color: var(--border); cursor: pointer; }\n.uv-rating .active { color: #f59e0b; }\n.uv-toggle-input { display: none; }\n.uv-toggle-pill { width: 44px; height: 24px; background: var(--border); border-radius: 12px; position: relative; transition: 0.2s; }\n.uv-toggle-pill.active { background: var(--brand); }\n.uv-toggle-circle { width: 20px; height: 20px; background: var(--surface); border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.2s; }\n.uv-toggle-pill.active .uv-toggle-circle { transform: translateX(20px); }\n.uv-address-row { display: flex; gap: 12px; }`} />
                 </div>
                 <pre style={{ maxHeight: '250px', overflowY: 'auto' }}>{`.uv-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; width: 100%; }
 .uv-label { font-size: 14px; font-weight: 500; color: var(--text); }
@@ -397,7 +409,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Full Name <span className="uv-required">*</span></label>\n  <input type="text" className="uv-input" placeholder="John Doe" />\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Full Name <span className="uv-required">*</span></label>\n  <input type="text" className="uv-input" placeholder="John Doe" />\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Full Name <span className="uv-required">*</span></label>\n  <input type="text" className="uv-input" placeholder="John Doe" />\n</div>`}</pre>
               </div>
             </div>
@@ -412,7 +427,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Bio</label>\n  <textarea className="uv-input" rows="4" placeholder="Tell us about yourself..."></textarea>\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Bio</label>\n  <textarea className="uv-input" rows="4" placeholder="Tell us about yourself..."></textarea>\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Bio</label>\n  <textarea className="uv-input" rows="4" placeholder="Tell us about yourself..."></textarea>\n</div>`}</pre>
               </div>
             </div>
@@ -427,7 +445,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Password</label>\n  <input type="password" className="uv-input" placeholder="••••••••" />\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Password</label>\n  <input type="password" className="uv-input" placeholder="••••••••" />\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Password</label>\n  <input type="password" className="uv-input" placeholder="••••••••" />\n</div>`}</pre>
               </div>
             </div>
@@ -442,7 +463,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Email Address</label>\n  <input type="email" className="uv-input" placeholder="name@example.com" />\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Email Address</label>\n  <input type="email" className="uv-input" placeholder="name@example.com" />\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Email Address</label>\n  <input type="email" className="uv-input" placeholder="name@example.com" />\n</div>`}</pre>
               </div>
             </div>
@@ -457,7 +481,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Phone Number</label>\n  <input type="tel" className="uv-input" placeholder="(555) 000-0000" />\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Phone Number</label>\n  <input type="tel" className="uv-input" placeholder="(555) 000-0000" />\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Phone Number</label>\n  <input type="tel" className="uv-input" placeholder="(555) 000-0000" />\n</div>`}</pre>
               </div>
             </div>
@@ -471,7 +498,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <input type="search" className="uv-input" placeholder="Search..." />\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <input type="search" className="uv-input" placeholder="Search..." />\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <input type="search" className="uv-input" placeholder="Search..." />\n</div>`}</pre>
               </div>
             </div>
@@ -486,7 +516,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Date of Birth</label>\n  <input type="date" className="uv-input" />\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Date of Birth</label>\n  <input type="date" className="uv-input" />\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Date of Birth</label>\n  <input type="date" className="uv-input" />\n</div>`}</pre>
               </div>
             </div>
@@ -502,7 +535,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-check-radio-label">\n    <input type="checkbox" className="uv-checkbox" /> I agree to the Terms of Service\n  </label>\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-check-radio-label">\n    <input type="checkbox" className="uv-checkbox" /> I agree to the Terms of Service\n  </label>\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-check-radio-label">\n    <input type="checkbox" className="uv-checkbox" /> I agree to the Terms of Service\n  </label>\n</div>`}</pre>
               </div>
             </div>
@@ -518,7 +554,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Shipping Method</label>\n  <label className="uv-check-radio-label"><input type="radio" name="shipping" className="uv-radio" /> Standard Shipping</label>\n  <label className="uv-check-radio-label"><input type="radio" name="shipping" className="uv-radio" /> Express Shipping</label>\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Shipping Method</label>\n  <label className="uv-check-radio-label"><input type="radio" name="shipping" className="uv-radio" /> Standard Shipping</label>\n  <label className="uv-check-radio-label"><input type="radio" name="shipping" className="uv-radio" /> Express Shipping</label>\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Shipping Method</label>\n  <label className="uv-check-radio-label"><input type="radio" name="shipping" className="uv-radio" /> Standard Shipping</label>\n  <label className="uv-check-radio-label"><input type="radio" name="shipping" className="uv-radio" /> Express Shipping</label>\n</div>`}</pre>
               </div>
             </div>
@@ -538,7 +577,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Country</label>\n  <select className="uv-input">\n    <option value="" disabled selected>Select an option</option>\n    <option>United States</option>\n    <option>India</option>\n    <option>United Kingdom</option>\n  </select>\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Country</label>\n  <select className="uv-input">\n    <option value="" disabled selected>Select an option</option>\n    <option>United States</option>\n    <option>India</option>\n    <option>United Kingdom</option>\n  </select>\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Country</label>\n  <select className="uv-input">\n    <option value="" disabled selected>Select an option</option>\n    <option>United States</option>\n    <option>India</option>\n    <option>United Kingdom</option>\n  </select>\n</div>`}</pre>
               </div>
             </div>
@@ -558,7 +600,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Select Skills (Hold Ctrl/Cmd to select multiple)</label>\n  <select multiple className="uv-input" style={{ minHeight: '100px' }}>\n    <option>React</option>\n    <option>Node.js</option>\n    <option>Python</option>\n    <option>CSS</option>\n  </select>\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Select Skills (Hold Ctrl/Cmd to select multiple)</label>\n  <select multiple className="uv-input" style={{ minHeight: '100px' }}>\n    <option>React</option>\n    <option>Node.js</option>\n    <option>Python</option>\n    <option>CSS</option>\n  </select>\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Select Skills (Hold Ctrl/Cmd to select multiple)</label>\n  <select multiple className="uv-input" style={{ minHeight: '100px' }}>\n    <option>React</option>\n    <option>Node.js</option>\n    <option>Python</option>\n    <option>CSS</option>\n  </select>\n</div>`}</pre>
               </div>
             </div>
@@ -579,7 +624,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Browser</label>\n  <input list="browsers" className="uv-input" placeholder="Start typing..." />\n  <datalist id="browsers">\n    <option value="Chrome" />\n    <option value="Firefox" />\n    <option value="Safari" />\n    <option value="Edge" />\n  </datalist>\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Browser</label>\n  <input list="browsers" className="uv-input" placeholder="Start typing..." />\n  <datalist id="browsers">\n    <option value="Chrome" />\n    <option value="Firefox" />\n    <option value="Safari" />\n    <option value="Edge" />\n  </datalist>\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Browser</label>\n  <input list="browsers" className="uv-input" placeholder="Start typing..." />\n  <datalist id="browsers">\n    <option value="Chrome" />\n    <option value="Firefox" />\n    <option value="Safari" />\n    <option value="Edge" />\n  </datalist>\n</div>`}</pre>
               </div>
             </div>
@@ -594,7 +642,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Upload Profile Picture</label>\n  <input type="file" className="uv-file-input" />\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Upload Profile Picture</label>\n  <input type="file" className="uv-file-input" />\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Upload Profile Picture</label>\n  <input type="file" className="uv-file-input" />\n</div>`}</pre>
               </div>
             </div>
@@ -610,7 +661,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-check-radio-label">\n    <input type="checkbox" className="uv-checkbox" /> Enable Notifications\n  </label>\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-check-radio-label">\n    <input type="checkbox" className="uv-checkbox" /> Enable Notifications\n  </label>\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-check-radio-label">\n    <input type="checkbox" className="uv-checkbox" /> Enable Notifications\n  </label>\n</div>`}</pre>
               </div>
             </div>
@@ -625,7 +679,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Volume</label>\n  <input type="range" className="uv-slider" min="0" max="100" />\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Volume</label>\n  <input type="range" className="uv-slider" min="0" max="100" />\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Volume</label>\n  <input type="range" className="uv-slider" min="0" max="100" />\n</div>`}</pre>
               </div>
             </div>
@@ -645,7 +702,10 @@ function Components() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Enter 4-digit Code</label>\n  <div className="uv-otp-container">\n    <input type="text" maxLength="1" className="uv-otp-input" />\n    <input type="text" maxLength="1" className="uv-otp-input" />\n    <input type="text" maxLength="1" className="uv-otp-input" />\n    <input type="text" maxLength="1" className="uv-otp-input" />\n  </div>\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Enter 4-digit Code</label>\n  <div className="uv-otp-container">\n    <input type="text" maxLength="1" className="uv-otp-input" />\n    <input type="text" maxLength="1" className="uv-otp-input" />\n    <input type="text" maxLength="1" className="uv-otp-input" />\n    <input type="text" maxLength="1" className="uv-otp-input" />\n  </div>\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Enter 4-digit Code</label>\n  <div className="uv-otp-container">\n    <input type="text" maxLength="1" className="uv-otp-input" />\n    <input type="text" maxLength="1" className="uv-otp-input" />\n    <input type="text" maxLength="1" className="uv-otp-input" />\n    <input type="text" maxLength="1" className="uv-otp-input" />\n  </div>\n</div>`}</pre>
               </div>
             </div>
@@ -659,9 +719,7 @@ function Components() {
               <div className="code-block">
                 <div className="code-block-header">
                   <span>React Component (Requires state)</span>
-                  <button className="copy-btn" onClick={() => handleCopy(`import React, { useState } from 'react';\n\nexport default function Rating() {\n  const [rating, setRating] = useState(0);\n  \n  return (\n    <div className="uv-group">\n      <label className="uv-label">Rate your experience</label>\n      <div className="uv-rating">\n        {[1, 2, 3, 4, 5].map((star) => (\n          <span \n            key={star} \n            className={star <= rating ? 'active' : ''} \n            onClick={() => setRating(star)}\n          >\n            ★\n          </span>\n        ))}\n      </div>\n    </div>\n  );\n}`)}>
-                    Copy Code
-                  </button>
+                  <SnippetCopyButton code={`import React, { useState } from 'react';\n\nexport default function Rating() {\n  const [rating, setRating] = useState(0);\n  \n  return (\n    <div className="uv-group">\n      <label className="uv-label">Rate your experience</label>\n      <div className="uv-rating">\n        {[1, 2, 3, 4, 5].map((star) => (\n          <span \n            key={star} \n            className={star <= rating ? 'active' : ''} \n            onClick={() => setRating(star)}\n          >\n            ★\n          </span>\n        ))}\n      </div>\n    </div>\n  );\n}`} />
                 </div>
                 <pre>{`import React, { useState } from 'react';
 
@@ -702,7 +760,10 @@ export default function Rating() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Shipping Address</label>\n  <input type="text" className="uv-input" placeholder="Street Address" style={{ marginBottom: '8px' }} />\n  <div style={{ display: 'flex', gap: '8px' }}>\n    <input type="text" className="uv-input" placeholder="City" />\n    <input type="text" className="uv-input" placeholder="Zip Code" />\n  </div>\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Shipping Address</label>\n  <input type="text" className="uv-input" placeholder="Street Address" style={{ marginBottom: '8px' }} />\n  <div style={{ display: 'flex', gap: '8px' }}>\n    <input type="text" className="uv-input" placeholder="City" />\n    <input type="text" className="uv-input" placeholder="Zip Code" />\n  </div>\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Shipping Address</label>\n  <input type="text" className="uv-input" placeholder="Street Address" style={{ marginBottom: '8px' }} />\n  <div style={{ display: 'flex', gap: '8px' }}>\n    <input type="text" className="uv-input" placeholder="City" />\n    <input type="text" className="uv-input" placeholder="Zip Code" />\n  </div>\n</div>`}</pre>
               </div>
             </div>
@@ -718,7 +779,10 @@ export default function Rating() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Username</label>\n  <input type="text" className="uv-input error" defaultValue="johndoe" />\n  <span className="uv-helper error">This username is already taken.</span>\n</div>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<div className="uv-group">\n  <label className="uv-label">Username</label>\n  <input type="text" className="uv-input error" defaultValue="johndoe" />\n  <span className="uv-helper error">This username is already taken.</span>\n</div>`} />
+                </div>
                 <pre>{`<div className="uv-group">\n  <label className="uv-label">Username</label>\n  <input type="text" className="uv-input error" defaultValue="johndoe" />\n  <span className="uv-helper error">This username is already taken.</span>\n</div>`}</pre>
               </div>
             </div>
@@ -732,7 +796,10 @@ export default function Rating() {
                 </div>
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<button type="submit" className="uv-button">\n  Create Account\n</button>`)}>Copy</button></div>
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <SnippetCopyButton code={`<button type="submit" className="uv-button">\n  Create Account\n</button>`} />
+                </div>
                 <pre>{`<button type="submit" className="uv-button">\n  Create Account\n</button>`}</pre>
               </div>
             </div>
