@@ -351,31 +351,37 @@ function Components() {
               <div className="code-block">
                 <div className="code-block-header">
                   <span>CSS (form-styles.css)</span>
-                  <button className="copy-btn" onClick={() => handleCopy(`.uv-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; width: 100%; }\n.uv-label { font-size: 14px; font-weight: 500; color: #1a1a2e; }\n.uv-required { color: #ef4444; margin-left: 4px; }\n.uv-input { padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 15px; background: #fff; outline: none; transition: all 0.2s; font-family: inherit; width: 100%; }\n.uv-input:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.15); }\n.uv-input.error { border-color: #ef4444; }\n.uv-helper { font-size: 12px; color: #64748b; }\n.uv-helper.error { color: #ef4444; }\n.uv-button { padding: 12px 24px; background: #4f46e5; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; width: 100%; }\n.uv-button:hover { background: #4338ca; }\n.uv-check-radio-label { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }\n.uv-checkbox, .uv-radio { width: 16px; height: 16px; accent-color: #4f46e5; cursor: pointer; }\n.uv-file-input { font-size: 14px; }\n.uv-file-input::file-selector-button { padding: 8px 16px; border-radius: 6px; border: 1px solid #e2e8f0; background: #f8fafc; cursor: pointer; margin-right: 12px; transition: 0.2s; }\n.uv-file-input::file-selector-button:hover { background: #e2e8f0; }\n.uv-slider { width: 100%; accent-color: #4f46e5; }\n.uv-otp-container { display: flex; gap: 8px; }\n.uv-otp-input { width: 44px; height: 52px; text-align: center; font-size: 18px; font-weight: 600; border: 1px solid #e2e8f0; border-radius: 6px; outline: none; }\n.uv-otp-input:focus { border-color: #4f46e5; }\n.uv-rating { display: flex; gap: 4px; font-size: 24px; color: #cbd5e1; cursor: pointer; }\n.uv-rating .active { color: #f59e0b; }`)}>
+                  <button className="copy-btn" onClick={() => handleCopy(`.uv-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; width: 100%; }\n.uv-label { font-size: 14px; font-weight: 500; color: var(--text); }\n.uv-required { color: #ef4444; margin-left: 4px; }\n.uv-input { padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; font-size: 15px; background: var(--surface); outline: none; transition: all 0.2s; font-family: inherit; width: 100%; color: var(--text); }\n.uv-input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px var(--accent); }\n.uv-input.error { border-color: #ef4444; }\n.uv-helper { font-size: 12px; color: var(--muted); }\n.uv-helper.error { color: #ef4444; }\n.uv-button { padding: 12px 24px; background: var(--brand); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; width: 100%; }\n.uv-button:hover { background: var(--brand-dark); }\n.uv-check-radio-label { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; color: var(--text); }\n.uv-checkbox, .uv-radio { width: 16px; height: 16px; accent-color: var(--brand); cursor: pointer; }\n.uv-file-input { font-size: 14px; color: var(--text); }\n.uv-file-input::file-selector-button { padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); cursor: pointer; margin-right: 12px; transition: 0.2s; }\n.uv-file-input::file-selector-button:hover { background: var(--border); }\n.uv-slider { width: 100%; accent-color: var(--brand); }\n.uv-otp-container { display: flex; gap: 8px; }\n.uv-otp-input { width: 44px; height: 52px; text-align: center; font-size: 18px; font-weight: 600; border: 1px solid var(--border); border-radius: 6px; outline: none; background: var(--surface); color: var(--text); }\n.uv-otp-input:focus { border-color: var(--brand); }\n.uv-rating { display: flex; gap: 4px; font-size: 24px; color: var(--border); cursor: pointer; }\n.uv-rating .active { color: #f59e0b; }\n.uv-toggle-input { display: none; }\n.uv-toggle-pill { width: 44px; height: 24px; background: var(--border); border-radius: 12px; position: relative; transition: 0.2s; }\n.uv-toggle-pill.active { background: var(--brand); }\n.uv-toggle-circle { width: 20px; height: 20px; background: var(--surface); border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.2s; }\n.uv-toggle-pill.active .uv-toggle-circle { transform: translateX(20px); }\n.uv-address-row { display: flex; gap: 12px; }`)}>
                     Copy CSS
                   </button>
                 </div>
                 <pre style={{ maxHeight: '250px', overflowY: 'auto' }}>{`.uv-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; width: 100%; }
-.uv-label { font-size: 14px; font-weight: 500; color: #1a1a2e; }
+.uv-label { font-size: 14px; font-weight: 500; color: var(--text); }
 .uv-required { color: #ef4444; margin-left: 4px; }
-.uv-input { padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 15px; background: #fff; outline: none; transition: all 0.2s; font-family: inherit; width: 100%; }
-.uv-input:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.15); }
+.uv-input { padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; font-size: 15px; background: var(--surface); outline: none; transition: all 0.2s; font-family: inherit; width: 100%; color: var(--text); }
+.uv-input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px var(--accent); }
 .uv-input.error { border-color: #ef4444; }
-.uv-helper { font-size: 12px; color: #64748b; }
+.uv-helper { font-size: 12px; color: var(--muted); }
 .uv-helper.error { color: #ef4444; }
-.uv-button { padding: 12px 24px; background: #4f46e5; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; width: 100%; }
-.uv-button:hover { background: #4338ca; }
-.uv-check-radio-label { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
-.uv-checkbox, .uv-radio { width: 16px; height: 16px; accent-color: #4f46e5; cursor: pointer; }
-.uv-file-input { font-size: 14px; }
-.uv-file-input::file-selector-button { padding: 8px 16px; border-radius: 6px; border: 1px solid #e2e8f0; background: #f8fafc; cursor: pointer; margin-right: 12px; transition: 0.2s; }
-.uv-file-input::file-selector-button:hover { background: #e2e8f0; }
-.uv-slider { width: 100%; accent-color: #4f46e5; }
+.uv-button { padding: 12px 24px; background: var(--brand); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; width: 100%; }
+.uv-button:hover { background: var(--brand-dark); }
+.uv-check-radio-label { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; color: var(--text); }
+.uv-checkbox, .uv-radio { width: 16px; height: 16px; accent-color: var(--brand); cursor: pointer; }
+.uv-file-input { font-size: 14px; color: var(--text); }
+.uv-file-input::file-selector-button { padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); cursor: pointer; margin-right: 12px; transition: 0.2s; }
+.uv-file-input::file-selector-button:hover { background: var(--border); }
+.uv-slider { width: 100%; accent-color: var(--brand); }
 .uv-otp-container { display: flex; gap: 8px; }
-.uv-otp-input { width: 44px; height: 52px; text-align: center; font-size: 18px; font-weight: 600; border: 1px solid #e2e8f0; border-radius: 6px; outline: none; }
-.uv-otp-input:focus { border-color: #4f46e5; }
-.uv-rating { display: flex; gap: 4px; font-size: 24px; color: #cbd5e1; cursor: pointer; }
-.uv-rating .active { color: #f59e0b; }`}</pre>
+.uv-otp-input { width: 44px; height: 52px; text-align: center; font-size: 18px; font-weight: 600; border: 1px solid var(--border); border-radius: 6px; outline: none; background: var(--surface); color: var(--text); }
+.uv-otp-input:focus { border-color: var(--brand); }
+.uv-rating { display: flex; gap: 4px; font-size: 24px; color: var(--border); cursor: pointer; }
+.uv-rating .active { color: #f59e0b; }
+.uv-toggle-input { display: none; }
+.uv-toggle-pill { width: 44px; height: 24px; background: var(--border); border-radius: 12px; position: relative; transition: 0.2s; }
+.uv-toggle-pill.active { background: var(--brand); }
+.uv-toggle-circle { width: 20px; height: 20px; background: var(--surface); border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.2s; }
+.uv-toggle-pill.active .uv-toggle-circle { transform: translateX(20px); }
+.uv-address-row { display: flex; gap: 12px; }`}</pre>
               </div>
             </div>
 
@@ -648,20 +654,37 @@ function Components() {
             <div className="comp-subsection" style={{ marginTop: '32px' }}>
               <h3 className="comp-subsection-title">Rating Input</h3>
               <div className="comp-preview">
-                <div className="uv-group">
-                  <label className="uv-label">Rate your experience</label>
-                  <div className="uv-rating">
-                    <span className="active">★</span>
-                    <span className="active">★</span>
-                    <span className="active">★</span>
-                    <span>★</span>
-                    <span>★</span>
-                  </div>
-                </div>
+                <RatingInput label="Rate your experience" />
               </div>
               <div className="code-block">
-                <div className="code-block-header"><span>JSX</span><button className="copy-btn" onClick={() => handleCopy(`<div className="uv-group">\n  <label className="uv-label">Rate your experience</label>\n  <div className="uv-rating">\n    <span className="active">★</span>\n    <span className="active">★</span>\n    <span className="active">★</span>\n    <span>★</span>\n    <span>★</span>\n  </div>\n</div>`)}>Copy</button></div>
-                <pre>{`<div className="uv-group">\n  <label className="uv-label">Rate your experience</label>\n  <div className="uv-rating">\n    <span className="active">★</span>\n    <span className="active">★</span>\n    <span className="active">★</span>\n    <span>★</span>\n    <span>★</span>\n  </div>\n</div>`}</pre>
+                <div className="code-block-header">
+                  <span>React Component (Requires state)</span>
+                  <button className="copy-btn" onClick={() => handleCopy(`import React, { useState } from 'react';\n\nexport default function Rating() {\n  const [rating, setRating] = useState(0);\n  \n  return (\n    <div className="uv-group">\n      <label className="uv-label">Rate your experience</label>\n      <div className="uv-rating">\n        {[1, 2, 3, 4, 5].map((star) => (\n          <span \n            key={star} \n            className={star <= rating ? 'active' : ''} \n            onClick={() => setRating(star)}\n          >\n            ★\n          </span>\n        ))}\n      </div>\n    </div>\n  );\n}`)}>
+                    Copy Code
+                  </button>
+                </div>
+                <pre>{`import React, { useState } from 'react';
+
+export default function Rating() {
+  const [rating, setRating] = useState(0);
+  
+  return (
+    <div className="uv-group">
+      <label className="uv-label">Rate your experience</label>
+      <div className="uv-rating">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span 
+            key={star} 
+            className={star <= rating ? 'active' : ''} 
+            onClick={() => setRating(star)}
+          >
+            ★
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}`}</pre>
               </div>
             </div>
 
