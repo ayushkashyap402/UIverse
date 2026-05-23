@@ -62,4 +62,12 @@ export const componentsList = [
     description:
       'Reusable alert component for success, error, warning, and informational messages.',
   },
+
+  {
+    id: 8,
+    name: 'Form Components',
+    category: 'Inputs',
+    status: 'Stable',
+    description: 'A comprehensive suite of 20 drop-in ready form elements with base CSS.',
+  },
 ]
