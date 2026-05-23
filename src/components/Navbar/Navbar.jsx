@@ -157,16 +157,14 @@ function Navbar() {
         >
           Components
         </Link>
-
-        {/* GitHub */}
-        <a
-          href="https://github.com/ayushkashyap402/UIverse"
-          target="_blank"
-          rel="noreferrer"
+        {/* Get Started CTA (links to docs page) */}
+        <Link
+          to="/docs"
           className="navbar-link navbar-github"
+          onClick={closeMenu}
         >
-          GitHub
-        </a>
+          Get Started
+        </Link>
 
         {/* Theme Toggle */}
         <button className="theme-toggle" onClick={toggleTheme}>

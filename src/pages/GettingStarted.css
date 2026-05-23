@@ -1,0 +1,238 @@
+/* GettingStarted.css – Doc-specific styles
+   Layout, sidebar, code blocks and tables are reused from Components.css */
+
+/* ── Prose ── */
+.doc-prose {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.75;
+}
+
+.doc-prose p {
+  margin-bottom: 14px;
+}
+
+.doc-prose a {
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.doc-prose a:hover {
+  text-decoration: underline;
+}
+
+.doc-prose code {
+  background: #f1f5f9;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #4f46e5;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* ── Bullet / checklist ── */
+.doc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.doc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.93rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.doc-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: #4f46e5;
+}
+
+/* ── Numbered steps ── */
+.doc-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.doc-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 0.93rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.doc-step-num {
+  width: 26px;
+  height: 26px;
+  background: #eef2ff;
+  color: #4f46e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.doc-step code {
+  background: #f1f5f9;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.83rem;
+  color: #4f46e5;
+}
+
+/* ── Note / callout ── */
+.doc-callout {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #4f46e5;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.7;
+  margin-top: 20px;
+}
+
+.doc-callout-label {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4f46e5;
+}
+
+.doc-callout code {
+  background: #eef2ff;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.83rem;
+  color: #4f46e5;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.doc-callout a {
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.doc-callout a:hover {
+  text-decoration: underline;
+}
+
+/* ── Next-steps button row ── */
+.doc-link-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* ── Table of contents (collapsible on mobile) ── */
+/* Toggle is desktop-hidden; the list shows as the normal sticky sidebar */
+.doc-toc-toggle {
+  display: none;
+}
+
+.doc-toc-caret {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #4f46e5;
+  border-bottom: 2px solid #4f46e5;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  margin-top: -3px;
+  flex-shrink: 0;
+}
+
+.doc-toc-caret--open {
+  transform: rotate(-135deg);
+  margin-top: 3px;
+}
+
+@media (max-width: 768px) {
+  /* Stack the toggle above the collapsible list */
+  .comp-sidebar.doc-toc {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .doc-toc-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .doc-toc-toggle-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .doc-toc-toggle-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #94a3b8;
+  }
+
+  .doc-toc-toggle-current {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1a1a2e;
+  }
+
+  /* Collapsed by default on mobile */
+  .doc-toc .doc-toc-list {
+    display: none;
+    margin-top: 8px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  .doc-toc .doc-toc-list--open {
+    display: block;
+  }
+
+  .doc-toc .sidebar-item {
+    width: 100%;
+  }
+
+  .doc-link-row {
+    flex-direction: column;
+  }
+}
