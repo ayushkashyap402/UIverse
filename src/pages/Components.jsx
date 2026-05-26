@@ -6,6 +6,7 @@ import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
+import Tabs from '../components/Tabs/Tabs.jsx'
 
 /* ================= SECTIONS ================= */
 
@@ -51,6 +52,16 @@ const sections = [
       </svg>
     ),
   },
+  {
+  id: 'tabs',
+  label: 'Tabs',
+  icon: (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="1" y="4" width="22" height="16" rx="2"/>
+      <path d="M1 9h22"/>
+    </svg>
+  ),
+ },
 ]
 /* ================= ICONS ================= */
 
@@ -313,6 +324,44 @@ function Components() {
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</section>
+
+
+{/* — Tabs Section — */}
+<section className="comp-section" id="tabs">
+  <div className="comp-section-header">
+    <h2>Tabs</h2>
+    <span className="comp-badge comp-badge--beta">
+      Beta
+    </span>
+  </div>
+
+  <p className="comp-section-desc">
+    Accessible compound Tabs with animated underline
+    and full keyboard navigation support.
+  </p>
+
+  <div className="comp-subsection">
+    <h3 className="comp-subsection-title">Example</h3>
+    <div className="comp-preview">
+      <Tabs defaultValue="account">
+        <Tabs.List ariaLabel="User Profiles">
+          <Tabs.Trigger value="account">Account</Tabs.Trigger>
+          <Tabs.Trigger value="password">Password</Tabs.Trigger>
+          <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="account">
+          <p>Make changes to your account here.</p>
+        </Tabs.Content>
+        <Tabs.Content value="password">
+          <p>Change your password here.</p>
+        </Tabs.Content>
+        <Tabs.Content value="settings">
+          <p>Manage your configuration profiles.</p>
+        </Tabs.Content>
+      </Tabs>
     </div>
   </div>
 </section>
