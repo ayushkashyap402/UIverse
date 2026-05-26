@@ -1,0 +1,68 @@
+/* ScrollToTop.css */
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand, #4f46e5), var(--brand-2, #a855f7));
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  
+  /* Initial hidden state with interactive transitions */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.8);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+  transition: 
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* Visible State */
+.scroll-to-top--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* Hover State */
+.scroll-to-top--visible:hover {
+  transform: translateY(-5px) scale(1.08);
+  box-shadow: var(--shadow-brand, 0 8px 28px rgba(79, 70, 229, 0.45));
+  background: linear-gradient(135deg, var(--brand-dark, #4338ca), var(--brand-2, #a855f7));
+}
+
+/* Active State */
+.scroll-to-top--visible:active {
+  transform: translateY(-2px) scale(0.96);
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+/* Icon Micro-animation */
+.scroll-to-top-icon {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-to-top--visible:hover .scroll-to-top-icon {
+  transform: translateY(-2px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .scroll-to-top {
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+  }
+}

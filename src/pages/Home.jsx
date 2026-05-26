@@ -1,30 +1,12 @@
 // Home.jsx – Landing page of UIverse
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Button from "../components/Button/Button.jsx";
 import Navbar from "../components/Navbar/Navbar.jsx";
 import "./Home.css";
 
 function Home() {
-  const [showButton, setShowButton] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowButton(window.scrollY > 300);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
   return (
     <div className="home-page">
       <Navbar />
@@ -146,11 +128,6 @@ function Home() {
       </section>
 
       {/* ── Footer ── */}
-      {showButton && (
-        <button className="scroll-top-btn" onClick={scrollToTop}>
-          ↑
-        </button>
-      )}
       <footer className="home-footer">
         <p>Made with care for the open-source community · UIverse 2025</p>
       </footer>
