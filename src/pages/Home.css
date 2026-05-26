@@ -328,24 +328,3 @@
   background: var(--surface);
 }
 
-.scroll-top-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 52px;
-  height: 52px;
-  border: none;
-  border-radius: 50%;
-  background: #111827;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease;
-  z-index: 1000;
-}
-
-.scroll-top-btn:hover {
-  transform: translateY(-4px) scale(1.05);
-  opacity: 0.9;
-}
