@@ -1,266 +1,307 @@
-/* ================= ROOT VARIABLES ================= */
-:root {
-  --nav-text: #e5e7eb;
-  --nav-muted: #9ca3af;
-  --nav-primary: #4f46e5;
-  --nav-primary-light: #6366f1;
-  --nav-hover: rgba(255, 255, 255, 0.06);
+/* ================= REUSABLE NAVBAR COMPONENT ================= */
+/* Variants: default | transparent | solid | gradient              */
 
-  --surface: rgba(31, 34, 44, 0.85);
-  --border: rgba(255, 255, 255, 0.08);
-}
-
-/* ================= NAVBAR ================= */
-.navbar {
+/* ================= BASE ================= */
+.uiverse-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 32px;
-  height: 64px;
+  padding: 0 28px;
+  height: 60px;
+  width: 100%;
 
+  font-family: inherit;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.uiverse-navbar--sticky {
   position: sticky;
   top: 0;
-  z-index: 1000;
-
-  background: var(--surface);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-
-  border-bottom: 1px solid var(--border);
-
-  transition: all 0.3s ease;
+  z-index: 100;
 }
 
-.navbar--scrolled {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+.uiverse-navbar--scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* ================= LOGO ================= */
-.navbar-logo {
+/* ================= VARIANT: DEFAULT ================= */
+.uiverse-navbar--default {
+  background: rgba(15, 17, 24, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.uiverse-navbar--default .uiverse-navbar-brand {
+  color: #f1f5f9;
+}
+
+.uiverse-navbar--default .uiverse-navbar-link {
+  color: #94a3b8;
+}
+
+.uiverse-navbar--default .uiverse-navbar-link:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ================= VARIANT: TRANSPARENT ================= */
+.uiverse-navbar--transparent {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.uiverse-navbar--transparent .uiverse-navbar-brand {
+  color: #f1f5f9;
+}
+
+.uiverse-navbar--transparent .uiverse-navbar-link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.uiverse-navbar--transparent .uiverse-navbar-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ================= VARIANT: SOLID ================= */
+.uiverse-navbar--solid {
+  background: #1e1b4b;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.uiverse-navbar--solid .uiverse-navbar-brand {
+  color: #e0e7ff;
+}
+
+.uiverse-navbar--solid .uiverse-navbar-link {
+  color: #a5b4fc;
+}
+
+.uiverse-navbar--solid .uiverse-navbar-link:hover {
+  color: #e0e7ff;
+  background: rgba(99, 102, 241, 0.15);
+}
+
+/* ================= VARIANT: GRADIENT ================= */
+.uiverse-navbar--gradient {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+  border-bottom: none;
+}
+
+.uiverse-navbar--gradient .uiverse-navbar-brand {
+  color: #fff;
+}
+
+.uiverse-navbar--gradient .uiverse-navbar-link {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.uiverse-navbar--gradient .uiverse-navbar-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ================= BRAND ================= */
+.uiverse-navbar-brand {
   display: flex;
   align-items: center;
   gap: 10px;
 
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: white;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
 
+  cursor: default;
   transition: transform 0.2s ease;
 }
 
-.navbar-logo:hover {
+.uiverse-navbar-brand:hover {
   transform: translateY(-1px);
 }
 
-.navbar-logo-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 1.5rem;
-  color: var(--nav-primary-light);
-
-  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.45));
+.uiverse-navbar-brand svg {
+  flex-shrink: 0;
+  opacity: 0.85;
 }
 
 /* ================= LINKS ================= */
-.navbar-links {
+.uiverse-navbar-links {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
-.navbar-link {
+.uiverse-navbar-link {
   position: relative;
-  padding: 10px 16px;
+  padding: 8px 16px;
   border-radius: 10px;
 
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
-  color: var(--nav-muted);
   text-decoration: none;
 
   transition: all 0.25s ease;
 }
 
-.navbar-link:hover {
-  color: white;
-  background: var(--nav-hover);
-  transform: translateY(-1px);
-}
-
-/* Active Link */
-.navbar-link.active {
-  color: white;
-  background: rgba(99, 102, 241, 0.15);
-}
-
-/* Underline animation */
-.navbar-link::after {
+.uiverse-navbar-link::after {
   content: "";
   position: absolute;
   left: 16px;
-  bottom: 6px;
-  width: 0%;
+  bottom: 4px;
+  width: 0;
   height: 2px;
-  background: var(--nav-primary-light);
   border-radius: 999px;
+  background: currentColor;
+  opacity: 0.5;
   transition: width 0.25s ease;
 }
 
-.navbar-link:hover::after,
-.navbar-link.active::after {
+.uiverse-navbar-link:hover::after {
   width: calc(100% - 32px);
 }
 
-/* ================= GITHUB BUTTON ================= */
-.navbar-github {
+/* ================= CTA BUTTON ================= */
+.uiverse-navbar-cta {
   margin-left: 8px;
+  padding: 8px 20px;
+  border-radius: 10px;
 
-  background: linear-gradient(
-    135deg,
-    var(--nav-primary),
-    var(--nav-primary-light)
-  );
-
-  color: white !important;
+  font-size: 0.88rem;
   font-weight: 600;
-  padding: 10px 16px;
-  border-radius: 12px;
+  text-decoration: none;
 
-  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.28);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 
   transition: all 0.25s ease;
 }
 
-.navbar-github:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(5, 1, 75, 0.4);
+.uiverse-navbar-cta:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ================= THEME TOGGLE ================= */
-.theme-toggle {
-  margin-left: 8px;
-
-  width: 36px;
-  height: 36px;
-
-  border-radius: 10px;
-  border: 1px solid var(--border);
-
-  background: rgba(255, 255, 255, 0.04);
-  color: white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-
-  transition: all 0.2s ease;
+/* Gradient variant CTA override */
+.uiverse-navbar--gradient .uiverse-navbar-cta {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-.theme-toggle:hover {
-  background: rgba(99, 102, 241, 0.15);
-  transform: rotate(15deg) scale(1.05);
+.uiverse-navbar--gradient .uiverse-navbar-cta:hover {
+  background: rgba(255, 255, 255, 0.32);
 }
 
-.theme-toggle:active {
-  transform: rotate(180deg) scale(0.9);
+/* Default variant CTA override */
+.uiverse-navbar--default .uiverse-navbar-cta {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
 }
 
-/* ================= MOBILE BUTTON ================= */
-.nav-btn {
+.uiverse-navbar--default .uiverse-navbar-cta:hover {
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+}
+
+/* Solid variant CTA override */
+.uiverse-navbar--solid .uiverse-navbar-cta {
+  background: #4f46e5;
+  border-color: rgba(99, 102, 241, 0.4);
+  color: #e0e7ff;
+}
+
+.uiverse-navbar--solid .uiverse-navbar-cta:hover {
+  background: #5b52f0;
+}
+
+/* ================= MOBILE TOGGLE ================= */
+.uiverse-navbar-toggle {
   display: none;
 
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
 
   align-items: center;
   justify-content: center;
 
   border-radius: 10px;
-  border: 1px solid var(--border);
-
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   color: white;
 
-  font-size: 1.3rem;
   cursor: pointer;
-
   transition: all 0.2s ease;
 }
 
-.nav-btn:hover {
-  background: rgba(99, 102, 241, 0.15);
+.uiverse-navbar-toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
   transform: scale(1.05);
 }
 
-/* ================= MOBILE STYLES ================= */
+/* ================= MOBILE RESPONSIVE ================= */
 @media (max-width: 768px) {
-  .navbar {
+  .uiverse-navbar {
     padding: 0 20px;
-    height: 68px;
+    height: 64px;
   }
 
-  .nav-btn {
+  .uiverse-navbar-toggle {
     display: flex;
   }
 
-  .navbar-links {
+  .uiverse-navbar-links {
     position: absolute;
-    top: 80px;
-    right: 20px;
+    top: 72px;
+    right: 16px;
 
-    width: 230px;
+    width: 220px;
 
     display: none;
     flex-direction: column;
     align-items: stretch;
 
-    gap: 8px;
-    padding: 18px;
+    gap: 6px;
+    padding: 16px;
 
-    background: rgba(39, 43, 54, 0.96);
-
+    background: rgba(20, 22, 30, 0.97);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
 
     box-shadow:
-      0 20px 40px rgba(0, 0, 0, 0.45),
+      0 16px 40px rgba(0, 0, 0, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.04);
 
-    animation: menuFade 0.25s ease;
+    animation: uiverseNavFade 0.25s ease;
   }
 
-  .navbar-links.active {
+  .uiverse-navbar-links--open {
     display: flex;
   }
 
-  .navbar-link {
+  .uiverse-navbar-link {
     width: 100%;
     padding: 12px 14px;
   }
 
-  .navbar-github {
+  .uiverse-navbar-cta {
+    margin-left: 0;
     margin-top: 6px;
     text-align: center;
   }
 }
 
 /* ================= ANIMATION ================= */
-@keyframes menuFade {
+@keyframes uiverseNavFade {
   from {
     opacity: 0;
-    transform: translateY(-10px) scale(0.98);
+    transform: translateY(-8px) scale(0.98);
   }
-
   to {
     opacity: 1;
     transform: translateY(0) scale(1);

@@ -1,0 +1,254 @@
+:root {
+  --app-nav-text: #e5e7eb;
+  --app-nav-muted: #9ca3af;
+  --app-nav-primary: #4f46e5;
+  --app-nav-primary-light: #6366f1;
+  --app-nav-hover: rgba(255, 255, 255, 0.06);
+
+  --app-surface: rgba(31, 34, 44, 0.85);
+  --app-border: rgba(255, 255, 255, 0.08);
+}
+
+/* ================= NAVBAR ================= */
+.app-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 32px;
+  height: 64px;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: var(--app-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border-bottom: 1px solid var(--app-border);
+
+  transition: all 0.3s ease;
+}
+
+.app-navbar--scrolled {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* ================= LOGO ================= */
+.app-navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: white;
+
+  transition: transform 0.2s ease;
+}
+
+.app-navbar-logo:hover {
+  transform: translateY(-1px);
+}
+
+/* ================= LINKS ================= */
+.app-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-navbar-link {
+  position: relative;
+  padding: 10px 16px;
+  border-radius: 10px;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--app-nav-muted);
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+.app-navbar-link:hover {
+  color: white;
+  background: var(--app-nav-hover);
+  transform: translateY(-1px);
+}
+
+/* Active Link */
+.app-navbar-link.active {
+  color: white;
+  background: rgba(99, 102, 241, 0.15);
+}
+
+/* Underline animation */
+.app-navbar-link::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  bottom: 6px;
+  width: 0%;
+  height: 2px;
+  background: var(--app-nav-primary-light);
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+.app-navbar-link:hover::after,
+.app-navbar-link.active::after {
+  width: calc(100% - 32px);
+}
+
+/* ================= GITHUB BUTTON ================= */
+.app-navbar-github {
+  margin-left: 8px;
+
+  background: linear-gradient(135deg,
+      var(--app-nav-primary),
+      var(--app-nav-primary-light));
+
+  color: white !important;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 12px;
+
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.28);
+
+  transition: all 0.25s ease;
+}
+
+.app-navbar-github:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(5, 1, 75, 0.4);
+}
+
+/* ================= THEME TOGGLE ================= */
+.app-theme-toggle {
+  margin-left: 8px;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 10px;
+  border: 1px solid var(--app-border);
+
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.app-theme-toggle:hover {
+  background: rgba(99, 102, 241, 0.15);
+  transform: rotate(15deg) scale(1.05);
+}
+
+.app-theme-toggle:active {
+  transform: rotate(180deg) scale(0.9);
+}
+
+/* ================= MOBILE BUTTON ================= */
+.app-nav-btn {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--app-border);
+
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+
+  font-size: 1.3rem;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.app-nav-btn:hover {
+  background: rgba(99, 102, 241, 0.15);
+  transform: scale(1.05);
+}
+
+/* ================= MOBILE STYLES ================= */
+@media (max-width: 768px) {
+  .app-navbar {
+    padding: 0 20px;
+    height: 68px;
+  }
+
+  .app-nav-btn {
+    display: flex;
+  }
+
+  .app-navbar-links {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+
+    width: 230px;
+
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 8px;
+    padding: 18px;
+
+    background: rgba(39, 43, 54, 0.96);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid var(--app-border);
+    border-radius: 16px;
+
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    animation: appMenuFade 0.25s ease;
+  }
+
+  .app-navbar-links.active {
+    display: flex;
+  }
+
+  .app-navbar-link {
+    width: 100%;
+    padding: 12px 14px;
+  }
+
+  .app-navbar-github {
+    margin-top: 6px;
+    text-align: center;
+  }
+}
+
+/* ================= ANIMATION ================= */
+@keyframes appMenuFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

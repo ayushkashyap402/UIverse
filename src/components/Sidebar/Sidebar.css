@@ -1,0 +1,352 @@
+/* ================= BASE ================= */
+.uiverse-sidebar {
+  display: flex;
+  flex-direction: column;
+
+  width: 260px;
+  min-height: 400px;
+
+  padding: 20px 12px;
+
+  font-family: inherit;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+/* Collapsed state — icon-only mode */
+.uiverse-sidebar--collapsed {
+  width: 68px;
+}
+
+/* ================= VARIANT: DEFAULT ================= */
+.uiverse-sidebar--default {
+  background: rgba(15, 17, 24, 0.92);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+}
+
+.uiverse-sidebar--default .uiverse-sidebar-brand {
+  color: #f1f5f9;
+}
+
+.uiverse-sidebar--default .uiverse-sidebar-section-title {
+  color: #64748b;
+}
+
+.uiverse-sidebar--default .uiverse-sidebar-item {
+  color: #94a3b8;
+}
+
+.uiverse-sidebar--default .uiverse-sidebar-item:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.uiverse-sidebar--default .uiverse-sidebar-item--active {
+  color: #fff;
+  background: rgba(99, 102, 241, 0.18);
+}
+
+.uiverse-sidebar--default .uiverse-sidebar-item--active .uiverse-sidebar-item-icon {
+  color: #818cf8;
+}
+
+/* ================= VARIANT: MINIMAL ================= */
+.uiverse-sidebar--minimal {
+  background: transparent;
+  border-right: none;
+  border-radius: 0;
+}
+
+.uiverse-sidebar--minimal .uiverse-sidebar-brand {
+  color: #e2e8f0;
+}
+
+.uiverse-sidebar--minimal .uiverse-sidebar-section-title {
+  color: #475569;
+}
+
+.uiverse-sidebar--minimal .uiverse-sidebar-item {
+  color: #94a3b8;
+  border-radius: 8px;
+}
+
+.uiverse-sidebar--minimal .uiverse-sidebar-item:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.uiverse-sidebar--minimal .uiverse-sidebar-item--active {
+  color: #c7d2fe;
+  background: none;
+}
+
+.uiverse-sidebar--minimal .uiverse-sidebar-item--active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  border-radius: 0 4px 4px 0;
+  background: #6366f1;
+}
+
+/* ================= VARIANT: BORDERED ================= */
+.uiverse-sidebar--bordered {
+  background: rgba(15, 17, 24, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.uiverse-sidebar--bordered .uiverse-sidebar-brand {
+  color: #f1f5f9;
+}
+
+.uiverse-sidebar--bordered .uiverse-sidebar-section-title {
+  color: #64748b;
+}
+
+.uiverse-sidebar--bordered .uiverse-sidebar-item {
+  color: #94a3b8;
+  border: 1px solid transparent;
+}
+
+.uiverse-sidebar--bordered .uiverse-sidebar-item:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.uiverse-sidebar--bordered .uiverse-sidebar-item--active {
+  color: #e0e7ff;
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.uiverse-sidebar--bordered .uiverse-sidebar-item--active .uiverse-sidebar-item-icon {
+  color: #a5b4fc;
+}
+
+/* ================= VARIANT: GRADIENT ================= */
+.uiverse-sidebar--gradient {
+  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 50%, #3730a3 100%);
+  border-right: none;
+  border-radius: 16px;
+}
+
+.uiverse-sidebar--gradient .uiverse-sidebar-brand {
+  color: #e0e7ff;
+}
+
+.uiverse-sidebar--gradient .uiverse-sidebar-section-title {
+  color: #a5b4fc;
+}
+
+.uiverse-sidebar--gradient .uiverse-sidebar-item {
+  color: rgba(224, 231, 255, 0.7);
+}
+
+.uiverse-sidebar--gradient .uiverse-sidebar-item:hover {
+  color: #e0e7ff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.uiverse-sidebar--gradient .uiverse-sidebar-item--active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.uiverse-sidebar--gradient .uiverse-sidebar-item--active .uiverse-sidebar-item-icon {
+  color: #c7d2fe;
+}
+
+.uiverse-sidebar--gradient .uiverse-sidebar-separator {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.uiverse-sidebar--gradient .uiverse-sidebar-collapse-btn {
+  color: rgba(224, 231, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.uiverse-sidebar--gradient .uiverse-sidebar-collapse-btn:hover {
+  color: #e0e7ff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ================= HEADER / BRAND ================= */
+.uiverse-sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 12px 20px;
+  margin-bottom: 4px;
+
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.uiverse-sidebar-header svg {
+  flex-shrink: 0;
+  opacity: 0.8;
+  color: inherit;
+}
+
+.uiverse-sidebar-brand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+/* ================= NAVIGATION ================= */
+.uiverse-sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+/* ── Section ── */
+.uiverse-sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.uiverse-sidebar-section+.uiverse-sidebar-section {
+  margin-top: 16px;
+}
+
+.uiverse-sidebar-section-title {
+  padding: 0 12px;
+  margin: 0 0 8px;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ── Separator (collapsed mode) ── */
+.uiverse-sidebar-separator {
+  height: 1px;
+  margin: 8px 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Item ── */
+.uiverse-sidebar-item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.uiverse-sidebar-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 20px;
+  height: 20px;
+
+  transition: color 0.2s ease;
+}
+
+.uiverse-sidebar-item-label {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+/* ================= COLLAPSE BUTTON ================= */
+.uiverse-sidebar-collapse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin-top: auto;
+  padding: 10px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+
+  background: none;
+  color: #64748b;
+
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: inherit;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.uiverse-sidebar-collapse-btn:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.uiverse-sidebar-collapse-btn svg {
+  flex-shrink: 0;
+}
+
+/* ================= COLLAPSED ADJUSTMENTS ================= */
+.uiverse-sidebar--collapsed .uiverse-sidebar-header {
+  justify-content: center;
+  padding: 8px 0 20px;
+}
+
+.uiverse-sidebar--collapsed .uiverse-sidebar-item {
+  justify-content: center;
+  padding: 10px;
+}
+
+.uiverse-sidebar--collapsed .uiverse-sidebar-collapse-btn {
+  justify-content: center;
+  padding: 10px;
+}
+
+/* ================= SCROLLBAR ================= */
+.uiverse-sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.uiverse-sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.uiverse-sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+}
+
+.uiverse-sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

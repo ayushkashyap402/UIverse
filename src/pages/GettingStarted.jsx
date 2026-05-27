@@ -11,7 +11,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button/Button.jsx'
 import Badge from '../components/Badge/Badge.jsx'
-import Navbar from '../components/Navbar/Navbar.jsx'
+import AppNavbar from '../layout/AppNavbar/AppNavbar.jsx'
 import './Components.css' // shared layout + code-block + table styles
 import './GettingStarted.css'
 
@@ -109,7 +109,7 @@ function GettingStarted() {
 
   return (
     <div className="comp-page">
-      <Navbar />
+      <AppNavbar />
 
       <div className="comp-layout">
         {/* ── Sidebar / table of contents ── */}
