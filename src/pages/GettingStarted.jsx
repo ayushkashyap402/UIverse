@@ -7,7 +7,7 @@
 // <section id="..."> below — the sidebar wires itself up automatically and
 // the active item is tracked on scroll.
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button/Button.jsx'
 import Badge from '../components/Badge/Badge.jsx'
@@ -16,6 +16,12 @@ import './Components.css' // shared layout + code-block + table styles
 import './GettingStarted.css'
 
 const REPO_URL = 'https://github.com/ayushkashyap402/UIverse'
+
+// All setup commands combined — used by the "Copy All" button
+const ALL_SETUP_COMMANDS = `git clone ${REPO_URL}.git
+cd UIverse
+npm install
+npm run dev`
 
 // Sidebar items — `id` must match the section element id
 const sections = [
@@ -51,6 +57,58 @@ function CodeBlock({ label = 'BASH', code }) {
   )
 }
 
+// Toast notification component — slides in from the bottom-right
+function Toast({ message, visible, onDone }) {
+  useEffect(() => {
+    if (!visible) return
+    const id = setTimeout(onDone, 2500)
+    return () => clearTimeout(id)
+  }, [visible, onDone])
+
+  return (
+    <div
+      className={`copy-toast ${visible ? 'copy-toast--show' : ''}`}
+      role="status"
+      aria-live="polite"
+    >
+      <span className="copy-toast-icon" aria-hidden="true">
+        ✓
+      </span>
+      <span>{message}</span>
+    </div>
+  )
+}
+
+// "Copy All Setup Commands" button — copies every install + run command
+function CopyAllButton({ commands, onCopied }) {
+  const [state, setState] = useState('idle') // idle | copied
+
+  const handleClick = async () => {
+    try {
+      await navigator.clipboard.writeText(commands)
+      setState('copied')
+      onCopied()
+      setTimeout(() => setState('idle'), 2000)
+    } catch {
+      // Graceful fallback — do nothing if clipboard isn't available
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      className={`copy-all-btn ${state === 'copied' ? 'copy-all-btn--copied' : ''}`}
+      onClick={handleClick}
+      id="copy-all-setup-commands"
+    >
+      <span className="copy-all-btn-icon" aria-hidden="true">
+        {state === 'copied' ? '✓' : '⧉'}
+      </span>
+      {state === 'copied' ? 'Copied!' : 'Copy All Setup Commands'}
+    </button>
+  )
+}
+
 // Labeled note box (replaces emoji callouts)
 function Note({ label = 'Note', children }) {
   return (
@@ -65,6 +123,9 @@ function GettingStarted() {
   const [activeSection, setActiveSection] = useState('introduction')
   // Table of contents — collapsed by default on mobile
   const [tocOpen, setTocOpen] = useState(false)
+  // Toast visibility state
+  const [toastVisible, setToastVisible] = useState(false)
+  const hideToast = useCallback(() => setToastVisible(false), [])
 
   // While the user is mid-click-scroll, pause the observer so the active
   // item lands on the clicked section instead of flickering through others.
@@ -240,6 +301,12 @@ function GettingStarted() {
               Clone the repository, install dependencies, and start the dev
               server.
             </p>
+
+            {/* One-click copy for all setup commands */}
+            <CopyAllButton
+              commands={ALL_SETUP_COMMANDS}
+              onCopied={() => setToastVisible(true)}
+            />
 
             <div className="comp-subsection">
               <h3 className="comp-subsection-title">1 · Clone &amp; install</h3>
@@ -451,6 +518,13 @@ export default Card`}
           </section>
         </main>
       </div>
+
+      {/* Toast notification — portal-free, fixed position */}
+      <Toast
+        message="All setup commands copied to clipboard!"
+        visible={toastVisible}
+        onDone={hideToast}
+      />
     </div>
   )
 }
