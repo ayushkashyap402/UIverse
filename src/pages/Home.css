@@ -10,8 +10,16 @@
   text-align: center;
   padding: 110px 24px 90px;
   background:
-    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79,70,229,0.13) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(168,85,247,0.09) 0%, transparent 60%),
+    radial-gradient(
+      ellipse 80% 60% at 50% -10%,
+      rgba(79, 70, 229, 0.13) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 90% 80%,
+      rgba(168, 85, 247, 0.09) 0%,
+      transparent 60%
+    ),
     var(--bg);
   border-bottom: 1px solid var(--border);
   position: relative;
@@ -19,12 +27,12 @@
 }
 
 .hero::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(79,70,229,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79,70,229,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(79, 70, 229, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 70, 229, 0.05) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
 }
@@ -35,7 +43,7 @@
   gap: 6px;
   background: var(--accent);
   color: var(--brand);
-  border: 1px solid rgba(79,70,229,0.2);
+  border: 1px solid rgba(79, 70, 229, 0.2);
   border-radius: 999px;
   padding: 5px 18px;
   font-size: 0.82rem;
@@ -58,7 +66,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 28px rgba(79,70,229,0.22));
+  filter: drop-shadow(0 0 28px rgba(79, 70, 229, 0.22));
 }
 
 .hero-subtitle {
@@ -156,13 +164,16 @@
   border: 1px solid var(--border-2);
   border-radius: 16px;
   padding: 28px 24px;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
   position: relative;
   overflow: hidden;
 }
 
 .feature-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -173,12 +184,14 @@
   transition: height 0.25s ease;
 }
 
-.feature-card:hover::before { height: 100%; }
+.feature-card:hover::before {
+  height: 100%;
+}
 
 .feature-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-brand);
-  border-color: rgba(79,70,229,0.25);
+  border-color: rgba(79, 70, 229, 0.25);
 }
 
 .feature-icon-wrap {
@@ -216,12 +229,12 @@
 }
 
 .contribute-section::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
 }
@@ -267,7 +280,7 @@
 }
 
 .step code {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.82rem;
@@ -277,8 +290,8 @@
 .step-num {
   width: 28px;
   height: 28px;
-  background: rgba(255,255,255,0.18);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -289,13 +302,15 @@
   flex-shrink: 0;
 }
 
-.contribute-cta { flex-shrink: 0; }
+.contribute-cta {
+  flex-shrink: 0;
+}
 
 .contribute-cta .uiverse-btn--primary {
   background: #fff;
   color: #4f46e5;
   border-color: #fff;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .contribute-cta .uiverse-btn--primary:hover {
@@ -311,4 +326,26 @@
   color: var(--muted);
   border-top: 1px solid var(--border);
   background: var(--surface);
+}
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  background: #111827;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.scroll-top-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  opacity: 0.9;
 }

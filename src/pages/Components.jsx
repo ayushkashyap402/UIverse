@@ -319,7 +319,133 @@ function Components() {
             </div>
           </section>
 
+
+          {/* ── Alert Section ── */}
+<section className="comp-section" id="alerts">
+  <div className="comp-section-header">
+    <h2>Alert</h2>
+    <span className="comp-badge comp-badge--stable">
+      Stable
+    </span>
+  </div>
+
+  <p className="comp-section-desc">
+    Reusable alert component with multiple variants
+    for success, error, warning, and informational
+    messages.
+  </p>
+
+  {/* Variants */}
+  <div className="comp-subsection">
+    <h3 className="comp-subsection-title">
+      Variants
+    </h3>
+
+    <div className="comp-preview">
+      <Alert
+        type="success"
+        message="Action completed successfully!"
+      />
+
+      <Alert
+        type="error"
+        message="Something went wrong."
+      />
+
+      <Alert
+        type="warning"
+        message="Warning message here."
+      />
+
+      <Alert
+        type="info"
+        message="Information message."
+      />
+
+      <Alert
+    type="info"
+    message="Closable alert example."
+    closable
+      />
+    </div>
+  </div>
+
+  {/* Code Block */}
+  <div className="code-block">
+    <div className="code-block-header">
+      <span>JSX</span>
+
+      <button
+        className="copy-btn"
+        onClick={() =>
+          handleCopy(`<Alert type="success" message="Action completed successfully!" />
+<Alert type="error" message="Something went wrong." />
+<Alert type="warning" message="Warning message here." />
+<Alert type="info" message="Information message." />
+<Alert type="info" message="Closable alert example." closable />`)
+        }
+      >
+        {copied ? '✅ Copied!' : '📋 Copy'}
+      </button>
+    </div>
+
+    <pre>{`<Alert type="success" message="Action completed successfully!" />
+<Alert type="error" message="Something went wrong." />
+<Alert type="warning" message="Warning message here." />
+<Alert type="info" message="Information message." />
+<Alert type="info" message="Closable alert example." closable />`}</pre>
+  </div>
+
+  {/* Props Table */}
+  <div className="comp-subsection">
+    <h3 className="comp-subsection-title">Props</h3>
+
+    <div className="props-table-wrap">
+      <table className="props-table">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><code>type</code></td>
+            <td>string</td>
+            <td><code>"info"</code></td>
+            <td>
+              success · error · warning · info
+            </td>
+          </tr>
+
+          <tr>
+            <td><code>message</code></td>
+            <td>string</td>
+            <td>
+              <code>"This is an alert"</code>
+            </td>
+            <td>Alert message text</td>
+          </tr>
+
+          <tr>
+            <td><code>closable</code></td>
+            <td>boolean</td>
+            <td><code>false</code></td>
+            <td>Shows close button</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+          {/* ── All Components Table ── */}
+
           {/* ================= ALL COMPONENTS ================= */}
+
           <section className="comp-section" id="all-components">
             <div className="comp-section-header">
               <h2>All Components</h2>
