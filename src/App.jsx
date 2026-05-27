@@ -1,24 +1,27 @@
 // App.jsx – Root component that defines all routes
 // To add a new page: import it and add a new <Route> below
 
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home.jsx'
-import Components from './pages/Components.jsx'
-import GettingStarted from './pages/GettingStarted.jsx'
+
+const Home = lazy(() => import('./pages/Home.jsx'))
+const Components = lazy(() => import('./pages/Components.jsx'))
+const GettingStarted = lazy(() => import('./pages/GettingStarted.jsx'))
 
 function App() {
   return (
-    <Routes>
-      {/* Home page – landing screen */}
-      <Route path="/" element={<Home />} />
+    <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}>
+      <Routes>
+        {/* Home page – landing screen */}
+        <Route path="/" element={<Home />} />
 
-      {/* Components showcase page */}
-      <Route path="/components" element={<Components />} />
+        {/* Components showcase page */}
+        <Route path="/components" element={<Components />} />
 
-      {/* Getting Started / documentation page */}
-      <Route path="/docs" element={<GettingStarted />} />
-    </Routes>
+        {/* Getting Started / documentation page */}
+        <Route path="/docs" element={<GettingStarted />} />
+      </Routes>
+    </Suspense>
   )
 }
 
