@@ -113,12 +113,13 @@ function GettingStarted() {
 
       <div className="comp-layout">
         {/* ── Sidebar / table of contents ── */}
-        <aside className="comp-sidebar doc-toc">
+        <aside className="comp-sidebar doc-toc" aria-label="Table of contents">
           <button
             type="button"
             className="doc-toc-toggle"
             aria-expanded={tocOpen}
             aria-controls="doc-toc-list"
+            aria-label={tocOpen ? "Close table of contents" : "Open table of contents"}
             onClick={() => setTocOpen((open) => !open)}
           >
             <span className="doc-toc-toggle-text">
@@ -165,7 +166,7 @@ function GettingStarted() {
         </aside>
 
         {/* ── Main content ── */}
-        <main className="comp-main">
+        <main id="main-content" className="comp-main">
           <div className="comp-header">
             <h1>Getting Started</h1>
             <p>From a fresh clone to your first UIverse component.</p>

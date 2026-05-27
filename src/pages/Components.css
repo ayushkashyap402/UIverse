@@ -551,3 +551,21 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* ================= ACCESSIBILITY FOCUS STATES ================= */
+.sidebar-item:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: -2px;
+  background: var(--accent);
+}
+
+.clear-search-btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  background: var(--accent);
+}
+
+.copy-btn:focus-visible {
+  outline: 2px solid #a5b4fc;
+  outline-offset: 2px;
+}

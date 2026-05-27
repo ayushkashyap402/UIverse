@@ -236,3 +236,10 @@
     flex-direction: column;
   }
 }
+
+/* ================= ACCESSIBILITY FOCUS STATES ================= */
+.doc-toc-toggle:focus-visible {
+  outline: 3px solid #4f46e5;
+  outline-offset: 2px;
+}
+

@@ -256,3 +256,38 @@
   from { opacity: 0; transform: translateY(-10px) scale(0.98); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* ================= ACCESSIBILITY FOCUS STATES ================= */
+.navbar-logo:focus-visible {
+  outline: 3px solid var(--nav-primary);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.navbar-link:focus-visible {
+  outline: 3px solid var(--nav-primary);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+.navbar-github:focus-visible {
+  outline: 3px solid var(--nav-primary-light);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--nav-primary);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+[data-theme="dark"] .theme-toggle:focus-visible {
+  outline-color: #fbbf24;
+}
+
+.nav-btn:focus-visible {
+  outline: 3px solid var(--nav-primary);
+  outline-offset: 2px;
+  border-radius: 10px;
+}

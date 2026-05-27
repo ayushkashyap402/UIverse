@@ -185,7 +185,7 @@ function Components() {
       <div className="comp-layout">
 
         {/* ================= SIDEBAR ================= */}
-        <aside className="comp-sidebar">
+        <aside className="comp-sidebar" aria-label="Table of contents">
           <p className="sidebar-label">ON THIS PAGE</p>
 
           {sections.map((s) => {
@@ -199,6 +199,7 @@ function Components() {
               <button
                 key={s.id}
                 className={`sidebar-item ${activeSection === s.id ? "sidebar-item--active" : ""}`}
+                aria-current={activeSection === s.id ? "true" : undefined}
                 onClick={() => scrollTo(s.id)}
               >
                 <span className="sidebar-item-icon">{s.icon}</span>
@@ -227,7 +228,7 @@ function Components() {
         </aside>
 
         {/* ================= MAIN ================= */}
-        <main className="comp-main">
+        <main id="main-content" className="comp-main">
 
           <div className="comp-header">
             <h1>Components</h1>
@@ -242,6 +243,7 @@ function Components() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="search-input"
+                  aria-label="Search components by name or category"
                 />
                 {searchQuery && (
                   <button onClick={clearSearch} className="clear-search-btn" aria-label="Clear search">

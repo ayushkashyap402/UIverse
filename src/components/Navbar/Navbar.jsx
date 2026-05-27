@@ -112,55 +112,63 @@ function Navbar() {
   /* ================= JSX ================= */
 
   return (
-    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+    <>
+      <a href="#main-content" className="skip-to-content">
+        Skip to content
+      </a>
+      <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
 
-      {/* LOGO */}
-      <Link to="/" className="navbar-logo" onClick={closeMenu}>
-        <LogoIcon />
-        UIverse
-      </Link>
-
-      {/* LINKS */}
-      <div className={`navbar-links ${isOpen ? "active" : ""}`}>
-
-        <Link to="/" onClick={closeMenu}
-          className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}>
-          Home
+        {/* LOGO */}
+        <Link to="/" className="navbar-logo" onClick={closeMenu} aria-label="UIverse home page">
+          <LogoIcon />
+          UIverse
         </Link>
 
-        <Link to="/components" onClick={closeMenu}
-          className={`navbar-link ${location.pathname === '/components' ? 'active' : ''}`}>
-          Components
-        </Link>
-        {/* Get Started CTA (links to docs page) */}
-        <Link
-          to="/docs"
-          className="navbar-link navbar-github"
-          onClick={closeMenu}
-        >
-          Get Started
-        </Link>
+        {/* LINKS */}
+        <div id="navbar-menu-links" className={`navbar-links ${isOpen ? "active" : ""}`}>
 
-        {/* Theme Toggle */}
+          <Link to="/" onClick={closeMenu}
+            className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}>
+            Home
+          </Link>
+
+          <Link to="/components" onClick={closeMenu}
+            className={`navbar-link ${location.pathname === '/components' ? 'active' : ''}`}>
+            Components
+          </Link>
+          {/* Get Started CTA (links to docs page) */}
+          <Link
+            to="/docs"
+            className="navbar-link navbar-github"
+            onClick={closeMenu}
+          >
+            Get Started
+          </Link>
+
+          {/* Theme Toggle */}
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            {dark ? <SunIcon /> : <MoonIcon />}
+          </button>
+
+        </div>
+
+        {/* MOBILE BUTTON */}
         <button
-          className="theme-toggle"
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
+          onClick={handleOpenNavbar}
+          className="nav-btn"
+          aria-label={isOpen ? "Close main navigation menu" : "Open main navigation menu"}
+          aria-expanded={isOpen}
+          aria-controls="navbar-menu-links"
         >
-          {dark ? <SunIcon /> : <MoonIcon />}
+          {isOpen ? <TimesIcon /> : <BarsIcon />}
         </button>
 
-      </div>
-
-      {/* MOBILE BUTTON */}
-      <button
-        onClick={handleOpenNavbar}
-        className="nav-btn"
-      >
-        {isOpen ? <TimesIcon /> : <BarsIcon />}
-      </button>
-
-    </nav>
+      </nav>
+    </>
   )
 }
 
