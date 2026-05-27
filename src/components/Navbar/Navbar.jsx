@@ -31,6 +31,7 @@ const TimesIcon = () => (
 )
 
 const SunIcon = () => (
+
   <svg
     width="16"
     height="16"
@@ -42,10 +43,23 @@ const SunIcon = () => (
     <circle cx="12" cy="12" r="5" />
     <line x1="12" y1="1" x2="12" y2="3" />
     <line x1="12" y1="21" x2="12" y2="23" />
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="4" fill="currentColor" fillOpacity="0.15"/>
+    <circle cx="12" cy="12" r="4"/>
+    <line x1="12" y1="2" x2="12" y2="5"/>
+    <line x1="12" y1="19" x2="12" y2="22"/>
+    <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+    <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+    <line x1="2" y1="12" x2="5" y2="12"/>
+    <line x1="19" y1="12" x2="22" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
+    <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+
   </svg>
 );
 
 const MoonIcon = () => (
+
   <svg
     width="15"
     height="15"
@@ -55,6 +69,10 @@ const MoonIcon = () => (
     strokeWidth="2"
   >
     <path d="M21 12.79A9 9 0 1 1 11.21 3" />
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fillOpacity="0.15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor" fillOpacity="0.2"/>
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+
   </svg>
 );
 
@@ -85,7 +103,6 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Theme state
   const [dark, setDark] = useState(() => {
     const saved = localStorage.getItem("uiverse-theme");
     if (saved) return saved === "dark";
@@ -113,6 +130,23 @@ function Navbar() {
   const toggleTheme = () => {
     setDark((prev) => !prev);
   };
+  const toggleTheme = (e) => {
+    const x = e.clientX
+    const y = e.clientY
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    )
+    if (!document.startViewTransition) {
+      setDark(d => !d)
+      return
+    }
+    document.documentElement.style.setProperty('--vt-x', `${x}px`)
+    document.documentElement.style.setProperty('--vt-y', `${y}px`)
+    document.documentElement.style.setProperty('--vt-r', `${radius}px`)
+    document.startViewTransition(() => setDark(d => !d))
+  }
+
 
   const handleOpenNavbar = () => {
     setIsOpen((prev) => !prev);
@@ -168,6 +202,13 @@ function Navbar() {
 
         {/* Theme Toggle */}
         <button className="theme-toggle" onClick={toggleTheme}>
+
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+        >
+
           {dark ? <SunIcon /> : <MoonIcon />}
         </button>
 
@@ -219,4 +260,8 @@ function Navbar() {
   );
 }
 
+
 export default Navbar;
+
+export default Navbar
+
