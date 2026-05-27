@@ -9,8 +9,16 @@
   --nav-hover: rgba(99, 102, 241, 0.1);
   --nav-hover-glow: rgba(99, 102, 241, 0.2);
 
-  --surface: rgba(31, 34, 44, 0.85);
-  --border: rgba(255, 255, 255, 0.08);
+[data-theme="dark"] {
+  --nav-bg:           rgba(22, 27, 39, 0.88);
+  --nav-border:       rgba(255, 255, 255, 0.08);
+  --nav-text:         #f1f5f9;
+  --nav-muted:        #94a3b8;
+  --nav-hover:        rgba(255, 255, 255, 0.06);
+  --nav-active-bg:    rgba(99, 102, 241, 0.15);
+  --nav-active-color: #ffffff;
+  --nav-btn-bg:       rgba(255, 255, 255, 0.04);
+  --nav-btn-color:    #ffffff;
 }
 
 /* Light theme variables */
@@ -28,25 +36,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 0 32px;
   height: 64px;
-
   position: sticky;
   top: 0;
   z-index: 1000;
-
-  background: var(--surface);
+  background: var(--nav-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-
-  border-bottom: 1px solid var(--border);
-
-  transition: all 0.3s ease;
+  border-bottom: 1px solid var(--nav-border);
+  transition: box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .navbar--scrolled {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="light"] .navbar--scrolled {
@@ -58,7 +61,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-
   text-decoration: none;
   font-size: 1.2rem;
   font-weight: 800;
@@ -84,7 +86,6 @@
   position: relative;
   padding: 10px 16px;
   border-radius: 10px;
-
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--nav-muted);
@@ -99,7 +100,6 @@
   transform: translateY(-2px);
 }
 
-/* Active Link */
 .navbar-link.active {
   color: var(--nav-primary-light);
   background: var(--nav-hover-glow);

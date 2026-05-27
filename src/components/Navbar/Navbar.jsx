@@ -69,7 +69,6 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
-  // Theme state
   const [dark, setDark] = useState(() => {
     const saved = localStorage.getItem('uiverse-theme')
     if (saved) return saved === 'dark'
@@ -103,8 +102,21 @@ function Navbar() {
 
   /* ================= HANDLERS ================= */
 
-  const toggleTheme = () => {
-    setDark(prev => !prev)
+  const toggleTheme = (e) => {
+    const x = e.clientX
+    const y = e.clientY
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    )
+    if (!document.startViewTransition) {
+      setDark(d => !d)
+      return
+    }
+    document.documentElement.style.setProperty('--vt-x', `${x}px`)
+    document.documentElement.style.setProperty('--vt-y', `${y}px`)
+    document.documentElement.style.setProperty('--vt-r', `${radius}px`)
+    document.startViewTransition(() => setDark(d => !d))
   }
 
   const handleOpenNavbar = () => {
