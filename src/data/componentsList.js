@@ -1,13 +1,9 @@
-// componentsList.js – Metadata registry for all UIverse components
-//
-// Each entry describes one component available in the library.
-// This data is used by the Components page to render the overview table.
-//
-// To register a new component:
-//   1. Add a new object to the array below
-//   2. Fill in: id, name, category, status, description
-//   3. Status options: "Stable" | "Beta" | "Planned" 
+import React from 'react'
+import Button from '../components/Button/Button.jsx'
+import Badge from '../components/Badge/Badge.jsx'
+import Alert from '../components/Alert/Alert.jsx'
 
+// componentsList.js – Metadata registry for all UIverse components
 export const componentsList = [
   {
     id: 1,
@@ -15,6 +11,15 @@ export const componentsList = [
     category: 'Inputs',
     status: 'Stable',
     description: 'Reusable button with primary, secondary, and danger variants.',
+    preview: (
+      <>
+        <Button text="Primary" variant="primary" />
+        <Button text="Secondary" variant="secondary" />
+        <Button text="Danger" variant="danger" />
+        <Button text="Disabled" variant="disabled" />
+      </>
+    ),
+    code: `<Button text="Primary" variant="primary" />`
   },
   {
     id: 2,
@@ -43,6 +48,15 @@ export const componentsList = [
     category: 'Display',
     status: 'Stable',
     description: 'Small status indicator badge with color variants.',
+    preview: (
+      <>
+        <Badge text="Primary" variant="primary" />
+        <Badge text="Success" variant="success" />
+        <Badge text="Warning" variant="warning" />
+        <Badge text="Danger" variant="danger" />
+      </>
+    ),
+    code: `<Badge text="Primary" variant="primary" />`
   },
   {
     id: 6,
@@ -51,15 +65,25 @@ export const componentsList = [
     status: 'Planned',
     description: 'Responsive top navigation bar with logo and links.',
   },
-
-
-  // New Alert component
   {
     id: 7,
     name: 'Alert',
     category: 'Feedback',
     status: 'Stable',
-    description:
-      'Reusable alert component for success, error, warning, and informational messages.',
+    description: 'Reusable alert component for success, error, warning, and informational messages.',
+    preview: (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
+        <Alert type="success" message="Action completed successfully!" />
+        <Alert type="error" message="Something went wrong." />
+        <Alert type="warning" message="Warning message here." />
+        <Alert type="info" message="Information message." />
+        <Alert type="info" message="Closable alert example." closable />
+      </div>
+    ),
+    code: `<Alert type="success" message="Action completed successfully!" />
+<Alert type="error" message="Something went wrong." />
+<Alert type="warning" message="Warning message here." />
+<Alert type="info" message="Information message." />
+<Alert type="info" message="Closable alert example." closable />`
   },
 ]
