@@ -3,6 +3,7 @@ import Button from '../components/Button/Button.jsx'
 import Navbar from '../components/Navbar/Navbar.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert.jsx'
+import NavbarComponent from '../components/NavbarComponent/NavbarComponent.jsx'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
 
@@ -36,6 +37,18 @@ const sections = [
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M10 2L2 22h20L14 2z"/>
+      </svg>
+    ),
+  },
+  {
+    id: 'navbars',
+    label: 'Navbars',
+    componentName: 'Navbar',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="2" y="5" width="20" height="4" rx="1"/>
+        <line x1="2" y1="13" x2="22" y2="13" strokeDasharray="3 3" strokeWidth="1.5"/>
+        <line x1="2" y1="19" x2="22" y2="19" strokeDasharray="3 3" strokeWidth="1.5"/>
       </svg>
     ),
   },
@@ -82,6 +95,7 @@ function Components() {
   const buttonsRef = useRef(null)
   const badgesRef = useRef(null)
   const alertsRef = useRef(null)
+  const navbarsRef = useRef(null)
   const allComponentsRef = useRef(null)
 
   const handleCopy = (code) => {
@@ -103,6 +117,9 @@ function Components() {
         break
       case 'alerts':
         element = alertsRef.current
+        break
+      case 'navbars':
+        element = navbarsRef.current
         break
       case 'all-components':
         element = allComponentsRef.current
@@ -157,6 +174,8 @@ function Components() {
         scrollTo('badges')
       } else if (searchLower.includes('alert') || filteredComponents.some(c => c.name === 'Alert')) {
         scrollTo('alerts')
+      } else if (searchLower.includes('navbar') || filteredComponents.some(c => c.name === 'Navbar')) {
+        scrollTo('navbars')
       } else if (filteredComponents.length > 0) {
         scrollTo('all-components')
       }
@@ -174,6 +193,7 @@ function Components() {
     if (shouldShowSection('buttons', 'Button')) count++
     if (shouldShowSection('badges', 'Badge')) count++
     if (shouldShowSection('alerts', 'Alert')) count++
+    if (shouldShowSection('navbars', 'Navbar')) count++
     if (filteredComponents.length > 0) count++
     return count
   }, [searchQuery, filteredComponents])
@@ -429,6 +449,112 @@ function Components() {
                         <td>boolean</td>
                         <td><code>false</code></td>
                         <td>Shows close button</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ================= NAVBARS ================= */}
+          {shouldShowSection('navbars', 'Navbar') && (
+            <section className="comp-section" id="navbars" ref={navbarsRef}>
+              <div className="comp-section-header">
+                <h2>Navbar</h2>
+                <span className="comp-badge comp-badge--stable">Stable</span>
+              </div>
+
+              <p className="comp-section-desc">
+                A simple, fully responsive, and beginner-friendly top navigation bar component. Supports multiple color variants and auto-collapses on mobile screens.
+              </p>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title" style={{ marginTop: '1.5rem', marginBottom: '0.75rem' }}>Light Variant</h3>
+                <div style={{ width: '100%', marginBottom: '1.5rem' }}>
+                  <NavbarComponent variant="light" brandName="UIverse" />
+                </div>
+
+                <h3 className="comp-subsection-title" style={{ marginTop: '1.5rem', marginBottom: '0.75rem' }}>Dark Variant</h3>
+                <div style={{ width: '100%', marginBottom: '1.5rem' }}>
+                  <NavbarComponent variant="dark" brandName="UIverse" />
+                </div>
+
+                <h3 className="comp-subsection-title" style={{ marginTop: '1.5rem', marginBottom: '0.75rem' }}>Primary Variant</h3>
+                <div style={{ width: '100%', marginBottom: '1.5rem' }}>
+                  <NavbarComponent variant="primary" brandName="UIverse" />
+                </div>
+              </div>
+
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX Usage</span>
+                  <button
+                    className="copy-btn"
+                    onClick={() =>
+                      handleCopy(`<NavbarComponent 
+  brandName="UIverse" 
+  variant="light" 
+  links={[
+    { label: "Home", href: "#" },
+    { label: "Features", href: "#" },
+    { label: "Pricing", href: "#" }
+  ]} 
+/>`)
+                    }
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+                <pre>{`<NavbarComponent 
+  brandName="UIverse" 
+  variant="light" 
+  links={[
+    { label: "Home", href: "#" },
+    { label: "Features", href: "#" },
+    { label: "Pricing", href: "#" }
+  ]} 
+/>`}</pre>
+              </div>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Props</h3>
+                <div className="props-table-wrap">
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>brandName</code></td>
+                        <td>string</td>
+                        <td><code>"UIverse"</code></td>
+                        <td>The text brand logo on the left</td>
+                      </tr>
+                      <tr>
+                        <td><code>variant</code></td>
+                        <td>string</td>
+                        <td><code>"light"</code></td>
+                        <td>Color scheme: <code>"light"</code> | <code>"dark"</code> | <code>"primary"</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>links</code></td>
+                        <td>array</td>
+                        <td><code>[...]</code></td>
+                        <td>Array of link items: <code>{"{"} label, href {"}"}</code></td>
                       </tr>
                     </tbody>
                   </table>

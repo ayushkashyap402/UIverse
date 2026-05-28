@@ -1,0 +1,204 @@
+/* NavbarComponent.css – Clean, readable styling for the beginner Navbar component */
+
+/* ================= 1. CORE LAYOUT ================= */
+
+.uiverse-navbar {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border-radius: 8px; /* Elegant slightly rounded card style for showcasing */
+  margin: 10px 0;
+}
+
+.uiverse-navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Brand/Logo Styling */
+.uiverse-navbar-brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  transition: opacity 0.2s ease;
+}
+
+.uiverse-navbar-brand:hover {
+  opacity: 0.85;
+}
+
+/* Menu & Links container */
+.uiverse-navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Individual Links */
+.uiverse-navbar-link {
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.uiverse-navbar-link:hover {
+  transform: translateY(-1px);
+}
+
+/* Mobile Toggle Hamburger Button */
+.uiverse-navbar-toggle {
+  display: none; /* Hidden on desktop */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+
+/* ================= 2. COLOR VARIANTS ================= */
+
+/* --- A. Light Theme --- */
+.uiverse-navbar--light {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.uiverse-navbar--light .uiverse-navbar-brand {
+  color: #0f172a; /* Slate 900 */
+}
+
+.uiverse-navbar--light .uiverse-navbar-link {
+  color: #475569; /* Slate 600 */
+}
+
+.uiverse-navbar--light .uiverse-navbar-link:hover {
+  color: #4f46e5; /* UIverse Violet/Indigo */
+}
+
+.uiverse-navbar--light .uiverse-navbar-toggle {
+  color: #0f172a;
+}
+
+.uiverse-navbar--light .uiverse-navbar-toggle:hover {
+  background-color: #f1f5f9;
+}
+
+
+/* --- B. Dark Theme --- */
+.uiverse-navbar--dark {
+  background-color: #0f172a; /* Slate 900 */
+  border: 1px solid #1e293b;
+}
+
+.uiverse-navbar--dark .uiverse-navbar-brand {
+  color: #ffffff;
+}
+
+.uiverse-navbar--dark .uiverse-navbar-link {
+  color: #94a3b8; /* Slate 400 */
+}
+
+.uiverse-navbar--dark .uiverse-navbar-link:hover {
+  color: #ffffff;
+}
+
+.uiverse-navbar--dark .uiverse-navbar-toggle {
+  color: #ffffff;
+}
+
+.uiverse-navbar--dark .uiverse-navbar-toggle:hover {
+  background-color: #1e293b;
+}
+
+
+/* --- C. Primary Theme (Vibrant Indigo) --- */
+.uiverse-navbar--primary {
+  background-color: #4f46e5; /* Indigo 600 */
+  border: 1px solid #4338ca;
+}
+
+.uiverse-navbar--primary .uiverse-navbar-brand {
+  color: #ffffff;
+}
+
+.uiverse-navbar--primary .uiverse-navbar-link {
+  color: #e0e7ff; /* Indigo 100 */
+}
+
+.uiverse-navbar--primary .uiverse-navbar-link:hover {
+  color: #ffffff;
+}
+
+.uiverse-navbar--primary .uiverse-navbar-toggle {
+  color: #ffffff;
+}
+
+.uiverse-navbar--primary .uiverse-navbar-toggle:hover {
+  background-color: #4338ca;
+}
+
+
+/* ================= 3. MOBILE RESPONSIVENESS ================= */
+
+@media (max-width: 768px) {
+  .uiverse-navbar-toggle {
+    display: flex; /* Show hamburger button on mobile screens */
+  }
+
+  .uiverse-navbar-menu {
+    display: none; /* Hide standard flex links */
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 1rem 1.5rem;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  /* When the menu is toggled open */
+  .uiverse-navbar-menu--open {
+    display: flex; /* Display links stacked vertically */
+  }
+
+  .uiverse-navbar-container {
+    position: relative; /* Anchor for absolute positioning of menu dropdown */
+  }
+
+  /* Dropdown styling for different variants on mobile */
+  .uiverse-navbar--light .uiverse-navbar-menu {
+    background-color: #ffffff;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .uiverse-navbar--dark .uiverse-navbar-menu {
+    background-color: #0f172a;
+    border-top: 1px solid #1e293b;
+  }
+
+  .uiverse-navbar--primary .uiverse-navbar-menu {
+    background-color: #4f46e5;
+    border-top: 1px solid #4338ca;
+  }
+
+  .uiverse-navbar-link {
+    width: 100%;
+    padding: 8px 0;
+  }
+}
