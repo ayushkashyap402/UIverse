@@ -1,11 +1,14 @@
-/* Home.css */
+/* Home.css – Landing page styles for the UIverse library showcase view. */
 
 .home-page {
   min-height: 100vh;
   background: var(--bg);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* ── Hero ── */
+/* ==========================================================================
+   HERO DISPLAY WRAPPER
+   ========================================================================== */
 .hero {
   text-align: center;
   padding: 110px 24px 90px;
@@ -73,7 +76,8 @@
   font-size: 1.1rem;
   color: var(--text-2);
   max-width: 580px;
-  margin: 0 auto 40px;
+  margin: 0 auto;
+  margin-bottom: 40px;
   line-height: 1.75;
 }
 
@@ -85,7 +89,9 @@
   margin-bottom: 56px;
 }
 
-/* Stats */
+/* ==========================================================================
+   STATS LOGIC GRID CONTAINERS (ANIMATED COUNTERS)
+   ========================================================================== */
 .hero-stats {
   display: inline-flex;
   align-items: center;
@@ -104,6 +110,7 @@
   flex-direction: column;
   align-items: center;
   padding: 0 24px;
+  min-width: 100px;
 }
 
 .stat-number {
@@ -114,6 +121,8 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition: all 0.3s ease;
 }
 
 .stat-label {
@@ -129,7 +138,9 @@
   background: var(--border);
 }
 
-/* ── Features ── */
+/* ==========================================================================
+   FEATURES ARCHITECTURE
+   ========================================================================== */
 .features-section {
   max-width: 1100px;
   margin: 0 auto;
@@ -164,12 +175,30 @@
   border: 1px solid var(--border-2);
   border-radius: 16px;
   padding: 28px 24px;
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    border-color 0.22s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   position: relative;
   overflow: hidden;
+}
+
+.feature-card.centered {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+}
+
+.feature-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 48px;
+  height: 48px;
+  background: var(--accent-2);
+  border-radius: 12px;
+  color: var(--brand);
+  font-size: 1.6rem;
 }
 
 .feature-card::before {
@@ -196,7 +225,7 @@
 
 .feature-icon-wrap {
   font-size: 1.6rem;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   width: 48px;
   height: 48px;
   background: var(--accent-2);
@@ -204,6 +233,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--brand);
 }
 
 .feature-card h3 {
@@ -220,7 +250,46 @@
   line-height: 1.65;
 }
 
-/* ── Contribute ── */
+/* ==========================================================================
+   TESTIMONIALS SECTION
+   ========================================================================== */
+.testimonials-section {
+  padding: 80px 24px;
+  background: var(--surface-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: var(--surface);
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  font-style: italic;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  color: var(--text-2);
+}
+
+.testimonial-card span {
+  display: block;
+  margin-top: 16px;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--brand);
+}
+
+/* ==========================================================================
+   CONTRIBUTION CALLOUT LAYOUT BLOCK
+   ========================================================================== */
 .contribute-section {
   background: linear-gradient(135deg, #3730a3 0%, #4f46e5 45%, #7c3aed 100%);
   padding: 80px 24px;
@@ -252,7 +321,7 @@
 .contribute-text h2 {
   font-size: 2rem;
   font-weight: 900;
-  color: #fff;
+  color: #ffffff;
   margin-bottom: 12px;
   letter-spacing: -0.02em;
 }
@@ -284,7 +353,7 @@
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.82rem;
-  color: #fff;
+  color: #ffffff;
 }
 
 .step-num {
@@ -298,7 +367,7 @@
   justify-content: center;
   font-size: 0.78rem;
   font-weight: 700;
-  color: #fff;
+  color: #ffffff;
   flex-shrink: 0;
 }
 
@@ -307,9 +376,9 @@
 }
 
 .contribute-cta .uiverse-btn--primary {
-  background: #fff;
+  background: #ffffff;
   color: #4f46e5;
-  border-color: #fff;
+  border-color: #ffffff;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -318,40 +387,9 @@
   border-color: #eef2ff;
 }
 
-/* ── Footer ── */
-.home-footer {
-  text-align: center;
-  padding: 32px 24px;
-  font-size: 0.88rem;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.scroll-top-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 52px;
-  height: 52px;
-  border: none;
-  border-radius: 50%;
-  background: #111827;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease;
-  z-index: 1000;
-}
-
-.scroll-top-btn:hover {
-  transform: translateY(-4px) scale(1.05);
-  opacity: 0.9;
-}
-
-/* ── FAQ ── */
-/* ── FAQ ── */
+/* ==========================================================================
+   ACCORDION SYSTEM INFRASTRUCTURE (FAQ SECTION)
+   ========================================================================== */
 .faq-section {
   max-width: 900px;
   margin: 0 auto;
@@ -365,7 +403,7 @@
 }
 
 .faq-item {
-  border: 1.5px solid #7c3aed;
+  border: 1.5px solid var(--border);
   border-radius: 16px;
   background: var(--surface);
   overflow: hidden;
@@ -373,6 +411,7 @@
 }
 
 .faq-item.active {
+  border-color: #7c3aed;
   box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12);
 }
 
@@ -389,14 +428,13 @@
   font-size: 1rem;
   font-weight: 700;
   text-align: left;
+  outline: none;
 }
 
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition:
-    max-height 0.35s ease,
-    padding 0.35s ease;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
 }
 
 .faq-answer.show {
@@ -405,7 +443,143 @@
 }
 
 .faq-answer p {
-  color: var(--muted);
+  color: var(--text-2);
   line-height: 1.7;
   font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   FOOTER UTILITIES
+   ========================================================================== */
+.home-footer {
+  text-align: center;
+  padding: 40px 24px;
+  font-size: 0.88rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.contributor-tag {
+  font-size: 0.75rem;
+  margin-top: 10px;
+  opacity: 0.7;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  background: #111827;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="dark"] .scroll-top-btn {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.scroll-top-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES FOR ALL SCREEN VIEWS
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 80px 16px 60px;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+
+  .hero-stats {
+    padding: 16px 20px;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .stat {
+    padding: 8px 12px;
+    flex: 1 1 40%;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  .features-section,
+  .testimonials-section,
+  .faq-section {
+    padding: 56px 16px;
+  }
+
+  .section-heading {
+    font-size: 1.75rem;
+  }
+
+  .section-subheading {
+    margin-bottom: 36px;
+  }
+
+  .contribute-section {
+    padding: 48px 16px;
+  }
+
+  .contribute-inner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 32px;
+  }
+
+  .contribute-text p {
+    max-width: 100%;
+  }
+
+  .steps {
+    align-items: flex-start;
+    text-align: left;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-actions .uiverse-btn {
+    width: 100%;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
+  }
+
+  .faq-question {
+    padding: 16px;
+    font-size: 0.95rem;
+  }
+
+  .faq-answer.show {
+    padding: 0 16px 16px;
+  }
 }
