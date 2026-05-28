@@ -164,16 +164,24 @@ function Components() {
         <aside className="comp-sidebar">
           <p className="sidebar-label">ON THIS PAGE</p>
 
-          {sections.map((s) => (
-            <button
-              key={s.id}
-              className={`sidebar-item ${activeSection === s.id ? "sidebar-item--active" : ""}`}
-              onClick={() => scrollTo(s.id)}
-            >
-              <span className="sidebar-item-icon">{s.icon}</span>
-              {s.label}
-            </button>
-          ))}
+          {sections.map((s) => {
+            // Only show section in sidebar if it has content when searching
+            if (searchQuery.trim()) {
+              if (s.id === 'all-components' && filteredComponents.length === 0) return null
+              if (s.componentName && !shouldShowSection(s.id, s.componentName)) return null
+            }
+            
+            return (
+              <button
+                key={s.id}
+                className={`sidebar-item ${activeSection === s.id ? "sidebar-item--active" : ""}`}
+                onClick={() => scrollTo(s.id)}
+              >
+                <span className="sidebar-item-icon">{s.icon}</span>
+                {s.label}
+              </button>
+            )
+          })}
 
           <div className="sidebar-divider" />
 
@@ -261,195 +269,195 @@ function Components() {
             )}
           </section>
           {/* ================= BUTTONS ================= */}
-          <section className="comp-section" id="buttons">
-            <div className="comp-section-header">
-              <h2>Button</h2>
-              <span className="comp-badge comp-badge--stable">Stable</span>
-            </div>
-
-            <p className="comp-section-desc">
-              Versatile button component with variants and sizes.
-            </p>
-
-            <div className="comp-preview">
-              <Button text="Primary" variant="primary" />
-              <Button text="Secondary" variant="secondary" />
-              <Button text="Danger" variant="danger" />
-              <Button text="Disabled" variant="disabled" />
-            </div>
-
-            <div className="code-block">
-              <div className="code-block-header">
-                <span>JSX</span>
-
-                <button
-                  className="copy-btn"
-                  onClick={() =>
-                    handleCopy(`<Button text="Primary" variant="primary" />`)
-                  }
-                >
-                  {copied ? (
-                    <>
-                      <CheckIcon /> Copied
-                    </>
-                  ) : (
-                    <>
-                      <CopyIcon /> Copy
-                    </>
-                  )}
-                </button>
+          {shouldShowSection('buttons', 'Button') && (
+            <section className="comp-section" id="buttons" ref={buttonsRef}>
+              <div className="comp-section-header">
+                <h2>Button</h2>
+                <span className="comp-badge comp-badge--stable">Stable</span>
               </div>
 
-              <pre>{`<Button text="Primary" variant="primary" />`}</pre>
-            </div>
-          </section>
+              <p className="comp-section-desc">
+                Versatile button component with variants and sizes.
+              </p>
+
+              <div className="comp-preview">
+                <Button text="Primary" variant="primary" />
+                <Button text="Secondary" variant="secondary" />
+                <Button text="Danger" variant="danger" />
+                <Button text="Disabled" variant="disabled" />
+              </div>
+
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX</span>
+
+                  <button
+                    className="copy-btn"
+                    onClick={() =>
+                      handleCopy(`<Button text="Primary" variant="primary" />`)
+                    }
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <pre>{`<Button text="Primary" variant="primary" />`}</pre>
+              </div>
+            </section>
+          )}
 
           {/* ================= BADGES ================= */}
-          <section className="comp-section" id="badges">
-            <div className="comp-section-header">
-              <h2>Badge</h2>
-              <span className="comp-badge comp-badge--stable">Stable</span>
-            </div>
+          {shouldShowSection('badges', 'Badge') && (
+            <section className="comp-section" id="badges" ref={badgesRef}>
+              <div className="comp-section-header">
+                <h2>Badge</h2>
+                <span className="comp-badge comp-badge--stable">Stable</span>
+              </div>
 
-            <div className="comp-preview">
-              <Badge text="Primary" variant="primary" />
-              <Badge text="Success" variant="success" />
-              <Badge text="Warning" variant="warning" />
-              <Badge text="Danger" variant="danger" />
-            </div>
-          </section>
+              <p className="comp-section-desc">
+                Small status indicator badge with color variants.
+              </p>
 
+              <div className="comp-preview">
+                <Badge text="Primary" variant="primary" />
+                <Badge text="Success" variant="success" />
+                <Badge text="Warning" variant="warning" />
+                <Badge text="Danger" variant="danger" />
+              </div>
 
-          {/* ── Alert Section ── */}
-<section className="comp-section" id="alerts">
-  <div className="comp-section-header">
-    <h2>Alert</h2>
-    <span className="comp-badge comp-badge--stable">
-      Stable
-    </span>
-  </div>
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX</span>
 
-  <p className="comp-section-desc">
-    Reusable alert component with multiple variants
-    for success, error, warning, and informational
-    messages.
-  </p>
+                  <button
+                    className="copy-btn"
+                    onClick={() =>
+                      handleCopy(`<Badge text="Primary" variant="primary" />`)
+                    }
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
 
-  {/* Variants */}
-  <div className="comp-subsection">
-    <h3 className="comp-subsection-title">
-      Variants
-    </h3>
+                <pre>{`<Badge text="Primary" variant="primary" />`}</pre>
+              </div>
+            </section>
+          )}
 
-    <div className="comp-preview">
-      <Alert
-        type="success"
-        message="Action completed successfully!"
-      />
+          {/* ================= ALERTS ================= */}
+          {shouldShowSection('alerts', 'Alert') && (
+            <section className="comp-section" id="alerts" ref={alertsRef}>
+              <div className="comp-section-header">
+                <h2>Alert</h2>
+                <span className="comp-badge comp-badge--stable">Stable</span>
+              </div>
 
-      <Alert
-        type="error"
-        message="Something went wrong."
-      />
+              <p className="comp-section-desc">
+                Reusable alert component with multiple variants
+                for success, error, warning, and informational
+                messages.
+              </p>
 
-      <Alert
-        type="warning"
-        message="Warning message here."
-      />
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Variants</h3>
 
-      <Alert
-        type="info"
-        message="Information message."
-      />
+                <div className="comp-preview">
+                  <Alert type="success" message="Action completed successfully!" />
+                  <Alert type="error" message="Something went wrong." />
+                  <Alert type="warning" message="Warning message here." />
+                  <Alert type="info" message="Information message." />
+                  <Alert type="info" message="Closable alert example." closable />
+                </div>
+              </div>
 
-      <Alert
-    type="info"
-    message="Closable alert example."
-    closable
-      />
-    </div>
-  </div>
-
-  {/* Code Block */}
-  <div className="code-block">
-    <div className="code-block-header">
-      <span>JSX</span>
-
-      <button
-        className="copy-btn"
-        onClick={() =>
-          handleCopy(`<Alert type="success" message="Action completed successfully!" />
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <button
+                    className="copy-btn"
+                    onClick={() =>
+                      handleCopy(`<Alert type="success" message="Action completed successfully!" />
 <Alert type="error" message="Something went wrong." />
 <Alert type="warning" message="Warning message here." />
 <Alert type="info" message="Information message." />
 <Alert type="info" message="Closable alert example." closable />`)
-        }
-      >
-        {copied ? '✅ Copied!' : '📋 Copy'}
-      </button>
-    </div>
-
-    <pre>{`<Alert type="success" message="Action completed successfully!" />
+                    }
+                  >
+                    {copied ? '✅ Copied!' : '📋 Copy'}
+                  </button>
+                </div>
+                <pre>{`<Alert type="success" message="Action completed successfully!" />
 <Alert type="error" message="Something went wrong." />
 <Alert type="warning" message="Warning message here." />
 <Alert type="info" message="Information message." />
 <Alert type="info" message="Closable alert example." closable />`}</pre>
-  </div>
+              </div>
 
-  {/* Props Table */}
-  <div className="comp-subsection">
-    <h3 className="comp-subsection-title">Props</h3>
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Props</h3>
+                <div className="props-table-wrap">
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>type</code></td>
+                        <td>string</td>
+                        <td><code>"info"</code></td>
+                        <td>success · error · warning · info</td>
+                      </tr>
+                      <tr>
+                        <td><code>message</code></td>
+                        <td>string</td>
+                        <td><code>"This is an alert"</code></td>
+                        <td>Alert message text</td>
+                      </tr>
+                      <tr>
+                        <td><code>closable</code></td>
+                        <td>boolean</td>
+                        <td><code>false</code></td>
+                        <td>Shows close button</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          )}
 
-    <div className="props-table-wrap">
-      <table className="props-table">
-        <thead>
-          <tr>
-            <th>Prop</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td><code>type</code></td>
-            <td>string</td>
-            <td><code>"info"</code></td>
-            <td>
-              success · error · warning · info
-            </td>
-          </tr>
-
-          <tr>
-            <td><code>message</code></td>
-            <td>string</td>
-            <td>
-              <code>"This is an alert"</code>
-            </td>
-            <td>Alert message text</td>
-          </tr>
-
-          <tr>
-            <td><code>closable</code></td>
-            <td>boolean</td>
-            <td><code>false</code></td>
-            <td>Shows close button</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-          {/* ── All Components Table ── */}
-
-          {/* ================= ALL COMPONENTS ================= */}
-
-          <section className="comp-section" id="all-components">
-            <div className="comp-section-header">
-              <h2>All Components</h2>
-            </div>
+          {/* ================= ALL COMPONENTS TABLE ================= */}
+          {filteredComponents.length > 0 && (
+            <section className="comp-section" id="all-components" ref={allComponentsRef}>
+              <div className="comp-section-header">
+                <h2>All Components</h2>
+                {searchQuery && (
+                  <span className="filtered-badge">
+                    Filtered: {filteredComponents.length} of {componentsList.length}
+                  </span>
+                )}
+              </div>
 
             <div className="comp-table-wrap">
               <table className="comp-table">
@@ -472,9 +480,35 @@ function Components() {
                       <td>{c.status}</td>
                       <td>{c.description}</td>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {filteredComponents.map((c) => (
+                      <tr key={c.id}>
+                        <td><strong>{c.name}</strong></td>
+                        <td>{c.category}</td>
+                        <td>
+                          <span className={`status-badge status-${c.status.toLowerCase()}`}>
+                            {c.status}
+                          </span>
+                        </td>
+                        <td>{c.description}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
+
+          {/* NO RESULTS MESSAGE */}
+          {searchQuery && filteredComponents.length === 0 && (
+            <div className="no-results">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <p>🔍 No components found matching <strong>"{searchQuery}"</strong></p>
+              <p>Try searching for "Button", "Alert", "Badge", or a category like "Inputs" or "Feedback"</p>
             </div>
           </section>
         </main>

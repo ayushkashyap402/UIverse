@@ -71,7 +71,7 @@
 
 .hero-subtitle {
   font-size: 1.1rem;
-  color: var(--muted);
+  color: var(--text-2);
   max-width: 580px;
   margin: 0 auto 40px;
   line-height: 1.75;
@@ -147,7 +147,7 @@
 
 .section-subheading {
   text-align: center;
-  color: var(--muted);
+  color: var(--text-2);
   font-size: 1.05rem;
   margin-bottom: 52px;
   line-height: 1.65;
@@ -216,7 +216,7 @@
 
 .feature-card p {
   font-size: 0.9rem;
-  color: var(--muted);
+  color: var(--text-2);
   line-height: 1.65;
 }
 
@@ -348,4 +348,64 @@
 .scroll-top-btn:hover {
   transform: translateY(-4px) scale(1.05);
   opacity: 0.9;
+}
+
+/* ── FAQ ── */
+/* ── FAQ ── */
+.faq-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 88px 24px;
+}
+
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.faq-item {
+  border: 1.5px solid #7c3aed;
+  border-radius: 16px;
+  background: var(--surface);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item.active {
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12);
+}
+
+.faq-question {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.35s ease,
+    padding 0.35s ease;
+}
+
+.faq-answer.show {
+  max-height: 200px;
+  padding: 0 24px 20px;
+}
+
+.faq-answer p {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 0.95rem;
 }
