@@ -5,6 +5,11 @@ import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert.jsx'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
+import CodeBlock from '../components/docs/CodeBlock.jsx'
+import PropsTable from '../components/docs/PropsTable.jsx'
+import VariantPreview from '../components/docs/VariantPreview.jsx'
+import ComponentSection from '../components/docs/ComponentSection.jsx'
+import { componentDocs } from '../data/componentDocs.js'
 
 /* ================= SECTIONS ================= */
 
@@ -55,6 +60,12 @@ const sections = [
     ),
   },
 ]
+
+const componentMap = {
+  Button,
+  Badge,
+  Alert,
+}
 
 /* ================= ICONS ================= */
 
@@ -183,7 +194,6 @@ function Components() {
       <Navbar />
 
       <div className="comp-layout">
-
         {/* ================= SIDEBAR ================= */}
         <aside className="comp-sidebar">
           <p className="sidebar-label">ON THIS PAGE</p>
@@ -194,7 +204,7 @@ function Components() {
               if (s.id === 'all-components' && filteredComponents.length === 0) return null
               if (s.componentName && !shouldShowSection(s.id, s.componentName)) return null
             }
-            
+
             return (
               <button
                 key={s.id}
@@ -232,7 +242,7 @@ function Components() {
           <div className="comp-header">
             <h1>Components</h1>
             <p>Production-ready UI components. Copy the code, drop it in, done.</p>
-            
+
             {/* SEARCH INPUT */}
             <div className="search-wrapper">
               <div className="search-container">
@@ -258,184 +268,66 @@ function Components() {
             </div>
           </div>
 
-          {/* ================= BUTTONS ================= */}
-          {shouldShowSection('buttons', 'Button') && (
-            <section className="comp-section" id="buttons" ref={buttonsRef}>
-              <div className="comp-section-header">
-                <h2>Button</h2>
-                <span className="comp-badge comp-badge--stable">Stable</span>
-              </div>
+          {componentDocs.map((doc) => {
+  const DynamicComponent =
+    componentMap[doc.component]
 
-              <p className="comp-section-desc">
-                Versatile button component with variants and sizes.
-              </p>
+  return (
+    shouldShowSection(doc.id, doc.component) && (
+      <ComponentSection
+        key={doc.id}
+        id={doc.id}
+        sectionRef={
+          doc.id === 'buttons'
+            ? buttonsRef
+            : doc.id === 'badges'
+            ? badgesRef
+            : alertsRef
+        }
+        title={doc.title}
+        status={doc.status}
+        description={doc.description}
+      >
+        <div className="comp-subsection">
+  {doc.subsectionTitle && (
+    <h3 className="comp-subsection-title">
+      {doc.subsectionTitle}
+    </h3>
+  )}
 
-              <div className="comp-preview">
-                <Button text="Primary" variant="primary" />
-                <Button text="Secondary" variant="secondary" />
-                <Button text="Danger" variant="danger" />
-                <Button text="Disabled" variant="disabled" />
-              </div>
+  <VariantPreview>
+    {doc.variants.map((variant, index) => (
+      <DynamicComponent
+        key={index}
+        {...variant}
+      />
+    ))}
+  </VariantPreview>
+</div>
 
-              <div className="code-block">
-                <div className="code-block-header">
-                  <span>JSX</span>
+        <CodeBlock
+          code={doc.code}
+          copied={copied}
+          onCopy={handleCopy}
+          CopyIcon={CopyIcon}
+          CheckIcon={CheckIcon}
+        />
 
-                  <button
-                    className="copy-btn"
-                    onClick={() =>
-                      handleCopy(`<Button text="Primary" variant="primary" />`)
-                    }
-                  >
-                    {copied ? (
-                      <>
-                        <CheckIcon /> Copied
-                      </>
-                    ) : (
-                      <>
-                        <CopyIcon /> Copy
-                      </>
-                    )}
-                  </button>
-                </div>
+        {doc.propsTable && (
+          <div className="comp-subsection">
+            <h3 className="comp-subsection-title">
+              Props
+            </h3>
 
-                <pre>{`<Button text="Primary" variant="primary" />`}</pre>
-              </div>
-            </section>
-          )}
-
-          {/* ================= BADGES ================= */}
-          {shouldShowSection('badges', 'Badge') && (
-            <section className="comp-section" id="badges" ref={badgesRef}>
-              <div className="comp-section-header">
-                <h2>Badge</h2>
-                <span className="comp-badge comp-badge--stable">Stable</span>
-              </div>
-
-              <p className="comp-section-desc">
-                Small status indicator badge with color variants.
-              </p>
-
-              <div className="comp-preview">
-                <Badge text="Primary" variant="primary" />
-                <Badge text="Success" variant="success" />
-                <Badge text="Warning" variant="warning" />
-                <Badge text="Danger" variant="danger" />
-              </div>
-
-              <div className="code-block">
-                <div className="code-block-header">
-                  <span>JSX</span>
-
-                  <button
-                    className="copy-btn"
-                    onClick={() =>
-                      handleCopy(`<Badge text="Primary" variant="primary" />`)
-                    }
-                  >
-                    {copied ? (
-                      <>
-                        <CheckIcon /> Copied
-                      </>
-                    ) : (
-                      <>
-                        <CopyIcon /> Copy
-                      </>
-                    )}
-                  </button>
-                </div>
-
-                <pre>{`<Badge text="Primary" variant="primary" />`}</pre>
-              </div>
-            </section>
-          )}
-
-          {/* ================= ALERTS ================= */}
-          {shouldShowSection('alerts', 'Alert') && (
-            <section className="comp-section" id="alerts" ref={alertsRef}>
-              <div className="comp-section-header">
-                <h2>Alert</h2>
-                <span className="comp-badge comp-badge--stable">Stable</span>
-              </div>
-
-              <p className="comp-section-desc">
-                Reusable alert component with multiple variants
-                for success, error, warning, and informational
-                messages.
-              </p>
-
-              <div className="comp-subsection">
-                <h3 className="comp-subsection-title">Variants</h3>
-
-                <div className="comp-preview">
-                  <Alert type="success" message="Action completed successfully!" />
-                  <Alert type="error" message="Something went wrong." />
-                  <Alert type="warning" message="Warning message here." />
-                  <Alert type="info" message="Information message." />
-                  <Alert type="info" message="Closable alert example." closable />
-                </div>
-              </div>
-
-              <div className="code-block">
-                <div className="code-block-header">
-                  <span>JSX</span>
-                  <button
-                    className="copy-btn"
-                    onClick={() =>
-                      handleCopy(`<Alert type="success" message="Action completed successfully!" />
-<Alert type="error" message="Something went wrong." />
-<Alert type="warning" message="Warning message here." />
-<Alert type="info" message="Information message." />
-<Alert type="info" message="Closable alert example." closable />`)
-                    }
-                  >
-                    {copied ? '✅ Copied!' : '📋 Copy'}
-                  </button>
-                </div>
-                <pre>{`<Alert type="success" message="Action completed successfully!" />
-<Alert type="error" message="Something went wrong." />
-<Alert type="warning" message="Warning message here." />
-<Alert type="info" message="Information message." />
-<Alert type="info" message="Closable alert example." closable />`}</pre>
-              </div>
-
-              <div className="comp-subsection">
-                <h3 className="comp-subsection-title">Props</h3>
-                <div className="props-table-wrap">
-                  <table className="props-table">
-                    <thead>
-                      <tr>
-                        <th>Prop</th>
-                        <th>Type</th>
-                        <th>Default</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><code>type</code></td>
-                        <td>string</td>
-                        <td><code>"info"</code></td>
-                        <td>success · error · warning · info</td>
-                      </tr>
-                      <tr>
-                        <td><code>message</code></td>
-                        <td>string</td>
-                        <td><code>"This is an alert"</code></td>
-                        <td>Alert message text</td>
-                      </tr>
-                      <tr>
-                        <td><code>closable</code></td>
-                        <td>boolean</td>
-                        <td><code>false</code></td>
-                        <td>Shows close button</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-          )}
+            <PropsTable
+              propsData={doc.propsTable}
+            />
+          </div>
+        )}
+      </ComponentSection>
+    )
+  )
+})}
 
           {/* ================= ALL COMPONENTS TABLE ================= */}
           {filteredComponents.length > 0 && (
