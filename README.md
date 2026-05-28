@@ -41,7 +41,7 @@ Every component is:
 | 🧑‍💻 Beginner Friendly | Every file has comments explaining what and why |
 | 🤝 Contributor Ready | Clear folder structure, easy to add new components |
 | 🏆 GSSoC Ready | Structured for open-source programs like GSSoC |
-| 📦 Zero Extra Deps | Only React + React Router. No bloat |
+| 📦 Minimal Dependencies | Uses React, React Router, and react-icons while keeping the project lightweight |
 | 🎨 Plain CSS | No Tailwind — so contributors learn real CSS |
 
 ---
@@ -297,6 +297,7 @@ Looking for something to build? Here are some ideas:
 | [Vite](https://vitejs.dev) | 5 | Dev server + bundler |
 | [React Router](https://reactrouter.com) | 6 | Client-side routing |
 | Plain CSS | — | Component styling |
+| [React Icons](https://react-icons.github.io/react-icons/) | 5 | Lightweight icon library for React components |
 
 ---
 
