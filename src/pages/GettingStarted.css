@@ -1,10 +1,35 @@
 /* GettingStarted.css – Doc-specific styles
    Layout, sidebar, code blocks and tables are reused from Components.css */
 
+/* ================= THEME VARIABLES ================= */
+:root {
+  --doc-text-primary: #444444;
+  --doc-text-link: #4f46e5;
+  --doc-code-bg: #f1f5f9;
+  --doc-step-num-bg: #eef2ff;
+  --doc-callout-bg: #f8fafc;
+  --doc-callout-border: #e2e8f0;
+  --doc-toc-bg: #ffffff;
+  --doc-toc-border: #e2e8f0;
+  --doc-toc-text: #1a1a2e;
+}
+
+[data-theme="dark"] {
+  --doc-text-primary: #cbd5e1;
+  --doc-text-link: #818cf8;
+  --doc-code-bg: #1e293b;
+  --doc-step-num-bg: rgba(79, 70, 229, 0.2);
+  --doc-callout-bg: #1e293b;
+  --doc-callout-border: #334155;
+  --doc-toc-bg: #1e293b;
+  --doc-toc-border: #334155;
+  --doc-toc-text: #f1f5f9;
+}
+
 /* ── Prose ── */
 .doc-prose {
   font-size: 0.95rem;
-  color: #444;
+  color: var(--doc-text-primary);
   line-height: 1.75;
 }
 
@@ -13,7 +38,7 @@
 }
 
 .doc-prose a {
-  color: #4f46e5;
+  color: var(--doc-text-link);
   font-weight: 600;
 }
 
@@ -22,11 +47,11 @@
 }
 
 .doc-prose code {
-  background: #f1f5f9;
+  background: var(--doc-code-bg);
   padding: 2px 7px;
   border-radius: 4px;
   font-size: 0.85rem;
-  color: #4f46e5;
+  color: var(--doc-text-link);
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -44,7 +69,7 @@
   align-items: flex-start;
   gap: 12px;
   font-size: 0.93rem;
-  color: #444;
+  color: var(--doc-text-primary);
   line-height: 1.6;
 }
 
@@ -55,7 +80,7 @@
   height: 6px;
   margin-top: 8px;
   border-radius: 50%;
-  background: #4f46e5;
+  background: var(--doc-text-link);
 }
 
 /* ── Numbered steps ── */
@@ -71,15 +96,15 @@
   align-items: flex-start;
   gap: 14px;
   font-size: 0.93rem;
-  color: #444;
+  color: var(--doc-text-primary);
   line-height: 1.6;
 }
 
 .doc-step-num {
   width: 26px;
   height: 26px;
-  background: #eef2ff;
-  color: #4f46e5;
+  background: var(--doc-step-num-bg);
+  color: var(--doc-text-link);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -90,11 +115,11 @@
 }
 
 .doc-step code {
-  background: #f1f5f9;
+  background: var(--doc-code-bg);
   padding: 2px 7px;
   border-radius: 4px;
   font-size: 0.83rem;
-  color: #4f46e5;
+  color: var(--doc-text-link);
 }
 
 /* ── Note / callout ── */
@@ -102,13 +127,13 @@
   display: flex;
   align-items: baseline;
   gap: 12px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-left: 3px solid #4f46e5;
+  background: var(--doc-callout-bg);
+  border: 1px solid var(--doc-callout-border);
+  border-left: 3px solid var(--doc-text-link);
   border-radius: 8px;
   padding: 14px 18px;
   font-size: 0.9rem;
-  color: #475569;
+  color: var(--doc-text-primary);
   line-height: 1.7;
   margin-top: 20px;
 }
@@ -119,20 +144,20 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #4f46e5;
+  color: var(--doc-text-link);
 }
 
 .doc-callout code {
-  background: #eef2ff;
+  background: var(--doc-code-bg);
   padding: 2px 7px;
   border-radius: 4px;
   font-size: 0.83rem;
-  color: #4f46e5;
+  color: var(--doc-text-link);
   font-family: 'Courier New', Courier, monospace;
 }
 
 .doc-callout a {
-  color: #4f46e5;
+  color: var(--doc-text-link);
   font-weight: 600;
 }
 
@@ -157,8 +182,8 @@
 .doc-toc-caret {
   width: 8px;
   height: 8px;
-  border-right: 2px solid #4f46e5;
-  border-bottom: 2px solid #4f46e5;
+  border-right: 2px solid var(--doc-text-link);
+  border-bottom: 2px solid var(--doc-text-link);
   transform: rotate(45deg);
   transition: transform 0.2s ease;
   margin-top: -3px;
@@ -170,6 +195,7 @@
   margin-top: 3px;
 }
 
+/* ── Responsive handling for all mobile/tablet devices ── */
 @media (max-width: 768px) {
   /* Stack the toggle above the collapsible list */
   .comp-sidebar.doc-toc {
@@ -184,8 +210,8 @@
     justify-content: space-between;
     gap: 12px;
     width: 100%;
-    background: #fff;
-    border: 1px solid #e2e8f0;
+    background: var(--doc-toc-bg);
+    border: 1px solid var(--doc-toc-border);
     border-radius: 10px;
     padding: 12px 16px;
     cursor: pointer;
@@ -205,21 +231,21 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #94a3b8;
+    color: var(--muted-2);
   }
 
   .doc-toc-toggle-current {
     font-size: 0.92rem;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--doc-toc-text);
   }
 
-  /* Collapsed by default on mobile */
+  /* Collapsed by default on mobile, reveals when toggled */
   .doc-toc .doc-toc-list {
     display: none;
     margin-top: 8px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
+    background: var(--doc-toc-bg);
+    border: 1px solid var(--doc-toc-border);
     border-radius: 10px;
     padding: 8px;
   }
