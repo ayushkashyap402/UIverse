@@ -75,7 +75,7 @@ const CheckIcon = () => (
 
 function Components() {
   const [activeSection, setActiveSection] = useState('buttons')
-  const [copied, setCopied] = useState(false)
+  const [copiedSection, setCopiedSection] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
   
   // Refs for scrolling
@@ -84,13 +84,17 @@ function Components() {
   const alertsRef = useRef(null)
   const allComponentsRef = useRef(null)
 
-  const handleCopy = (code) => {
+  // Flag to temporarily disable scroll-spy updates during smooth clicks
+  const clickScrolling = useRef(false)
+
+  const handleCopy = (code, sectionId) => {
     navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1800)
+    setCopiedSection(sectionId)
+    setTimeout(() => setCopiedSection(null), 1800)
   }
 
   const scrollTo = (id) => {
+    clickScrolling.current = true
     setActiveSection(id)
     let element = null
     
@@ -117,6 +121,11 @@ function Components() {
         block: 'start',
       })
     }
+
+    // Allow scroll listener back online after the smooth animation completes
+    setTimeout(() => {
+      clickScrolling.current = false
+    }, 800)
   }
 
   // Filter components based on search
@@ -163,6 +172,33 @@ function Components() {
     }
   }, [searchQuery])
 
+  // Scroll-spy functionality to track active section viewports
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (clickScrolling.current) return
+        
+        // Isolate sections intersecting near the viewport header area
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+          
+        if (visible[0]) {
+          setActiveSection(visible[0].target.id)
+        }
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+    )
+
+    // Run active tracking on matching elements available
+    if (shouldShowSection('buttons', 'Button') && buttonsRef.current) observer.observe(buttonsRef.current)
+    if (shouldShowSection('badges', 'Badge') && badgesRef.current) observer.observe(badgesRef.current)
+    if (shouldShowSection('alerts', 'Alert') && alertsRef.current) observer.observe(alertsRef.current)
+    if (filteredComponents.length > 0 && allComponentsRef.current) observer.observe(allComponentsRef.current)
+
+    return () => observer.disconnect()
+  }, [searchQuery, filteredComponents])
+
   // Clear search function
   const clearSearch = () => {
     setSearchQuery('')
@@ -200,6 +236,7 @@ function Components() {
                 key={s.id}
                 className={`sidebar-item ${activeSection === s.id ? "sidebar-item--active" : ""}`}
                 onClick={() => scrollTo(s.id)}
+                aria-current={activeSection === s.id ? "true" : undefined}
               >
                 <span className="sidebar-item-icon">{s.icon}</span>
                 {s.label}
@@ -284,10 +321,10 @@ function Components() {
                   <button
                     className="copy-btn"
                     onClick={() =>
-                      handleCopy(`<Button text="Primary" variant="primary" />`)
+                      handleCopy(`<Button text="Primary" variant="primary" />`, 'buttons')
                     }
                   >
-                    {copied ? (
+                    {copiedSection === 'buttons' ? (
                       <>
                         <CheckIcon /> Copied
                       </>
@@ -330,10 +367,10 @@ function Components() {
                   <button
                     className="copy-btn"
                     onClick={() =>
-                      handleCopy(`<Badge text="Primary" variant="primary" />`)
+                      handleCopy(`<Badge text="Primary" variant="primary" />`, 'badges')
                     }
                   >
-                    {copied ? (
+                    {copiedSection === 'badges' ? (
                       <>
                         <CheckIcon /> Copied
                       </>
@@ -386,10 +423,18 @@ function Components() {
 <Alert type="error" message="Something went wrong." />
 <Alert type="warning" message="Warning message here." />
 <Alert type="info" message="Information message." />
-<Alert type="info" message="Closable alert example." closable />`)
+<Alert type="info" message="Closable alert example." closable />`, 'alerts')
                     }
                   >
-                    {copied ? '✅ Copied!' : '📋 Copy'}
+                    {copiedSection === 'alerts' ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
                   </button>
                 </div>
                 <pre>{`<Alert type="success" message="Action completed successfully!" />

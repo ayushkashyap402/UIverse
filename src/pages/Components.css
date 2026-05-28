@@ -1,11 +1,70 @@
-/* Component  .css */
+/* Components.css – Main stylesheet for the showcase layout, 
+   sidebar navigation, utilities, cards, custom tables, and theme states. */
+
+/* ==========================================================================
+   GLOBAL DESIGN TOKENS & VARIABLES
+   ========================================================================== */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --text: #0f1117;
+  --text-2: #475569;
+  --muted: #64748b;
+  --muted-2: #94a3b8;
+  --border: #e2e8f0;
+  --border-2: #cbd5e1;
+  --brand: #4f46e5;
+  --accent: rgba(79, 70, 229, 0.06);
+  --accent-2: rgba(79, 70, 229, 0.1);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-brand: 0 10px 25px -5px rgba(79, 70, 229, 0.1), 0 8px 16px -6px rgba(79, 70, 229, 0.05);
+  
+  /* Code Blocks variables */
+  --code-bg: #0f1117;
+  --code-header: #1e293b;
+  --code-border: #334155;
+  --code-text: #f8fafc;
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-2: #0f172a;
+  --text: #f1f5f9;
+  --text-2: #94a3b8;
+  --muted: #64748b;
+  --muted-2: #475569;
+  --border: #334155;
+  --border-2: #1e293b;
+  --brand: #818cf8;
+  --accent: rgba(129, 140, 248, 0.12);
+  --accent-2: rgba(129, 140, 248, 0.18);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-brand: 0 10px 25px -5px rgba(99, 102, 241, 0.2);
+  
+  --code-bg: #030712;
+  --code-header: #111827;
+  --code-border: #1f2937;
+  --code-text: #e5e7eb;
+}
+
+/* ── Smooth Page Adjustments ── */
+html {
+  scroll-behavior: smooth;
+}
 
 .comp-page {
   min-height: 100vh;
   background: var(--bg);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* ── Layout ── */
+/* ==========================================================================
+   DEFAULT LAYOUT (DESKTOP DRIVEN MASTER CLASSES)
+   ========================================================================== */
 .comp-layout {
   display: flex;
   max-width: 1200px;
@@ -15,7 +74,6 @@
   align-items: flex-start;
 }
 
-/* ── Sidebar ── */
 .comp-sidebar {
   width: 210px;
   flex-shrink: 0;
@@ -47,7 +105,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s ease, color 0.15s ease;
   margin-bottom: 2px;
   text-decoration: none;
 }
@@ -77,7 +135,9 @@
   padding-left: 10px;
 }
 
-.sidebar-item--link { color: var(--brand); }
+.sidebar-item--link { 
+  color: var(--brand); 
+}
 
 .sidebar-divider {
   height: 1px;
@@ -85,10 +145,14 @@
   margin: 16px 0;
 }
 
-/* ── Main ── */
-.comp-main { flex: 1; min-width: 0; }
+.comp-main { 
+  flex: 1; 
+  min-width: 0; 
+}
 
-.comp-header { margin-bottom: 36px; }
+.comp-header { 
+  margin-bottom: 36px; 
+}
 
 .comp-header h1 {
   font-size: 2.2rem;
@@ -103,7 +167,9 @@
   font-size: 1.05rem;
 }
 
-/* ── Section card ── */
+/* ==========================================================================
+   UI DISPLAY CARDS & MODULE COMPOSITIONS
+   ========================================================================== */
 .comp-section {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -112,6 +178,7 @@
   margin-bottom: 28px;
   scroll-margin-top: 90px;
   box-shadow: var(--shadow-sm);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .comp-section-header {
@@ -135,8 +202,9 @@
   line-height: 1.65;
 }
 
-/* ── Subsection ── */
-.comp-subsection { margin-bottom: 28px; }
+.comp-subsection { 
+  margin-bottom: 28px; 
+}
 
 .comp-subsection-title {
   font-size: 0.75rem;
@@ -147,7 +215,6 @@
   margin-bottom: 14px;
 }
 
-/* ── Preview area ── */
 .comp-preview {
   display: flex;
   gap: 14px;
@@ -162,9 +229,90 @@
   border-radius: 12px;
 }
 
-.comp-preview--align-end { align-items: flex-end; }
+.comp-preview--align-end { 
+  align-items: flex-end; 
+}
 
-/* ── Code block ── */
+/* ==========================================================================
+   SEARCH REGISTRY STYLING INFRASTRUCTURE
+   ========================================================================== */
+.search-wrapper {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.search-container {
+  position: relative;
+  max-width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 44px 12px 16px;
+  font-size: 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.search-input::placeholder {
+  color: var(--muted-2);
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 1.1rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-search-btn:hover {
+  background: var(--accent);
+  color: var(--text);
+}
+
+.search-results-info {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 8px;
+  padding-left: 4px;
+}
+
+.filtered-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: var(--brand);
+  color: #ffffff;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-left: 12px;
+}
+
+/* ==========================================================================
+   CODE DISPLAY BLOCKS & COPY INTERACTIONS
+   ========================================================================== */
 .code-block {
   background: var(--code-bg);
   border-radius: 12px;
@@ -202,7 +350,7 @@
   padding: 4px 12px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s ease, border-color 0.15s ease;
   font-family: inherit;
 }
 
@@ -221,49 +369,22 @@
   margin: 0;
 }
 
-/* ── Props table ── */
-.props-table-wrap { overflow-x: auto; }
-
-.props-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.92rem;
+/* ==========================================================================
+   TABLE SYSTEM COMPOSITIONS (METADATA & SCHEMAS)
+   ========================================================================== */
+.props-table-wrap,
+.comp-table-wrap { 
+  overflow-x: auto; 
 }
 
-.props-table th {
-  text-align: left;
-  padding: 10px 14px;
-  background: var(--surface-2);
-  border-bottom: 2px solid var(--border);
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.props-table td {
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-2);
-}
-
-.props-table tr:last-child td { border-bottom: none; }
-
-.props-table code {
-  background: var(--accent);
-  padding: 2px 7px;
-  border-radius: 4px;
-  font-size: 0.84rem;
-  color: var(--brand);
-}
-
-/* ── All components table ── */
-.comp-table-wrap { overflow-x: auto; }
-
+.props-table,
 .comp-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.92rem;
 }
 
+.props-table th,
 .comp-table th {
   text-align: left;
   padding: 11px 16px;
@@ -273,30 +394,34 @@
   font-weight: 700;
 }
 
+.props-table td,
 .comp-table td {
   padding: 11px 16px;
   border-bottom: 1px solid var(--border);
   color: var(--text-2);
 }
 
-.comp-table tr:last-child td { border-bottom: none; }
+.props-table tr:last-child td,
+.comp-table tr:last-child td { 
+  border-bottom: none; 
+}
 
 .comp-table strong {
   color: var(--text);
   font-weight: 600;
 }
 
-.category-tag {
-  background: var(--surface-2);
-  color: var(--muted);
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border: 1px solid var(--border);
+.props-table code {
+  background: var(--accent);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.84rem;
+  color: var(--brand);
 }
 
-/* ── Badges ── */
+/* ==========================================================================
+   STATUS TAG INDICATION REGISTRY
+   ========================================================================== */
 .comp-badge {
   display: inline-flex;
   align-items: center;
@@ -337,93 +462,6 @@
   border-color: rgba(251,191,36,0.25);
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .comp-layout {
-    flex-direction: column;
-    padding: 24px 16px;
-  }
-
-  .comp-sidebar {
-    width: 100%;
-    position: static;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .sidebar-label,
-  .sidebar-divider { display: none; }
-
-  .comp-section { padding: 20px; }
-}
-
-/* Add to Components.css - Search Styles */
-
-.search-wrapper {
-  margin-top: 24px;
-  margin-bottom: 16px;
-}
-
-.search-container {
-  position: relative;
-  max-width: 100%;
-}
-
-.search-input {
-  width: 100%;
-  padding: 12px 44px 12px 16px;
-  font-size: 0.95rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--text);
-  transition: all 0.2s ease;
-  font-family: inherit;
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-}
-
-.search-input::placeholder {
-  color: var(--muted-2);
-}
-
-.clear-search-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--muted);
-  font-size: 1.1rem;
-  padding: 4px 8px;
-  border-radius: 6px;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.clear-search-btn:hover {
-  background: var(--accent);
-  color: var(--text);
-}
-
-.search-results-info {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-top: 8px;
-  padding-left: 4px;
-}
-
-/* Status badges in table */
 .status-badge {
   display: inline-block;
   padding: 2px 8px;
@@ -447,28 +485,6 @@
   color: var(--muted);
 }
 
-/* No results message */
-.no-results {
-  text-align: center;
-  padding: 48px 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  margin-top: 24px;
-}
-
-.no-results p:first-child {
-  font-size: 1.1rem;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-
-.no-results p:last-child {
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
-/* Dark mode support */
 [data-theme="dark"] .status-stable {
   background: rgba(21, 128, 61, 0.2);
   color: #4ade80;
@@ -479,34 +495,9 @@
   color: #fbbf24;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .search-input {
-    font-size: 0.9rem;
-    padding: 10px 40px 10px 14px;
-  }
-  
-  .no-results {
-    padding: 32px 16px;
-  }
-}
-
-
-
-/* Add these styles to Components.css */
-
-.filtered-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 10px;
-  background: var(--brand);
-  color: white;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  margin-left: 12px;
-}
-
+/* ==========================================================================
+   FALLBACK INFRASTRUCTURE (QUERY WRAPPERS)
+   ========================================================================== */
 .no-results {
   text-align: center;
   padding: 60px 24px;
@@ -532,22 +523,156 @@
   color: var(--muted);
 }
 
-.search-results-info {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-top: 8px;
-  padding-left: 4px;
+/* ==========================================================================
+   MEDIA QUERIES FOR ALL TYPES OF DEVICES (DEVICE MATRICES)
+   ========================================================================== */
+
+/* 1. Large Displays and Wide Monitors (Desktop Base Bounds Enhancements) */
+@media screen and (min-width: 1441px) {
+  .comp-layout {
+    max-width: 1400px;
+    padding: 64px 32px;
+    gap: 48px;
+  }
+  .comp-sidebar {
+    width: 240px;
+  }
 }
 
-/* Highlight active section in sidebar */
-.sidebar-item--active {
-  background: var(--accent);
-  color: var(--brand);
-  font-weight: 600;
-  border-left: 2px solid var(--brand);
+/* 2. Standard Laptops & Notebooks Viewport Overrides */
+@media screen and (max-width: 1200px) {
+  .comp-layout {
+    padding: 32px 24px;
+    gap: 24px;
+  }
+  .comp-section {
+    padding: 28px;
+  }
 }
 
-/* Smooth scrolling for the whole page */
-html {
-  scroll-behavior: smooth;
+/* 3. Landscape Tablets & Small Netbook Devices */
+@media screen and (max-width: 1024px) {
+  .comp-layout {
+    gap: 20px;
+  }
+  .comp-sidebar {
+    width: 190px;
+  }
+  .comp-header h1 {
+    font-size: 2rem;
+  }
+}
+
+/* 4. Portrait Tablets & Mobile Devices (Critical Structural Breakpoint) */
+@media screen and (max-width: 768px) {
+  .comp-page {
+    padding-top: 16px;
+  }
+
+  .comp-layout {
+    flex-direction: column;
+    padding: 16px;
+    gap: 20px;
+  }
+
+  .comp-sidebar {
+    width: 100%;
+    position: static;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    padding: 4px 2px 12px 2px;
+    align-items: center;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .comp-sidebar::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .comp-sidebar::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+
+  .sidebar-label,
+  .sidebar-divider { 
+    display: none; 
+  }
+
+  .sidebar-item {
+    width: auto;
+    display: inline-flex;
+    flex-shrink: 0;
+    white-space: nowrap;
+    margin-bottom: 0;
+    padding: 8px 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+  }
+  
+  .sidebar-item--active {
+    border-left: none;
+    padding-left: 14px;
+    background: var(--brand);
+    color: #ffffff;
+  }
+
+  .comp-main {
+    width: 100%;
+  }
+
+  .comp-section { 
+    padding: 20px; 
+    margin-bottom: 16px;
+  }
+  
+  .comp-preview {
+    padding: 20px;
+  }
+  
+  .search-input {
+    font-size: 0.9rem;
+    padding: 10px 40px 10px 14px;
+  }
+}
+
+/* 5. Mobile Smartphones (Standard Portrait Breakpoints) */
+@media screen and (max-width: 480px) {
+  .comp-sidebar {
+    padding-bottom: 8px;
+  }
+
+  .comp-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .comp-section-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .comp-preview {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .code-block pre {
+    padding: 16px;
+    font-size: 0.85rem;
+  }
+}
+
+/* 6. Ultra-Small Screen Sizes (Tiny Viewports / Legacy Devices) */
+@media screen and (max-width: 360px) {
+  .comp-layout {
+    padding: 12px 8px;
+  }
+  .sidebar-item {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  .comp-header h1 {
+    font-size: 1.5rem;
+  }
 }
