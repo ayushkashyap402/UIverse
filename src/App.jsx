@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Components from './pages/Components.jsx'
 import GettingStarted from './pages/GettingStarted.jsx'
+import NotFound from './pages/NotFound.jsx'
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
 
       {/* Getting Started / documentation page */}
       <Route path="/docs" element={<GettingStarted />} />
+
+      {/* Wildcard fallback page – catches all unmatched URLs to prevent a blank white screen */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }
