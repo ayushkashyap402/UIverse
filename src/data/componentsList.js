@@ -20,14 +20,14 @@ export const componentsList = [
     id: 2,
     name: 'Input',
     category: 'Inputs',
-    status: 'Planned',
+    status: 'Stable',
     description: 'Text input field with label and validation support.',
   },
   {
     id: 3,
     name: 'Card',
     category: 'Layout',
-    status: 'Planned',
+    status: 'Stable',
     description: 'Content card with optional header, body, and footer slots.',
   },
   {
@@ -48,7 +48,7 @@ export const componentsList = [
     id: 6,
     name: 'Navbar',
     category: 'Navigation',
-    status: 'Planned',
+    status: 'Stable',
     description: 'Responsive top navigation bar with logo and links.',
   },
 

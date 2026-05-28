@@ -1,0 +1,73 @@
+/* Input.css – Spacing, focus borders, and validation colors for the Input component */
+
+.uiverse-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  max-width: 320px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 10px 0;
+}
+
+/* Label styling */
+.uiverse-input-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569; /* Slate 600 */
+  text-align: left;
+}
+
+[data-theme='dark'] .uiverse-input-label {
+  color: #94a3b8; /* Slate 400 */
+}
+
+/* Input Field styling */
+.uiverse-input-field {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border, #cbd5e1); /* Slate 300 */
+  background-color: var(--input-bg, #ffffff);
+  color: var(--input-text, #0f172a);
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme='dark'] .uiverse-input-field {
+  --input-bg: #1e293b; /* Slate 800 */
+  --input-border: #334155; /* Slate 700 */
+  --input-text: #ffffff;
+}
+
+/* Focus indicator states */
+.uiverse-input-field:focus {
+  border-color: #4f46e5; /* Violet focus */
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+[data-theme='dark'] .uiverse-input-field:focus {
+  border-color: #6366f1; /* Indigo focus for dark background */
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* --- Error/Invalid visual states --- */
+.uiverse-input-group--error .uiverse-input-field {
+  border-color: #ef4444; /* Red 500 border */
+}
+
+.uiverse-input-group--error .uiverse-input-field:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+/* Validation error text */
+.uiverse-input-error-msg {
+  font-size: 0.8rem;
+  color: #ef4444; /* Red 500 */
+  font-weight: 500;
+  text-align: left;
+  margin-top: 2px;
+}
