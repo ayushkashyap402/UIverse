@@ -1,4 +1,4 @@
-/* Components.css */
+/* Component  .css */
 
 .comp-page {
   min-height: 100vh;
@@ -99,7 +99,7 @@
 }
 
 .comp-header p {
-  color: var(--muted);
+  color: var(--text-2);
   font-size: 1.05rem;
 }
 
@@ -130,7 +130,7 @@
 
 .comp-section-desc {
   font-size: 0.95rem;
-  color: var(--muted);
+  color: var(--text-2);
   margin-bottom: 28px;
   line-height: 1.65;
 }
@@ -281,6 +281,11 @@
 
 .comp-table tr:last-child td { border-bottom: none; }
 
+.comp-table strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 .category-tag {
   background: var(--surface-2);
   color: var(--muted);
@@ -352,4 +357,197 @@
   .sidebar-divider { display: none; }
 
   .comp-section { padding: 20px; }
+}
+
+/* Add to Components.css - Search Styles */
+
+.search-wrapper {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.search-container {
+  position: relative;
+  max-width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 44px 12px 16px;
+  font-size: 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--muted-2);
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 1.1rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-search-btn:hover {
+  background: var(--accent);
+  color: var(--text);
+}
+
+.search-results-info {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 8px;
+  padding-left: 4px;
+}
+
+/* Status badges in table */
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-stable {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-beta {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.status-planned {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+/* No results message */
+.no-results {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  margin-top: 24px;
+}
+
+.no-results p:first-child {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.no-results p:last-child {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Dark mode support */
+[data-theme="dark"] .status-stable {
+  background: rgba(21, 128, 61, 0.2);
+  color: #4ade80;
+}
+
+[data-theme="dark"] .status-beta {
+  background: rgba(161, 98, 7, 0.2);
+  color: #fbbf24;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-input {
+    font-size: 0.9rem;
+    padding: 10px 40px 10px 14px;
+  }
+  
+  .no-results {
+    padding: 32px 16px;
+  }
+}
+
+
+
+/* Add these styles to Components.css */
+
+.filtered-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: var(--brand);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-left: 12px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  margin-top: 24px;
+}
+
+.no-results svg {
+  margin-bottom: 16px;
+  color: var(--muted);
+}
+
+.no-results p:first-of-type {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.no-results p:last-of-type {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.search-results-info {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 8px;
+  padding-left: 4px;
+}
+
+/* Highlight active section in sidebar */
+.sidebar-item--active {
+  background: var(--accent);
+  color: var(--brand);
+  font-weight: 600;
+  border-left: 2px solid var(--brand);
+}
+
+/* Smooth scrolling for the whole page */
+html {
+  scroll-behavior: smooth;
 }

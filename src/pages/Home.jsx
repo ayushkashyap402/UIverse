@@ -8,6 +8,32 @@ import "./Home.css";
 
 function Home() {
   const [showButton, setShowButton] = useState(false);
+const [openFAQ, setOpenFAQ] = useState(null);
+
+const faqs = [
+  {
+    question: "Can I use UIverse components in my own project?",
+    answer:
+      "Yes! UIverse is open-source under the MIT License, so you can freely use and modify components in personal or commercial projects.",
+  },
+  {
+    question: "Do I need Tailwind CSS or any UI framework?",
+    answer:
+      "No. UIverse is built using plain React and CSS with minimal dependencies.",
+  },
+  {
+    question: "How can I contribute to UIverse?",
+    answer:
+      "Fork the repository, create your component, register it, and open a Pull Request on GitHub.",
+  },
+  {
+    question: "Where should I report bugs or suggest improvements?",
+    answer:
+      "You can open an Issue on the GitHub repository for bug reports, feature requests, or suggestions.",
+  },
+];
+
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -144,6 +170,42 @@ function Home() {
           </div>
         </div>
       </section>
+
+{/* ── FAQ ── */}
+<section className="faq-section">
+  <h2 className="section-heading">Frequently Asked Questions</h2>
+
+  <p className="section-subheading">
+    Quick answers for contributors and developers getting started with UIverse.
+  </p>
+
+  <div className="faq-container">
+    {faqs.map((faq, index) => (
+      <div
+        key={index}
+        className={`faq-item ${openFAQ === index ? "active" : ""}`}
+      >
+        <button
+          className="faq-question"
+          onClick={() =>
+            setOpenFAQ(openFAQ === index ? null : index)
+          }
+        >
+          <span>{faq.question}</span>
+          <span>{openFAQ === index ? "−" : "+"}</span>
+        </button>
+
+        <div
+          className={`faq-answer ${
+            openFAQ === index ? "show" : ""
+          }`}
+        >
+          <p>{faq.answer}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* ── Footer ── */}
       {showButton && (
