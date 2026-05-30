@@ -59,6 +59,10 @@
   transition: transform 0.2s ease;
 }
 
+[data-theme="light"] .navbar-logo {
+  color: #a855f7;
+}
+
 .navbar-logo:hover {
   transform: translateY(-1px);
 }
@@ -90,17 +94,59 @@
   transition: all 0.25s ease;
 }
 
+[data-theme="light"] .navbar-link {
+  color: #6b7280;
+}
+
 .navbar-link:hover {
   color: var(--nav-text);
   background: var(--nav-hover);
   transform: translateY(-1px);
 }
 
+[data-theme="light"] .navbar-link:hover {
+  color:#1f2937;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .navbar-link:not(.navbar-github):hover {
+  color: #1f2937;
+}
+
+[data-theme="light"] .navbar-link.active:hover {
+  color: white !important;
+}
+
+[data-theme="light"] .navbar-github {
+  color: white !important;
+}
+
+[data-theme="light"] .navbar-github:hover {
+  color: white !important;
+  background: linear-gradient(
+    135deg,
+    var(--nav-primary),
+    var(--nav-primary-light)
+  );
+}
+
+/* Active Link */
 .navbar-link.active {
   color: var(--nav-active-color);
   background: var(--nav-active-bg);
 }
 
+[data-theme="light"] .navbar-link.active {
+  background: linear-gradient(
+    135deg,
+    var(--nav-primary),
+    var(--nav-primary-light)
+  );
+  color: white;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.28);
+}
+
+/* Underline animation */
 .navbar-link::after {
   content: "";
   position: absolute;
@@ -111,6 +157,14 @@
   background: var(--nav-primary-light);
   border-radius: 999px;
   transition: width 0.25s ease;
+}
+
+[data-theme="light"] .navbar-link:not(.navbar-github)::after {
+  background: var(--nav-primary-light);
+}
+
+[data-theme="light"] .navbar-github::after {
+  background: white;
 }
 
 .navbar-link:hover::after,
@@ -136,6 +190,12 @@
 .navbar-github:hover {
   color: #ffffff !important;
   transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(5, 1, 75, 0.4);
+  color: white !important;
+}
+
+[data-theme="light"] .navbar-github:hover {
+  color: white !important;
   box-shadow: 0 8px 24px rgba(79, 70, 229, 0.45);
   background: linear-gradient(135deg, #4338ca, #5b21b6);
 }
@@ -160,10 +220,21 @@
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+[data-theme="light"] .theme-toggle {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1f2937;
+}
+
 .theme-toggle:hover {
   background: rgba(79, 70, 229, 0.2);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
   transform: rotate(20deg) scale(1.08);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(99, 102, 241, 0.15);
+  color: #4f46e5;
 }
 
 .theme-toggle:active {
