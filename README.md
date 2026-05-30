@@ -27,6 +27,7 @@ The goal is simple:
 > **Make it easy for beginners to learn React by building and contributing real UI components.**
 
 Every component is:
+
 - 📖 Fully commented for learning
 - 🧩 Reusable and prop-driven
 - 🎨 Styled with plain, readable CSS
@@ -36,14 +37,16 @@ Every component is:
 
 ## 🎯 Project Goals
 
-| Goal | Description |
-|------|-------------|
-| 🧑‍💻 Beginner Friendly | Every file has comments explaining what and why |
+| Goal                 | Description                                        |
+| -------------------- | -------------------------------------------------- |
+| 🧑‍💻 Beginner Friendly | Every file has comments explaining what and why    |
 | 🤝 Contributor Ready | Clear folder structure, easy to add new components |
+| 🏆 GSSoC Ready       | Structured for open-source programs like GSSoC     |
+| 📦 Zero Extra Deps   | Only React + React Router. No bloat                |
+| 🎨 Plain CSS         | No Tailwind — so contributors learn real CSS       |
 | 🏆 GSSoC Ready | Structured for open-source programs like GSSoC |
 | 📦 Minimal Dependencies | Uses React, React Router, and react-icons while keeping the project lightweight |
 | 🎨 Plain CSS | No Tailwind — so contributors learn real CSS |
-
 ---
 
 ## 🚀 Getting Started
@@ -120,14 +123,14 @@ uiverse/
 
 ## 🧩 Available Components
 
-| Component | Category | Status | Description |
-|-----------|----------|--------|-------------|
-| `Button` | Inputs | ✅ Stable | Primary, Secondary, Danger variants + sm/md/lg sizes |
-| `Navbar` | Navigation | ✅ Stable | Sticky navbar with active link highlighting |
-| `Input` | Inputs | 🔜 Planned | Text input with label and validation |
-| `Card` | Layout | 🔜 Planned | Content card with header/body/footer slots |
-| `Modal` | Overlay | 🔜 Planned | Accessible dialog with backdrop |
-| `Badge` | Display | 🔜 Planned | Status indicator with color variants |
+| Component | Category   | Status     | Description                                          |
+| --------- | ---------- | ---------- | ---------------------------------------------------- |
+| `Button`  | Inputs     | ✅ Stable  | Primary, Secondary, Danger variants + sm/md/lg sizes |
+| `Navbar`  | Navigation | ✅ Stable  | Sticky navbar with active link highlighting          |
+| `Input`   | Inputs     | 🔜 Planned | Text input with label and validation                 |
+| `Card`    | Layout     | 🔜 Planned | Content card with header/body/footer slots           |
+| `Modal`   | Overlay    | 🔜 Planned | Accessible dialog with backdrop                      |
+| `Badge`   | Display    | 🔜 Planned | Status indicator with color variants                 |
 
 ---
 
@@ -152,18 +155,14 @@ src/components/YourComponent/
 // Props:
 //   propName (type) – description
 
-import React from 'react'
-import './YourComponent.css'
+import React from "react";
+import "./YourComponent.css";
 
 function YourComponent({ propName }) {
-  return (
-    <div className="your-component">
-      {/* your JSX here */}
-    </div>
-  )
+  return <div className="your-component">{/* your JSX here */}</div>;
 }
 
-export default YourComponent
+export default YourComponent;
 ```
 
 **YourComponent.css** — minimal template:
@@ -199,11 +198,13 @@ Open `src/data/componentsList.js` and add your component to the array:
 Open `src/pages/Components.jsx` and:
 
 1. Import your component at the top:
+
 ```jsx
-import YourComponent from '../components/YourComponent/YourComponent.jsx'
+import YourComponent from "../components/YourComponent/YourComponent.jsx";
 ```
 
 2. Add it to the `sections` array (for sidebar navigation):
+
 ```js
 { id: 'your-component', label: '🆕 YourComponent' },
 ```
@@ -238,16 +239,17 @@ git push origin feat/add-card-component
 
 We follow a simple convention:
 
-| Prefix | When to use |
-|--------|-------------|
-| `feat:` | Adding a new component or feature |
-| `fix:` | Fixing a bug |
-| `style:` | CSS/UI changes only |
-| `docs:` | README or comment updates |
-| `refactor:` | Code cleanup, no behavior change |
-| `chore:` | Config, deps, tooling |
+| Prefix      | When to use                       |
+| ----------- | --------------------------------- |
+| `feat:`     | Adding a new component or feature |
+| `fix:`      | Fixing a bug                      |
+| `style:`    | CSS/UI changes only               |
+| `docs:`     | README or comment updates         |
+| `refactor:` | Code cleanup, no behavior change  |
+| `chore:`    | Config, deps, tooling             |
 
 **Examples:**
+
 ```
 feat: add Badge component with color variants
 fix: button hover state not working on Safari
@@ -276,20 +278,79 @@ Before opening a PR, make sure:
 
 Looking for something to build? Here are some ideas:
 
-| Component | Difficulty | Notes |
-|-----------|------------|-------|
-| `Input` | 🟢 Easy | Text input with label + placeholder props |
-| `Badge` | 🟢 Easy | Colored pill badge, similar to Button variants |
-| `Card` | 🟡 Medium | Header, body, footer slots via props/children |
-| `Alert` | 🟡 Medium | Info, success, warning, error variants |
-| `Modal` | 🔴 Hard | Needs portal, backdrop, keyboard close (Esc) |
-| `Tooltip` | 🔴 Hard | Hover-triggered, position-aware |
-| `Toggle` | 🟡 Medium | On/off switch with controlled state |
-| `Avatar` | 🟢 Easy | Image or initials fallback, size variants |
+| Component | Difficulty | Notes                                          |
+| --------- | ---------- | ---------------------------------------------- |
+| `Input`   | 🟢 Easy    | Text input with label + placeholder props      |
+| `Badge`   | 🟢 Easy    | Colored pill badge, similar to Button variants |
+| `Card`    | 🟡 Medium  | Header, body, footer slots via props/children  |
+| `Alert`   | 🟡 Medium  | Info, success, warning, error variants         |
+| `Modal`   | 🔴 Hard    | Needs portal, backdrop, keyboard close (Esc)   |
+| `Tooltip` | 🔴 Hard    | Hover-triggered, position-aware                |
+| `Toggle`  | 🟡 Medium  | On/off switch with controlled state            |
+| `Avatar`  | 🟢 Easy    | Image or initials fallback, size variants      |
 
 ---
 
 ## 🏗️ Tech Stack
+
+
+| Tool                                    | Version | Purpose                   |
+| --------------------------------------- | ------- | ------------------------- |
+| [React](https://react.dev)              | 18      | UI rendering              |
+| [Vite](https://vitejs.dev)              | 5       | Dev server + bundler      |
+| [React Router](https://reactrouter.com) | 6       | Client-side routing       |
+| [Supabase](https://supabase.com)        | latest  | Authentication & database |
+| Plain CSS                               | —       | Component styling         |
+
+---
+
+## 🔐 Authentication Setup (Supabase)
+
+UIverse now includes built-in authentication with **Supabase**. Follow these steps to set it up:
+
+### 1. Create a Supabase Project
+
+1. Go to [supabase.com](https://supabase.com) and sign up (free tier available)
+2. Click **New Project**
+3. Fill in project name, password, and region
+4. Wait for the project to initialize (~2 minutes)
+
+### 2. Get Your Credentials
+
+1. Go to **Project Settings** → **API**
+2. Copy your **Project URL** and **Anon Public Key**
+
+### 3. Add Environment Variables
+
+Create a `.env` file in the project root (copy from `.env.example`):
+
+```bash
+# .env
+VITE_SUPABASE_URL=your-project-url
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
+
+**⚠️ Important:** Never commit `.env` to version control. It's already in `.gitignore`.
+
+### 4. Test Authentication
+
+```bash
+npm run dev
+```
+
+1. Visit [http://localhost:5173/signup](http://localhost:5173/signup)
+2. Create a test account
+3. You'll be logged in and redirected to the home page
+4. Check the Navbar — it now shows your name and a Sign out button
+5. Visit [http://localhost:5173/profile](http://localhost:5173/profile) to see your profile
+
+### 5. Database Setup (Optional)
+
+To store additional user data (profile picture, bio, etc.):
+
+1. In Supabase dashboard, go to **SQL Editor**
+2. Create a `profiles` table linked to the `auth.users` table
+3. Update `src/services/authService.js` to sync with the `profiles` table
 
 | Tool | Version | Purpose |
 |------|---------|---------|
@@ -298,6 +359,7 @@ Looking for something to build? Here are some ideas:
 | [React Router](https://reactrouter.com) | 6 | Client-side routing |
 | Plain CSS | — | Component styling |
 | [React Icons](https://react-icons.github.io/react-icons/) | 5 | Lightweight icon library for React components |
+
 
 ---
 
