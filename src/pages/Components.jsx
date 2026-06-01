@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect, useRef } from 'react'
 import Button from '../components/Button/Button.jsx'
 import Navbar from '../components/Navbar/Navbar.jsx'
 import Badge from '../components/Badge/Badge.jsx'
+import NavbarC from '../components/NavBar C/NavBarC.jsx'
 import Alert from '../components/Alert/Alert.jsx'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
@@ -397,6 +398,116 @@ function Components() {
 <Alert type="warning" message="Warning message here." />
 <Alert type="info" message="Information message." />
 <Alert type="info" message="Closable alert example." closable />`}</pre>
+  </div>
+
+  {/* Props Table */}
+  <div className="comp-subsection">
+    <h3 className="comp-subsection-title">Props</h3>
+
+    <div className="props-table-wrap">
+      <table className="props-table">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><code>type</code></td>
+            <td>string</td>
+            <td><code>"info"</code></td>
+            <td>
+              success · error · warning · info
+            </td>
+          </tr>
+
+          <tr>
+            <td><code>message</code></td>
+            <td>string</td>
+            <td>
+              <code>"This is an alert"</code>
+            </td>
+            <td>Alert message text</td>
+          </tr>
+
+          <tr>
+            <td><code>closable</code></td>
+            <td>boolean</td>
+            <td><code>false</code></td>
+            <td>Shows close button</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+          {/* Navbar Component*/}
+          <section className="comp-section" id="navbar">
+           <div className="comp-section-header">
+            <h2>Navbar</h2>
+            <span className="comp-badge comp-badge--stable">Stable</span>
+            </div>
+
+              <p className="comp-section-desc">
+                 Responsive reusable navbar component with dynamic links.
+              </p>
+
+              <div className="comp-preview">
+               <NavbarC
+                  logo="UIverse"
+                  links={[
+                  { label: "Home", href: "#" },
+                  { label: "About", href: "#" },
+                  { label: "Docs", href: "#" },
+                  { label: "Contact", href: "#" },
+                ]}/>
+               </div>
+
+            <div className="code-block">
+                <div className="code-block-header">
+                 <span>JSX</span>
+
+                <button className="copy-btn"
+                  onClick={() => handleCopy(
+                `<Navbar
+                  logo="UIverse"
+                  links={[
+                   { label: "Home", href: "#" },  
+                   { label: "About", href: "#" },
+                   { label: "Docs", href: "#" },
+                   { label: "Contact", href: "#" },]}/>`
+                  )}>
+                {copied ? (
+                <>
+                  <CheckIcon /> Copied
+                </>
+                 ) : (
+                <>
+                  <CopyIcon /> Copy
+                </>
+              )}
+             </button>
+            </div>
+
+            <pre>
+            {`<Navbar
+  logo="UIverse"
+  links={[
+    { label: "Home", href: "#" },
+    { label: "About", href: "#" },
+    { label: "Docs", href: "#" },
+    { label: "Contact", href: "#" },
+  ]}
+/>`}</pre>
+         </div>
+         </section>
+          {/* ── All Components Table ── */}
+
+          {/* ================= ALL COMPONENTS ================= */}
               </div>
 
               <div className="comp-subsection">
