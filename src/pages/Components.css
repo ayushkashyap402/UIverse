@@ -3,16 +3,19 @@
 .comp-page {
   min-height: 100vh;
   background: var(--bg);
+  overflow-x: hidden;
 }
 
 /* ── Layout ── */
 .comp-layout {
   display: flex;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 44px 24px;
   gap: 36px;
   align-items: flex-start;
+  box-sizing: border-box;
 }
 
 /* ── Sidebar ── */
@@ -86,7 +89,12 @@
 }
 
 /* ── Main ── */
-.comp-main { flex: 1; min-width: 0; }
+.comp-main {
+  flex: 1;
+  min-width: 0;
+  overflow-x: hidden;
+  max-width: 100%;
+}
 
 .comp-header { margin-bottom: 36px; }
 
@@ -103,16 +111,18 @@
   font-size: 1.05rem;
 }
 
-/* ── Section card ── */
-.comp-section {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 36px;
-  margin-bottom: 28px;
-  scroll-margin-top: 90px;
-  box-shadow: var(--shadow-sm);
-}
+  /* ── Section card ── */
+  .comp-section {
+    
+    
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 36px;
+    margin-bottom: 28px;
+    scroll-margin-top: 90px;
+    box-shadow: var(--shadow-sm);
+  }
 
 .comp-section-header {
   display: flex;
@@ -333,7 +343,85 @@
 }
 
 /* ── Responsive ── */
+@media (max-width: 1024px) {
+  .comp-sidebar {
+    width: 170px;
+    flex-shrink: 0;
+  }
+
+  .comp-layout {
+    gap: 24px;
+    padding: 36px 20px;
+  }
+}
+
 @media (max-width: 768px) {
+  .comp-layout {
+    flex-direction: column;
+    padding: 24px 16px;
+  }
+
+  .comp-sidebar {
+    width: 100%;
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+
+  /* pills instead of full-width stacked items */
+  .comp-sidebar .sidebar-item {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 0.84rem;
+  }
+
+  .sidebar-label,
+  .sidebar-divider {
+    display: none;
+  }
+
+  .comp-section {
+    padding: 20px;
+    overflow-x: auto;
+  }
+
+  .comp-preview {
+    padding: 16px;
+    justify-content: center;
+  }
+
+  .uiverse-btn {
+    max-width: 100%;
+  }
+
+  .code-block pre {
+    font-size: 0.82rem;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .comp-layout {
+    padding: 16px 12px;
+  }
+
+  .comp-section {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .comp-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .comp-preview {
+    padding: 12px;
+  }
+}
+
+/* @media (max-width: 768px) {
   .comp-layout {
     flex-direction: column;
     padding: 24px 16px;
@@ -352,4 +440,4 @@
   .sidebar-divider { display: none; }
 
   .comp-section { padding: 20px; }
-}
+} */
