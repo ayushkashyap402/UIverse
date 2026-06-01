@@ -62,4 +62,13 @@ export const componentsList = [
     description:
       'Reusable alert component for success, error, warning, and informational messages.',
   },
+
+
+  {
+  id: 8,
+  name: 'Tabs',
+  category: 'Navigation',
+  status: 'Beta',
+  description: 'Accessible compound Tabs with animated underline and keyboard navigation.',
+ },
 ]

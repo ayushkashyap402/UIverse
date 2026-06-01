@@ -5,6 +5,7 @@ import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert.jsx'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
+import Tabs from '../components/Tabs/Tabs.jsx'
 
 /* ================= SECTIONS ================= */
 
@@ -54,6 +55,16 @@ const sections = [
       </svg>
     ),
   },
+  {
+  id: 'tabs',
+  label: 'Tabs',
+  icon: (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="1" y="4" width="22" height="16" rx="2"/>
+      <path d="M1 9h22"/>
+    </svg>
+  ),
+ },
 ]
 
 /* ================= ICONS ================= */
