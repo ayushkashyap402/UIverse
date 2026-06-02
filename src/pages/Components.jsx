@@ -700,6 +700,7 @@ function Components() {
 
         </main>
       </div>
+      <Footer />
     </div>
   )
 }
