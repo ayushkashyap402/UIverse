@@ -1,211 +1,165 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react'
-import Button from '../components/Button/Button.jsx'
-import Navbar from '../components/Navbar/Navbar.jsx'
-import Badge from '../components/Badge/Badge.jsx'
-import Alert from '../components/Alert/Alert.jsx'
-import Tabs from '../components/Tabs/Tabs.jsx'
-import { componentsList } from '../data/componentsList.js'
-import './Components.css'
+// Components.jsx – Component showcase page
+
+import React, { useState } from "react";
+import Button from "../components/Button/Button.jsx";
+import Navbar from "../components/Navbar/Navbar.jsx";
+import Badge from "../components/Badge/Badge.jsx";
+import { componentsList } from "../data/componentsList.js";
+import "./Components.css";
+import { generateComponent as aiGenerate } from "../lib/ai.js";
 
 /* ================= SECTIONS ================= */
 
 const sections = [
   {
-    id: 'buttons',
-    label: 'Buttons',
-    componentName: 'Button',
+    id: "buttons",
+    label: "Buttons",
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="3" y="8" width="18" height="8" rx="3"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <rect x="3" y="8" width="18" height="8" rx="3" />
       </svg>
     ),
   },
   {
-    id: 'badges',
-    label: 'Badges',
-    componentName: 'Badge',
+    id: "badges",
+    label: "Badges",
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2l4 7h7l-5.5 4.5L19 21l-7-4-7 4 1.5-7.5L1 9h7z"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <path d="M12 2l4 7h7l-5.5 4.5L19 21l-7-4-7 4 1.5-7.5L1 9h7z" />
       </svg>
     ),
   },
   {
-    id: 'alerts',
-    label: 'Alerts',
-    componentName: 'Alert',
+    id: "all-components",
+    label: "All Components",
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M10 2L2 22h20L14 2z"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <line x1="8" y1="6" x2="21" y2="6" />
+        <line x1="8" y1="12" x2="21" y2="12" />
+        <line x1="8" y1="18" x2="21" y2="18" />
+        <line x1="3" y1="6" x2="3.01" y2="6" />
+        <line x1="3" y1="12" x2="3.01" y2="12" />
+        <line x1="3" y1="18" x2="3.01" y2="18" />
       </svg>
     ),
   },
   {
-    id: 'tabs',
-    label: 'Tabs',
-    componentName: 'Tabs',
+    id: "ai-generator",
+    label: "AI Generator",
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="3" y="3" width="18" height="18" rx="2"/>
-        <line x1="3" y1="9" x2="21" y2="9"/>
-        <line x1="9" y1="21" x2="9" y2="9"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <path d="M12 2v4" />
+        <path d="M12 18v4" />
+        <path d="M4.93 4.93l2.83 2.83" />
+        <path d="M16.24 16.24l2.83 2.83" />
+        <path d="M2 12h4" />
+        <path d="M18 12h4" />
+        <path d="M4.93 19.07l2.83-2.83" />
+        <path d="M16.24 7.76l2.83-2.83" />
       </svg>
     ),
   },
-  {
-    id: 'all-components',
-    label: 'All Components',
-    componentName: null,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <line x1="8" y1="6" x2="21" y2="6"/>
-        <line x1="8" y1="12" x2="21" y2="12"/>
-        <line x1="8" y1="18" x2="21" y2="18"/>
-        <line x1="3" y1="6" x2="3.01" y2="6"/>
-        <line x1="3" y1="12" x2="3.01" y2="12"/>
-        <line x1="3" y1="18" x2="3.01" y2="18"/>
-      </svg>
-    ),
-  },
-]
+];
 
 /* ================= ICONS ================= */
 
 const CopyIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <rect x="9" y="9" width="13" height="13" rx="2"/>
-    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+  <svg
+    width="13"
+    height="13"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <rect x="9" y="9" width="13" height="13" rx="2" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
   </svg>
-)
+);
 
 const CheckIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <polyline points="20 6 9 17 4 12"/>
+  <svg
+    width="13"
+    height="13"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+  >
+    <polyline points="20 6 9 17 4 12" />
   </svg>
-)
+);
 
 /* ================= COMPONENT ================= */
 
 function Components() {
-  const [activeSection, setActiveSection] = useState('buttons')
-  const [copied, setCopied] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
-  // Mobile sidebar drawer state
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  
-  // Refs for scrolling
-  const buttonsRef = useRef(null)
-  const badgesRef = useRef(null)
-  const alertsRef = useRef(null)
-  const tabsRef = useRef(null)
-  const allComponentsRef = useRef(null)
-
+  const [activeSection, setActiveSection] = useState("buttons");
+  const [copied, setCopied] = useState(false);
+  const [prompt, setPrompt] = useState("");
+  const [generatedCode, setGeneratedCode] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleCopy = (code) => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1800)
-  }
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1800);
+  };
 
   const scrollTo = (id) => {
-    setActiveSection(id)
-    let element = null
-    
-    switch(id) {
-      case 'buttons':
-        element = buttonsRef.current
-        break
-      case 'badges':
-        element = badgesRef.current
-        break
-      case 'alerts':
-        element = alertsRef.current
-        break
-      case 'tabs':
-        element = tabsRef.current
-        break
-      case 'all-components':
-        element = allComponentsRef.current
-        break
-      default:
-        element = document.getElementById(id)
+    setActiveSection(id);
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+  const generateComponent = async () => {
+    if (!prompt.trim()) return;
+    try {
+      setLoading(true);
+      const text = await aiGenerate(`
+      Generate a reusable React JSX UI component.
+      Requirements: Return ONLY JSX code, no explanations, modern UI, Tailwind CSS only.
+      Prompt: ${prompt}
+    `);
+      setGeneratedCode(text);
+    } catch (error) {
+      setGeneratedCode("Failed to generate component.");
+    } finally {
+      setLoading(false);
     }
-    
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
-    }
-  }
-
-  // Filter components based on search
-  const filteredComponents = useMemo(() => {
-    if (!searchQuery.trim()) return componentsList
-    
-    const searchLower = searchQuery.toLowerCase()
-    return componentsList.filter(component => 
-      component.name.toLowerCase().includes(searchLower) ||
-      component.category.toLowerCase().includes(searchLower)
-    )
-  }, [searchQuery])
-
-  // Check if a section should be shown based on search
-  const shouldShowSection = (sectionId, componentName) => {
-    if (!searchQuery.trim()) return true
-    
-    const searchLower = searchQuery.toLowerCase()
-    
-    // Check if component name matches search
-    if (componentName && componentName.toLowerCase().includes(searchLower)) {
-      return true
-    }
-    
-    // Check if any component in filtered list matches this section
-    return filteredComponents.some(c => c.name === componentName)
-  }
-
-  // Auto-scroll to first matching section when searching
-  useEffect(() => {
-    if (searchQuery.trim()) {
-      const searchLower = searchQuery.toLowerCase()
-      
-      // Find first matching section
-      if (searchLower.includes('button') || filteredComponents.some(c => c.name === 'Button')) {
-        scrollTo('buttons')
-      } else if (searchLower.includes('badge') || filteredComponents.some(c => c.name === 'Badge')) {
-        scrollTo('badges')
-      } else if (searchLower.includes('alert') || filteredComponents.some(c => c.name === 'Alert')) {
-        scrollTo('alerts')
-      } else if (searchLower.includes('tab') || filteredComponents.some(c => c.name === 'Tabs')) {
-        scrollTo('tabs')
-      } else if (filteredComponents.length > 0) {
-        scrollTo('all-components')
-      }
-    }
-  }, [searchQuery])
-
-  // Clear search function
-  const clearSearch = () => {
-    setSearchQuery('')
-  }
-
-  // Get visible sections count
-  const visibleSectionsCount = useMemo(() => {
-    let count = 0
-    if (shouldShowSection('buttons', 'Button')) count++
-    if (shouldShowSection('badges', 'Badge')) count++
-    if (shouldShowSection('alerts', 'Alert')) count++
-    if (shouldShowSection('tabs', 'Tabs')) count++
-    if (filteredComponents.length > 0) count++
-    return count
-  }, [searchQuery, filteredComponents])
-
+  };
   return (
     <div className="comp-page">
       <Navbar />
 
       <div className="comp-layout">
-
         {/* ================= SIDEBAR ================= */}
         <aside className={`comp-sidebar comp-sidebar--mobile ${sidebarOpen ? 'comp-sidebar--open' : ''}`}>
           {/* Mobile toggle — hidden on desktop */}
@@ -217,11 +171,17 @@ function Components() {
             onClick={() => setSidebarOpen((o) => !o)}
             id="sidebar-toggle-btn"
           >
-            <span className="sidebar-mobile-toggle-text">
-              <span className="sidebar-mobile-toggle-eyebrow">Navigate</span>
-              <span className="sidebar-mobile-toggle-current">
-                {sections.find((s) => s.id === activeSection)?.label ?? 'Components'}
-              </span>
+            <span className="sidebar-item-icon">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
             </span>
             <span
               className={`sidebar-mobile-caret ${sidebarOpen ? 'sidebar-mobile-caret--open' : ''}`}
@@ -280,36 +240,63 @@ function Components() {
 
         {/* ================= MAIN ================= */}
         <main className="comp-main">
-
           <div className="comp-header">
             <h1>Components</h1>
-            <p>Production-ready UI components. Copy the code, drop it in, done.</p>
-            
-            {/* SEARCH INPUT */}
-            <div className="search-wrapper">
-              <div className="search-container">
-                <input
-                  type="text"
-                  placeholder="🔍 Search components by name or category..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="search-input"
-                />
-                {searchQuery && (
-                  <button onClick={clearSearch} className="clear-search-btn" aria-label="Clear search">
-                    ✕
-                  </button>
-                )}
-              </div>
-              {searchQuery && (
-                <p className="search-results-info">
-                  Found {filteredComponents.length} component{filteredComponents.length !== 1 ? 's' : ''} matching "{searchQuery}"
-                  {visibleSectionsCount > 0 && ` in ${visibleSectionsCount} section${visibleSectionsCount !== 1 ? 's' : ''}`}
-                </p>
-              )}
-            </div>
+            <p>
+              Production-ready UI components. Copy the code, drop it in, done.
+            </p>
           </div>
+          <section className="comp-section" id="ai-generator">
+            <div className="comp-section-header">
+              <h2>AI Component Generator</h2>
+              <span className="comp-badge comp-badge--stable">AI</span>
+            </div>
 
+            <p className="comp-section-desc">
+              Generate reusable React UI components using Gemini AI.
+            </p>
+
+            <div className="ai-generator-box">
+              <input
+                type="text"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="Create a modern purple pricing card"
+                className="ai-generator-input"
+              />
+
+              <button className="ai-generator-btn" onClick={generateComponent}>
+                {loading ? "Generating..." : "Generate Component"}
+              </button>
+            </div>
+
+            {generatedCode && (
+              <div className="ai-preview-box">
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>Generated JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() => handleCopy(generatedCode)}
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon /> Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon /> Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{generatedCode}</pre>
+                </div>
+              </div>
+            )}
+          </section>
           {/* ================= BUTTONS ================= */}
           {shouldShowSection('buttons', 'Button') && (
             <section className="comp-section" id="buttons" ref={buttonsRef}>
@@ -657,14 +644,26 @@ function Components() {
                 )}
               </div>
 
-              <div className="comp-table-wrap">
-                <table className="comp-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Category</th>
-                      <th>Status</th>
-                      <th>Description</th>
+            <div className="comp-table-wrap">
+              <table className="comp-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {componentsList.map((c) => (
+                    <tr key={c.id}>
+                      <td>
+                        <strong>{c.name}</strong>
+                      </td>
+                      <td>{c.category}</td>
+                      <td>{c.status}</td>
+                      <td>{c.description}</td>
                     </tr>
                   </thead>
                   <tbody>
@@ -696,12 +695,11 @@ function Components() {
               <p>🔍 No components found matching <strong>"{searchQuery}"</strong></p>
               <p>Try searching for "Button", "Alert", "Badge", or a category like "Inputs" or "Feedback"</p>
             </div>
-          )}
-
+          </section>
         </main>
       </div>
     </div>
-  )
+  );
 }
 
-export default Components
+export default Components;
