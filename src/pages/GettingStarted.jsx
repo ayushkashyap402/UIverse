@@ -51,6 +51,44 @@ function CodeBlock({ label = 'BASH', code }) {
   )
 }
 
+// Scroll progress bar — tracks how far the user has scrolled
+function ScrollProgressBar() {
+  const barRef = useRef(null)
+
+  useEffect(() => {
+    let ticking = false
+
+    const updateProgress = () => {
+      const scrollTop = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0
+      if (barRef.current) {
+        barRef.current.style.transform = `scaleX(${progress})`
+      }
+      ticking = false
+    }
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress)
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    // Set initial state
+    updateProgress()
+
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  return (
+    <div className="scroll-progress-track" aria-hidden="true">
+      <div className="scroll-progress-bar" ref={barRef} />
+    </div>
+  )
+}
+
 // Labeled note box (replaces emoji callouts)
 function Note({ label = 'Note', children }) {
   return (
@@ -110,6 +148,7 @@ function GettingStarted() {
   return (
     <div className="comp-page">
       <Navbar />
+      <ScrollProgressBar />
 
       <div className="comp-layout">
         {/* ── Sidebar / table of contents ── */}

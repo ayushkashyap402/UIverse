@@ -10,6 +10,7 @@
 // To add a new size:    add CSS class uiverse-btn--<size> in Button.css
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Button.css'
 
 function Button({ text = 'Button', variant = 'primary', size = 'md', onClick }) {
@@ -21,6 +22,13 @@ function Button({ text = 'Button', variant = 'primary', size = 'md', onClick }) 
       {text}
     </button>
   )
+}
+
+Button.propTypes = {
+  text: PropTypes.string,
+  variant: PropTypes.oneOf(['primary', 'secondary', 'danger', 'disabled']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  onClick: PropTypes.func,
 }
 
 export default Button

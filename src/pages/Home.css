@@ -5,6 +5,9 @@
   background: var(--bg);
   transition: background 0.3s ease, color 0.3s ease;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 /* ==========================================================================
    HERO DISPLAY WRAPPER
