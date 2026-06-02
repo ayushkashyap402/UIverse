@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky"
   },
   "dependencies": {
     "framer-motion": "^12.40.0",
@@ -17,6 +18,12 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3",
     "vite": "^5.4.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,css,md}": "prettier --write"
   }
 }

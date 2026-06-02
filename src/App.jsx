@@ -16,6 +16,9 @@ function App() {
 
       {/* Components showcase page */}
       <Route path="/components" element={<Components />} />
+
+      {/* Getting Started / documentation page */}
+      <Route path="/docs" element={<GettingStarted />} />
     </Routes>
   )
 }

@@ -6,13 +6,13 @@
   --bg:          #f4f6fb;
   --bg-alt:      #eef2ff;
   --surface:     #ffffff;
-  --surface-2:   #f8fafc;
-  --border:      #e2e8f0;
-  --border-2:    #e8ecf5;
-  --text:        #1a1a2e;
-  --text-2:      #374151;
-  --muted:       #6b7280;
-  --muted-2:     #9ca3af;
+  --surface-2:   #f1f5f9;
+  --border:      #d1d9e6;
+  --border-2:    #dde3ee;
+  --text:        #0f1117;
+  --text-2:      #1e293b;
+  --muted:       #475569;
+  --muted-2:     #64748b;
   --brand:       #4f46e5;
   --brand-dark:  #4338ca;
   --brand-2:     #a855f7;
@@ -69,7 +69,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
-  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Force text colors in light mode explicitly */
+:root body {
+  color: #0f1117;
+}
+
+[data-theme="dark"] body {
+  color: #f1f5f9;
 }
 
 :focus { outline: none; }
@@ -105,28 +113,18 @@ a { text-decoration: none; color: inherit; }
   }
 }
 
-/* Fallback: smooth CSS transition on all themed properties */
-*,
-*::before,
-*::after {
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    color 0.3s ease,
-    box-shadow 0.3s ease;
+/* Fallback: smooth CSS transition on themed properties — only on surfaces */
+html, body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Don't transition things that shouldn't animate */
-.uiverse-btn,
-.navbar-link,
-.theme-toggle,
-.feature-card,
-.sidebar-item {
-  transition:
-    background-color 0.18s ease,
-    border-color 0.18s ease,
-    color 0.18s ease,
-    box-shadow 0.18s ease,
-    transform 0.18s ease,
-    opacity 0.18s ease;
+.home-page, .comp-page,
+.feature-card, .comp-section,
+.hero-stats, .home-footer,
+.comp-sidebar, .navbar,
+.props-table th, .props-table td,
+.comp-table th, .comp-table td,
+.sidebar-divider, .stat-divider,
+.category-tag, .comp-badge--planned {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }

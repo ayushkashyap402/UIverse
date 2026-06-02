@@ -6,7 +6,7 @@
 // To register a new component:
 //   1. Add a new object to the array below
 //   2. Fill in: id, name, category, status, description
-//   3. Status options: "Stable" | "Beta" | "Planned"
+//   3. Status options: "Stable" | "Beta" | "Planned" 
 
 export const componentsList = [
   {
@@ -50,5 +50,24 @@ export const componentsList = [
     category: 'Navigation',
     status: 'Planned',
     description: 'Responsive top navigation bar with logo and links.',
+  },
+
+
+  // New Alert component
+  {
+    id: 7,
+    name: 'Alert',
+    category: 'Feedback',
+    status: 'Stable',
+    description:
+      'Reusable alert component for success, error, warning, and informational messages.',
+  },
+  {
+    id: 8,
+    name: 'Tabs',
+    category: 'Navigation',
+    status: 'Stable',
+    description:
+      'Accessible tabs component with animated underline, pills variant, keyboard navigation support, and compound API.',
   },
 ]
