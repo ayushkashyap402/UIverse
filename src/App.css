@@ -1,1 +1,34 @@
 /* App.css – intentionally empty; global styles live in index.css */
+/* Hide default cursor */
+body {
+  cursor: none;
+}
+
+/* Main Cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.7);
+  mix-blend-mode: difference;
+}
+
+/* Glow */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.25);
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: 9998;
+}
