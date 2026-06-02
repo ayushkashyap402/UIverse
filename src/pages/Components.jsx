@@ -88,7 +88,7 @@ const CheckIcon = () => (
 
 function Components() {
   const [activeSection, setActiveSection] = useState('buttons')
-  const [copied, setCopied] = useState(false)
+  const [copiedSection, setCopiedSection] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
   // Mobile sidebar drawer state
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -100,13 +100,17 @@ function Components() {
   const tabsRef = useRef(null)
   const allComponentsRef = useRef(null)
 
-  const handleCopy = (code) => {
+  // Flag to temporarily disable scroll-spy updates during smooth clicks
+  const clickScrolling = useRef(false)
+
+  const handleCopy = (code, sectionId) => {
     navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1800)
+    setCopiedSection(sectionId)
+    setTimeout(() => setCopiedSection(null), 1800)
   }
 
   const scrollTo = (id) => {
+    clickScrolling.current = true
     setActiveSection(id)
     let element = null
     
@@ -136,6 +140,11 @@ function Components() {
         block: 'start',
       })
     }
+
+    // Allow scroll listener back online after the smooth animation completes
+    setTimeout(() => {
+      clickScrolling.current = false
+    }, 800)
   }
 
   // Filter components based on search
@@ -184,6 +193,33 @@ function Components() {
     }
   }, [searchQuery])
 
+  // Scroll-spy functionality to track active section viewports
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (clickScrolling.current) return
+        
+        // Isolate sections intersecting near the viewport header area
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+          
+        if (visible[0]) {
+          setActiveSection(visible[0].target.id)
+        }
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+    )
+
+    // Run active tracking on matching elements available
+    if (shouldShowSection('buttons', 'Button') && buttonsRef.current) observer.observe(buttonsRef.current)
+    if (shouldShowSection('badges', 'Badge') && badgesRef.current) observer.observe(badgesRef.current)
+    if (shouldShowSection('alerts', 'Alert') && alertsRef.current) observer.observe(alertsRef.current)
+    if (filteredComponents.length > 0 && allComponentsRef.current) observer.observe(allComponentsRef.current)
+
+    return () => observer.disconnect()
+  }, [searchQuery, filteredComponents])
+
   // Clear search function
   const clearSearch = () => {
     setSearchQuery('')
@@ -207,15 +243,38 @@ function Components() {
       <div className="comp-layout">
 
         {/* ================= SIDEBAR ================= */}
-        <aside className={`comp-sidebar comp-sidebar--mobile ${sidebarOpen ? 'comp-sidebar--open' : ''}`}>
-          {/* Mobile toggle — hidden on desktop */}
-          <button
-            type="button"
-            className="sidebar-mobile-toggle"
-            aria-expanded={sidebarOpen}
-            aria-controls="comp-sidebar-drawer"
-            onClick={() => setSidebarOpen((o) => !o)}
-            id="sidebar-toggle-btn"
+        <aside className="comp-sidebar">
+          <p className="sidebar-label">ON THIS PAGE</p>
+
+          {sections.map((s) => {
+            // Only show section in sidebar if it has content when searching
+            if (searchQuery.trim()) {
+              if (s.id === 'all-components' && filteredComponents.length === 0) return null
+              if (s.componentName && !shouldShowSection(s.id, s.componentName)) return null
+            }
+            
+            return (
+              <button
+                key={s.id}
+                className={`sidebar-item ${activeSection === s.id ? "sidebar-item--active" : ""}`}
+                onClick={() => scrollTo(s.id)}
+                aria-current={activeSection === s.id ? "true" : undefined}
+              >
+                <span className="sidebar-item-icon">{s.icon}</span>
+                {s.label}
+              </button>
+            )
+          })}
+
+          <div className="sidebar-divider" />
+
+          <p className="sidebar-label">CONTRIBUTE</p>
+
+          <a
+            href="https://github.com/ayushkashyap402/UIverse"
+            target="_blank"
+            rel="noreferrer"
+            className="sidebar-item sidebar-item--link"
           >
             <span className="sidebar-mobile-toggle-text">
               <span className="sidebar-mobile-toggle-eyebrow">Navigate</span>
@@ -336,10 +395,10 @@ function Components() {
                   <button
                     className="copy-btn"
                     onClick={() =>
-                      handleCopy(`<Button text="Primary" variant="primary" />`)
+                      handleCopy(`<Button text="Primary" variant="primary" />`, 'buttons')
                     }
                   >
-                    {copied ? (
+                    {copiedSection === 'buttons' ? (
                       <>
                         <CheckIcon /> Copied
                       </>
@@ -382,10 +441,10 @@ function Components() {
                   <button
                     className="copy-btn"
                     onClick={() =>
-                      handleCopy(`<Badge text="Primary" variant="primary" />`)
+                      handleCopy(`<Badge text="Primary" variant="primary" />`, 'badges')
                     }
                   >
-                    {copied ? (
+                    {copiedSection === 'badges' ? (
                       <>
                         <CheckIcon /> Copied
                       </>
@@ -438,10 +497,18 @@ function Components() {
 <Alert type="error" message="Something went wrong." />
 <Alert type="warning" message="Warning message here." />
 <Alert type="info" message="Information message." />
-<Alert type="info" message="Closable alert example." closable />`)
+<Alert type="info" message="Closable alert example." closable />`, 'alerts')
                     }
                   >
-                    {copied ? '✅ Copied!' : '📋 Copy'}
+                    {copiedSection === 'alerts' ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
                   </button>
                 </div>
                 <pre>{`<Alert type="success" message="Action completed successfully!" />

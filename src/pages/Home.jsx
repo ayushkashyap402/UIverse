@@ -11,33 +11,35 @@ const communityLinks = ["GitHub", "GSSoC", "Contribute", "Issues"];
 
 const resourceLinks = ["Docs","FAQ", "Contribution Guide", "License", "Support"];
 
+// Custom hook for counter animation
+function useCounter(end, duration = 2000) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const increment = end / (duration / 16);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [end, duration]);
+
+  return count;
+}
+
 function Home() {
   const [showButton, setShowButton] = useState(false);
-const [openFAQ, setOpenFAQ] = useState(null);
+  const [openFAQ, setOpenFAQ] = useState(null);
 
-const faqs = [
-  {
-    question: "Can I use UIverse components in my own project?",
-    answer:
-      "Yes! UIverse is open-source under the MIT License, so you can freely use and modify components in personal or commercial projects.",
-  },
-  {
-    question: "Do I need Tailwind CSS or any UI framework?",
-    answer:
-      "No. UIverse is built using plain React and CSS with minimal dependencies.",
-  },
-  {
-    question: "How can I contribute to UIverse?",
-    answer:
-      "Fork the repository, create your component, register it, and open a Pull Request on GitHub.",
-  },
-  {
-    question: "Where should I report bugs or suggest improvements?",
-    answer:
-      "You can open an Issue on the GitHub repository for bug reports, feature requests, or suggestions.",
-  },
-];
-
+  // Stats Counters
+  const componentCount = useCounter(7);
+  const variantCount = useCounter(3);
 const testimonials = [
   {
     name: "Sarah Johnson",
@@ -87,14 +89,30 @@ const testimonials = [
 ];
 
 
+  const faqs = [
+    {
+      question: "Can I use UIverse components in my own project?",
+      answer: "Yes! UIverse is open-source under the MIT License, so you can freely use and modify components in personal or commercial projects.",
+    },
+    {
+      question: "Do I need Tailwind CSS or any UI framework?",
+      answer: "No. UIverse is built using plain React and CSS with minimal dependencies.",
+    },
+    {
+      question: "How can I contribute to UIverse?",
+      answer: "Fork the repository, create your component, register it, and open a Pull Request on GitHub.",
+    },
+    {
+      question: "Where should I report bugs or suggest improvements?",
+      answer: "You can open an Issue on the GitHub repository for bug reports, feature requests, or suggestions.",
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       setShowButton(window.scrollY > 300);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -104,6 +122,7 @@ const testimonials = [
       behavior: "smooth",
     });
   };
+
   return (
     <div className="home-page">
       <Navbar />
@@ -148,12 +167,12 @@ const testimonials = [
 
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-number">6+</span>
+            <span className="stat-number">{componentCount}+</span>
             <span className="stat-label">Components</span>
           </div>
           <div className="stat-divider" />
           <div className="stat">
-            <span className="stat-number">3</span>
+            <span className="stat-number">{variantCount}</span>
             <span className="stat-label">Variants each</span>
           </div>
           <div className="stat-divider" />
@@ -173,17 +192,32 @@ const testimonials = [
       <section className="features-section" id="features">
         <h2 className="section-heading">Why UIverse?</h2>
         <p className="section-subheading">
-          Everything you need to learn, build, and contribute — nothing you
-          don't.
+          Everything you need to learn, build, and contribute — nothing you don't.
         </p>
         <div className="features-grid">
           {features.map((f) => (
-            <div className="feature-card" key={f.title}>
+            /* Added 'centered' class here */
+            <div className="feature-card centered" key={f.title}>
               <div className="feature-icon-wrap">{f.icon}</div>
               <h3>{f.title}</h3>
               <p>{f.desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── Testimonials (New) ── */}
+      <section className="testimonials-section">
+        <h2 className="section-heading">Loved by Contributors</h2>
+        <div className="testimonials-grid">
+          <div className="testimonial-card">
+            <p>"UIverse made my first GSSoC contribution so smooth. The plain CSS approach is refreshing!"</p>
+            <span>— Open Source Contributor</span>
+          </div>
+          <div className="testimonial-card">
+            <p>"The best place to learn how React props and modular CSS actually work together."</p>
+            <span>— Student Developer</span>
+          </div>
         </div>
       </section>
 
@@ -270,14 +304,15 @@ const testimonials = [
         >
           <p>{faq.answer}</p>
         </div>
-      </div>
-    ))}
-  </div>
-</section>
+      </section>
 
       {/* ── Footer ── */}
       {showButton && (
-        <button className="scroll-top-btn" onClick={scrollToTop}>
+        <button 
+          className="scroll-top-btn" 
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+        >
           ↑
         </button>
       )}
@@ -416,7 +451,6 @@ const testimonials = [
   );
 }
 
-// SVG icon components (Lucide-style, 20×20)
 const Icon = ({ d, children, viewBox = "0 0 24 24" }) => (
   <svg
     width="20"
@@ -446,9 +480,7 @@ const features = [
     desc: "Drop any component into your project and it just works. No config, no wrappers.",
   },
   {
-    icon: (
-      <Icon d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    ),
+    icon: <Icon d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />,
     title: "Plain CSS",
     desc: "No Tailwind, no CSS-in-JS. Just clean, readable stylesheets you can actually learn from.",
   },
@@ -484,11 +516,7 @@ const features = [
     desc: "Every file is commented. Every pattern is explained. Perfect for learning React.",
   },
   {
-    icon: (
-      <Icon>
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-      </Icon>
-    ),
+    icon: <Icon><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></Icon>,
     title: "Vite Powered",
     desc: "Instant HMR and lightning-fast builds out of the box with Vite 5.",
   },
