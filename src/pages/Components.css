@@ -160,9 +160,88 @@
   background-blend-mode: normal;
   border: 1px solid var(--border);
   border-radius: 12px;
+  transition: background 0.35s ease, border-color 0.35s ease;
 }
 
 .comp-preview--align-end { align-items: flex-end; }
+
+/* ── Themed preview wrapper ── */
+.themed-preview-wrap {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  transition: border-color 0.35s ease;
+}
+
+/* When inside the wrapper, remove preview's own border + rounded top corners */
+.themed-preview-wrap .comp-preview {
+  border: none;
+  border-radius: 0 0 14px 14px;
+  margin-bottom: 0;
+}
+
+/* Toolbar above the preview */
+.themed-preview-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px 8px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.35s ease, border-color 0.35s ease;
+}
+
+.themed-preview-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  transition: color 0.35s ease;
+}
+
+/* Toggle pill — light/dark radio group */
+.themed-preview-toggle {
+  display: flex;
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid var(--border);
+  transition: background 0.35s ease, border-color 0.35s ease;
+}
+
+.themed-preview-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 26px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted-2);
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+}
+
+.themed-preview-btn:hover {
+  color: var(--text);
+  background: var(--accent);
+}
+
+.themed-preview-btn--active {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(79, 70, 229, 0.3);
+}
+
+.themed-preview-btn--active:hover {
+  background: var(--brand-dark);
+  color: #fff;
+}
 
 /* ── Code block ── */
 .code-block {
