@@ -362,19 +362,68 @@
 }
 
 /* ── Responsive ── */
+
+/* Mobile toggle — hidden on desktop */
+.sidebar-mobile-toggle {
+  display: none;
+}
+
+.sidebar-mobile-caret {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--brand);
+  border-bottom: 2px solid var(--brand);
+  transform: rotate(45deg);
+  transition: transform 0.25s ease;
+  margin-top: -3px;
+  flex-shrink: 0;
+}
+
+.sidebar-mobile-caret--open {
+  transform: rotate(-135deg);
+  margin-top: 3px;
+}
+
+/* Desktop: drawer is always visible, toggle is hidden */
+.sidebar-drawer {
+  display: contents;
+}
+
 @media (max-width: 768px) {
   .comp-layout {
     flex-direction: column;
     padding: 24px 16px;
   }
 
-  .comp-sidebar {
+  /* Sidebar becomes a block element on mobile */
+  .comp-sidebar.comp-sidebar--mobile {
     width: 100%;
     position: static;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* Mobile toggle button — always visible */
+  .sidebar-mobile-toggle {
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
     align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 52px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .sidebar-mobile-toggle:hover {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
   }
 
   .sidebar-label,

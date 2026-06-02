@@ -161,37 +161,15 @@ function Components() {
 
       <div className="comp-layout">
         {/* ================= SIDEBAR ================= */}
-        <aside className="comp-sidebar">
-          <p className="sidebar-label">ON THIS PAGE</p>
-
-          {sections.map((s) => {
-            // Only show section in sidebar if it has content when searching
-            if (searchQuery.trim()) {
-              if (s.id === 'all-components' && filteredComponents.length === 0) return null
-              if (s.componentName && !shouldShowSection(s.id, s.componentName)) return null
-            }
-            
-            return (
-              <button
-                key={s.id}
-                className={`sidebar-item ${activeSection === s.id ? "sidebar-item--active" : ""}`}
-                onClick={() => scrollTo(s.id)}
-              >
-                <span className="sidebar-item-icon">{s.icon}</span>
-                {s.label}
-              </button>
-            )
-          })}
-
-          <div className="sidebar-divider" />
-
-          <p className="sidebar-label">CONTRIBUTE</p>
-
-          <a
-            href="https://github.com/ayushkashyap402/UIverse"
-            target="_blank"
-            rel="noreferrer"
-            className="sidebar-item sidebar-item--link"
+        <aside className={`comp-sidebar comp-sidebar--mobile ${sidebarOpen ? 'comp-sidebar--open' : ''}`}>
+          {/* Mobile toggle — hidden on desktop */}
+          <button
+            type="button"
+            className="sidebar-mobile-toggle"
+            aria-expanded={sidebarOpen}
+            aria-controls="comp-sidebar-drawer"
+            onClick={() => setSidebarOpen((o) => !o)}
+            id="sidebar-toggle-btn"
           >
             <span className="sidebar-item-icon">
               <svg
@@ -205,8 +183,59 @@ function Components() {
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
               </svg>
             </span>
-            GitHub Repo
-          </a>
+            <span
+              className={`sidebar-mobile-caret ${sidebarOpen ? 'sidebar-mobile-caret--open' : ''}`}
+              aria-hidden="true"
+            />
+          </button>
+
+          {/* Drawer content — always visible on desktop, toggleable on mobile */}
+          <div
+            id="comp-sidebar-drawer"
+            className={`sidebar-drawer ${sidebarOpen ? 'sidebar-drawer--open' : ''}`}
+          >
+            <p className="sidebar-label">ON THIS PAGE</p>
+
+            {sections.map((s) => {
+              // Only show section in sidebar if it has content when searching
+              if (searchQuery.trim()) {
+                if (s.id === 'all-components' && filteredComponents.length === 0) return null
+                if (s.componentName && !shouldShowSection(s.id, s.componentName)) return null
+              }
+              
+              return (
+                <button
+                  key={s.id}
+                  className={`sidebar-item ${activeSection === s.id ? "sidebar-item--active" : ""}`}
+                  onClick={() => {
+                    scrollTo(s.id)
+                    setSidebarOpen(false)
+                  }}
+                >
+                  <span className="sidebar-item-icon">{s.icon}</span>
+                  {s.label}
+                </button>
+              )
+            })}
+
+            <div className="sidebar-divider" />
+
+            <p className="sidebar-label">CONTRIBUTE</p>
+
+            <a
+              href="https://github.com/ayushkashyap402/UIverse"
+              target="_blank"
+              rel="noreferrer"
+              className="sidebar-item sidebar-item--link"
+            >
+              <span className="sidebar-item-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                </svg>
+              </span>
+              GitHub Repo
+            </a>
+          </div>
         </aside>
 
         {/* ================= MAIN ================= */}
@@ -439,6 +468,162 @@ function Components() {
                         <td>boolean</td>
                         <td><code>false</code></td>
                         <td>Shows close button</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ================= TABS ================= */}
+          {shouldShowSection('tabs', 'Tabs') && (
+            <section className="comp-section" id="tabs" ref={tabsRef}>
+              <div className="comp-section-header">
+                <h2>Tabs</h2>
+                <span className="comp-badge comp-badge--stable">Stable</span>
+              </div>
+
+              <p className="comp-section-desc">
+                Accessible tabs component with animated indicators, supporting underline and pills variants.
+              </p>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Underline Variant (Default)</h3>
+                <div className="comp-preview" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
+                  <Tabs defaultValue="overview">
+                    <Tabs.List>
+                      <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+                      <Tabs.Trigger value="features">Features</Tabs.Trigger>
+                      <Tabs.Trigger value="disabled" disabled>Disabled Tab</Tabs.Trigger>
+                      <Tabs.Trigger value="api">API Reference</Tabs.Trigger>
+                    </Tabs.List>
+                    <Tabs.Content value="overview">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Explore UIverse</h4>
+                        <p>UIverse is a collection of handcrafted, accessible React components designed to make building beautiful interfaces fast and simple.</p>
+                      </div>
+                    </Tabs.Content>
+                    <Tabs.Content value="features">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Key Features</h4>
+                        <p>Our components are responsive, support dark mode natively, are keyboard accessible, and follow standard WAI-ARIA guidelines.</p>
+                      </div>
+                    </Tabs.Content>
+                    <Tabs.Content value="api">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Compound API Pattern</h4>
+                        <p>Uses React Context to implicitly share state between components, making it flexible and easy to customise layouts.</p>
+                      </div>
+                    </Tabs.Content>
+                  </Tabs>
+                </div>
+              </div>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Pills Variant</h3>
+                <div className="comp-preview" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
+                  <Tabs defaultValue="html" variant="pills">
+                    <Tabs.List>
+                      <Tabs.Trigger value="html">HTML5</Tabs.Trigger>
+                      <Tabs.Trigger value="css">CSS3</Tabs.Trigger>
+                      <Tabs.Trigger value="js">JavaScript</Tabs.Trigger>
+                    </Tabs.List>
+                    <Tabs.Content value="html">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Semantic Markup</h4>
+                        <p>Write clean, structured, and search-engine friendly markup using HTML5 elements.</p>
+                      </div>
+                    </Tabs.Content>
+                    <Tabs.Content value="css">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Modern Layouts</h4>
+                        <p>Utilise modern CSS properties like Flexbox, Grid, Custom Properties, and Subgrid for layout.</p>
+                      </div>
+                    </Tabs.Content>
+                    <Tabs.Content value="js">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Dynamic Interactivity</h4>
+                        <p>Add stateful behavior, async data loading, and interactive workflows with Javascript.</p>
+                      </div>
+                    </Tabs.Content>
+                  </Tabs>
+                </div>
+              </div>
+
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX (Compound API)</span>
+                  <button
+                    className="copy-btn"
+                    onClick={() =>
+                      handleCopy(`<Tabs defaultValue="tab1">
+  <Tabs.List>
+    <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+    <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="tab1">Content 1</Tabs.Content>
+  <Tabs.Content value="tab2">Content 2</Tabs.Content>
+</Tabs>`)
+                    }
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+                <pre>{`<Tabs defaultValue="tab1">
+  <Tabs.List>
+    <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+    <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="tab1">Content 1</Tabs.Content>
+  <Tabs.Content value="tab2">Content 2</Tabs.Content>
+</Tabs>`}</pre>
+              </div>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Props</h3>
+                <div className="props-table-wrap">
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>defaultValue</code></td>
+                        <td>string</td>
+                        <td><code>-</code></td>
+                        <td>The value of the active tab on initial render.</td>
+                      </tr>
+                      <tr>
+                        <td><code>value</code></td>
+                        <td>string</td>
+                        <td><code>-</code></td>
+                        <td>Controlled active tab value.</td>
+                      </tr>
+                      <tr>
+                        <td><code>onValueChange</code></td>
+                        <td>function</td>
+                        <td><code>-</code></td>
+                        <td>Event handler called when the active tab changes.</td>
+                      </tr>
+                      <tr>
+                        <td><code>variant</code></td>
+                        <td>string</td>
+                        <td><code>"underline"</code></td>
+                        <td>Visual style: <code>"underline"</code> or <code>"pills"</code>.</td>
                       </tr>
                     </tbody>
                   </table>

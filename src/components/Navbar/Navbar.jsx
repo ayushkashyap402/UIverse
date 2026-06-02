@@ -147,7 +147,7 @@ function Navbar() {
           onClick={toggleTheme}
           aria-label="Toggle theme"
         >
-          {dark ? <SunIcon /> : <MoonIcon />}
+          <SunIcon />
         </button>
 
       </div>
