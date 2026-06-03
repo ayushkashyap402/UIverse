@@ -6,7 +6,7 @@
 // To register a new component:
 //   1. Add a new object to the array below
 //   2. Fill in: id, name, category, status, description
-//   3. Status options: "Stable" | "Beta" | "Planned"
+//   3. Status options: "Stable" | "Beta" | "Planned" 
 
 export const componentsList = [
   {
