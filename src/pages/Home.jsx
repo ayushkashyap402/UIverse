@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../components/Button/Button.jsx";
-import Navbar from "../components/Navbar/Navbar.jsx";
+import AppNavbar from "../layout/AppNavbar/AppNavbar.jsx";
 import "./Home.css";
 const quickLinks = ["Home", "Components", "Features"];
 
@@ -106,7 +106,7 @@ const testimonials = [
   };
   return (
     <div className="home-page">
-      <Navbar />
+      <AppNavbar />
 
       {/* ── Hero ── */}
       <section className="hero">

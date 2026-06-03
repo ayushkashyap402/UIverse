@@ -48,8 +48,8 @@ export const componentsList = [
     id: 6,
     name: 'Navbar',
     category: 'Navigation',
-    status: 'Planned',
-    description: 'Responsive top navigation bar with logo and links.',
+    status: 'Stable',
+    description: 'Responsive navigation bar with brand, links, CTA, and multiple variant styles.',
   },
 
 
@@ -62,12 +62,14 @@ export const componentsList = [
     description:
       'Reusable alert component for success, error, warning, and informational messages.',
   },
+
+  // Sidebar navigation component
   {
     id: 8,
-    name: 'Tabs',
+    name: 'Sidebar',
     category: 'Navigation',
     status: 'Stable',
     description:
-      'Accessible tabs component with animated underline, pills variant, keyboard navigation support, and compound API.',
+      'Vertical sidebar navigation with sections, icons, variants, and collapsible mode.',
   },
 ]
