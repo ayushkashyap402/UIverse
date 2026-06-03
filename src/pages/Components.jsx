@@ -471,7 +471,6 @@ function Components() {
                 {sections.find((s) => s.id === activeSection)?.label ?? 'Components'}
               </span>
             </span>
-            </span>
             <span
               className={`sidebar-mobile-caret ${sidebarOpen ? 'sidebar-mobile-caret--open' : ''}`}
               aria-hidden="true"
@@ -678,6 +677,8 @@ function Components() {
 <Alert type="warning" message="Warning message here." />
 <Alert type="info" message="Information message." />
 <Alert type="info" message="Closable alert example." closable />`}</pre>
+
+            </div>
 
             {/* Props Table */}
             <div className="comp-subsection">
@@ -1020,8 +1021,7 @@ function Components() {
                 </table>
               </div>
             </div>
-            </section>
-              </div>
+          </section>
 
               <div className="comp-subsection">
                 <h3 className="comp-subsection-title">Props</h3>
