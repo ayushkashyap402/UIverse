@@ -82,6 +82,19 @@ function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Lock body scroll while sidebar is open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [isOpen])
+
+  // Close sidebar when viewport widens to desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth > 768) setIsOpen(false) }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
   /* ================= HANDLERS ================= */
 
   const toggleTheme = (e) => {
@@ -112,55 +125,67 @@ function Navbar() {
   /* ================= JSX ================= */
 
   return (
-    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+    <>
+      {/* OVERLAY — dims page content behind the open sidebar */}
+      <div
+        className={`navbar-overlay${isOpen ? ' active' : ''}`}
+        onClick={closeMenu}
+        aria-hidden="true"
+      />
 
-      {/* LOGO */}
-      <Link to="/" className="navbar-logo" onClick={closeMenu}>
-        <LogoIcon />
-        UIverse
-      </Link>
+      <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
 
-      {/* LINKS */}
-      <div className={`navbar-links ${isOpen ? "active" : ""}`}>
-
-        <Link to="/" onClick={closeMenu}
-          className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}>
-          Home
+        {/* LOGO */}
+        <Link to="/" className="navbar-logo" onClick={closeMenu}>
+          <LogoIcon />
+          UIverse
         </Link>
 
-        <Link to="/components" onClick={closeMenu}
-          className={`navbar-link ${location.pathname === '/components' ? 'active' : ''}`}>
-          Components
-        </Link>
-        {/* Get Started CTA (links to docs page) */}
-        <Link
-          to="/docs"
-          className="navbar-link navbar-github"
-          onClick={closeMenu}
-        >
-          Get Started
-        </Link>
+        {/* LINKS */}
+        <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
 
-        {/* Theme Toggle */}
+          <Link to="/" onClick={closeMenu}
+            className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}>
+            Home
+          </Link>
+
+          <Link to="/components" onClick={closeMenu}
+            className={`navbar-link ${location.pathname === '/components' ? 'active' : ''}`}>
+            Components
+          </Link>
+
+          {/* Get Started CTA (links to docs page) */}
+          <Link
+            to="/docs"
+            className="navbar-link navbar-github"
+            onClick={closeMenu}
+          >
+            Get Started
+          </Link>
+
+          {/* Theme Toggle */}
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {dark ? <SunIcon /> : <MoonIcon />}
+          </button>
+
+        </div>
+
+        {/* MOBILE BUTTON */}
         <button
-          className="theme-toggle"
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
+           onClick={handleOpenNavbar}
+           className="nav-btn"
+           aria-expanded={isOpen}
+           aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
         >
-          <SunIcon />
+           {isOpen ? <TimesIcon /> : <BarsIcon />}
         </button>
 
-      </div>
-
-      {/* MOBILE BUTTON */}
-      <button
-        onClick={handleOpenNavbar}
-        className="nav-btn"
-      >
-        {isOpen ? <TimesIcon /> : <BarsIcon />}
-      </button>
-
-    </nav>
+      </nav>
+    </>
   )
 }
 

@@ -277,6 +277,12 @@
   transform: scale(1.05);
 }
 
+/* ================= OVERLAY ================= */
+/* Always in the DOM; only visible on mobile when .active */
+.navbar-overlay {
+  display: none;
+}
+
 /* ================= MOBILE STYLES ================= */
 @media (max-width: 768px) {
   .navbar {
@@ -288,40 +294,117 @@
     display: flex;
   }
 
-  .navbar-links {
-    position: absolute;
-    top: 80px;
-    right: 20px;
-    width: 230px;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    padding: 18px;
-    background: var(--nav-bg);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid var(--nav-border);
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    animation: menuFade 0.25s ease;
-  }
+/* Full-screen dimming layer that sits behind the sidebar */
+.navbar-overlay {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 998;
 
-  .navbar-links.active {
-    display: flex;
-  }
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 
-  .navbar-link {
-    width: 100%;
-    padding: 12px 14px;
-  }
-
-  .navbar-github {
-    margin-top: 6px;
-    text-align: center;
-  }
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
+.navbar-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Slide-in sidebar */
+.navbar-links {
+  position: fixed;
+  top: 68px;
+  right: 0;
+  bottom: 0;
+  width: min(270px, 78vw);
+
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  gap: 12px;
+  padding: 20px 14px 230px;
+
+  border-radius: 24px; /* better than 10% */
+
+  background: rgba(14, 16, 24, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.45);
+
+  z-index: 999;
+
+  visibility: hidden;
+  transform: translateX(100%);
+  transition:
+    transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s linear 0.32s;
+
+  }
+
+  /* Open: slide in, make immediately accessible */
+  .navbar-links.active {
+    visibility: visible;
+    transform: translateX(0);
+    transition:
+      transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0s linear 0s;
+  }
+
+  /* Links inside the sidebar — uniform base */
+  .navbar-link {
+    width: 100%;
+    padding: 13px 16px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  /* Active: subtle left accent instead of a full card */
+  .navbar-link.active {
+  background: rgba(99, 102, 241, 0.12);
+  border-left: 3px solid var(--nav-primary-light);
+}
+
+  /* Slide underline doesn't read well in a vertical sidebar */
+  .navbar-link::after {
+    display: none;
+  }
+
+  /* "Get Started" — no extra top margin; thin divider signals intent */
+  .navbar-github {
+    margin-left: 0;
+    margin-top: 4px;
+    text-align: center;
+    padding: 13px 16px;
+  }
+
+  /* Divider line above the CTA */
+  
+
+  .navbar-github::after {
+    display: none;
+  }
+
+  /* Theme toggle — full-width, visually grouped after nav items */
+  .theme-toggle {
+    margin-left: 0;
+    
+    width: 42px;
+    height: 42px;
+    align-self: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    margin-top: 8px;
+    align-self: center;
+
+  }
 /* ================= ANIMATION ================= */
 @keyframes menuFade {
   from { opacity: 0; transform: translateY(-10px) scale(0.98); }
