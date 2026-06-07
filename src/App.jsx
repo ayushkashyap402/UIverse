@@ -7,6 +7,8 @@ import Home from './pages/Home.jsx'
 import Components from './pages/Components.jsx'
 import GettingStarted from './pages/GettingStarted.jsx'
 
+import ColorWall from './pages/ColorWall.jsx';
+
 function App() {
   return (
     <Routes>
@@ -16,6 +18,8 @@ function App() {
       {/* Components showcase page */}
       <Route path="/components" element={<Components />} />
 
+      {/* Color Wall */}
+      <Route path="/color-wall" element={<ColorWall />} />
       {/* Getting Started / documentation page */}
       <Route path="/docs" element={<GettingStarted />} />
     </Routes>
