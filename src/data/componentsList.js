@@ -69,5 +69,12 @@ export const componentsList = [
     status: 'Stable',
     description:
       'Accessible tabs component with animated underline, pills variant, keyboard navigation support, and compound API.',
-  },
+
+{
+    id: 9,
+    name: 'Form Components',
+    category: 'Inputs',
+    status: 'Stable',
+    description: 'A comprehensive suite of 20 drop-in ready form elements with base CSS.',
+  }, 
 ]
