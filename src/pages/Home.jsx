@@ -5,6 +5,11 @@ import { Link } from "react-router-dom";
 import Button from "../components/Button/Button.jsx";
 import Navbar from "../components/Navbar/Navbar.jsx";
 import "./Home.css";
+const quickLinks = ["Home", "Components", "Features"];
+
+const communityLinks = ["GitHub", "GSSoC", "Contribute", "Issues"];
+
+const resourceLinks = ["Docs","FAQ", "Contribution Guide", "License", "Support"];
 
 function Home() {
   const [showButton, setShowButton] = useState(false);
@@ -31,6 +36,54 @@ const faqs = [
     answer:
       "You can open an Issue on the GitHub repository for bug reports, feature requests, or suggestions.",
   },
+];
+
+const testimonials = [
+  {
+    name: "Sarah Johnson",
+    role: "Frontend Developer",
+    text: "UIverse makes it easy to build and learn at the same time."
+  },
+  {
+    name: "Alex Chen",
+    role: "Open Source Contributor",
+    text: "The project structure is simple and beginner-friendly."
+  },
+  {
+    name: "Priya Sharma",
+    role: "Student Developer",
+    text: "A great place to start contributing to open source."
+  },
+  {
+  name: "Rahul Mehta",
+  role: "Full Stack Developer",
+  text: "Clean components and very intuitive structure. Great for learning React fundamentals."
+  },
+  {
+    name: "Emily Watson",
+    role: "UI/UX Designer",
+    text: "The design system is minimal yet flexible enough to experiment with real UI patterns."
+  },
+  {
+    name: "Karan Patel",
+    role: "Open Source Beginner",
+    text: "Perfect project for first-time contributors. Everything is easy to understand."
+  },
+  {
+    name: "Sophia Lee",
+    role: "Frontend Intern",
+    text: "Loved how each component is isolated and reusable. Makes development faster."
+  },
+  {
+    name: "Arjun Nair",
+    role: "Web Developer",
+    text: "A great way to practice React by building real-world UI components."
+  },
+  {
+    name: "Neha Verma",
+    role: "Computer Science Student",
+    text: "UIverse helped me understand component-based architecture better."
+  }
 ];
 
 
@@ -118,7 +171,7 @@ const faqs = [
       </section>
 
       {/* ── Features ── */}
-      <section className="features-section">
+      <section className="features-section" id="features">
         <h2 className="section-heading">Why UIverse?</h2>
         <p className="section-subheading">
           Everything you need to learn, build, and contribute — nothing you
@@ -136,7 +189,7 @@ const faqs = [
       </section>
 
       {/* ── How to contribute ── */}
-      <section className="contribute-section">
+      <section className="contribute-section" id="contribute">
         <div className="contribute-inner">
           <div className="contribute-text">
             <h2>Want to contribute?</h2>
@@ -172,9 +225,24 @@ const faqs = [
         </div>
       </section>
 
-        {/* ── FAQ ── */}
-        <section className="faq-section">
-          <h2 className="section-heading">Frequently Asked Questions</h2>
+      {/* ── Testimonials ── */}
+      <section className="testimonial-section">
+        <h2 className="section-heading">Testimonials</h2>
+        <p className="section-subheading">Know what people think and feel about UIverse</p>
+        <div className="testimonial-container">
+          {[...testimonials, ...testimonials].map((item, index) => (
+            <div className="testimonial-card" key={index}>
+              <p>"{item.text}"</p>
+              <h4>{item.name}</h4>
+              <span>{item.role}</span>
+            </div>
+         ))}
+        </div>
+      </section>
+
+{/* ── FAQ ── */}
+<section className="faq-section" id="faq">
+  <h2 className="section-heading">Frequently Asked Questions</h2>
 
           <p className="section-subheading">
             Quick answers for contributors and developers getting started with UIverse.
@@ -221,9 +289,137 @@ const faqs = [
           ↑
         </button>
       )}
-      <footer className="home-footer">
-        <p>Made with care for the open-source community · UIverse 2025</p>
-      </footer>
+                  <footer className="footer-wrapper">
+
+              <div className="footer-cta">
+
+                <div className="footer-cta-icon">✦</div>
+
+                <h2>Ready to contribute?</h2>
+
+                <p>
+                  Join our community and help build UIverse better for everyone.
+                </p>
+
+                <a
+                    href="https://github.com/ayushkashyap402/UIverse"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <button className="footer-cta-btn">
+                      Start Contributing →
+                    </button>
+                  </a>
+
+              </div>
+
+              <div className="footer-main">
+
+                <div className="footer-brand">
+
+                  <h2>UIverse</h2>
+
+                  <p>
+                    A beginner-friendly React component library with clean CSS,
+                    zero dependencies, and a structure that's easy to contribute to.
+                  </p>
+
+                  <div className="footer-socials">
+                    <span>G</span>
+                    <span>D</span>
+                     <span>X</span>
+                     <span>♡</span>
+                   </div>
+
+                </div>
+
+               <div className="footer-links">
+
+                      <h3>Quick Links</h3>
+
+                      <a href="/">Home</a>
+
+                      <a href="/components">Components</a>
+
+                      <a href="#features">Features</a>
+
+                    </div>
+
+              <div className="footer-links">
+
+                    <h3>Community</h3>
+
+                    <a
+                      href="https://github.com/ayushkashyap402/UIverse"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      GitHub
+                    </a>
+
+                    <a
+                      href="https://gssoc.girlscript.tech/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      GSSoC
+                    </a>
+
+                    <a href="#contribute">Contribute</a>
+
+                    <a
+                      href="https://github.com/ayushkashyap402/UIverse/issues"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Issues
+                    </a>
+
+                  </div>
+
+                <div className="footer-links">
+
+                          <h3>Resources</h3>
+
+                          <a href="#contribute">Docs</a>
+
+                          <a href="#faq">FAQ</a>
+
+                          <a
+                            href="https://github.com/ayushkashyap402/UIverse"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Contribution Guide
+                          </a>
+
+                          <a
+                            href="https://github.com/ayushkashyap402/UIverse/blob/main/LICENSE"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            License
+                          </a>
+
+                          <a
+                            href="https://github.com/ayushkashyap402/UIverse/issues"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Support
+                          </a>
+
+                        </div>
+                      </div>
+              <div className="footer-bottom">
+
+                <p>Made with care for the open-source community</p>
+
+                <p>© 2026 UIverse • All rights reserved</p>
+
+              </div>
+
+            </footer>
     </div>
   );
 }

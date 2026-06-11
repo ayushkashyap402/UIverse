@@ -1,6 +1,35 @@
 /* GettingStarted.css – Doc-specific styles
    Layout, sidebar, code blocks and tables are reused from Components.css */
 
+/* ── Scroll progress indicator ── */
+.scroll-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 1100;
+  background: transparent;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #a78bfa);
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.12s ease-out;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.5),
+              0 0 2px rgba(139, 92, 246, 0.3);
+}
+
+[data-theme="dark"] .scroll-progress-bar {
+  background: linear-gradient(90deg, #818cf8, #a78bfa, #c4b5fd);
+  box-shadow: 0 0 12px rgba(129, 140, 248, 0.6),
+              0 0 4px rgba(167, 139, 250, 0.4);
+}
+
 /* ── Prose ── */
 .doc-prose {
   font-size: 0.95rem;

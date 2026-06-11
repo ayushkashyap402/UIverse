@@ -164,7 +164,7 @@ function Navbar() {
           aria-expanded={isOpen}
           aria-controls="navbar-menu-links"
         >
-          {isOpen ? <TimesIcon /> : <BarsIcon />}
+          <SunIcon />
         </button>
 
       </nav>
