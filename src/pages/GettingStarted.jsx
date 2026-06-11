@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import Button from '../components/Button/Button.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Navbar from '../components/Navbar/Navbar.jsx'
+import BackToTop from '../components/BackToTop/BackToTop.jsx'
 import './Components.css' // shared layout + code-block + table styles
 import './GettingStarted.css'
 
@@ -490,6 +491,7 @@ export default Card`}
           </section>
         </main>
       </div>
+      <BackToTop />
     </div>
   )
 }
