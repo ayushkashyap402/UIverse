@@ -5,33 +5,31 @@
 // closable  -> show close button
 
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import './Alert.css'
 
-function Alert({
-  type = 'info',
-  message = 'This is an alert message',
-  closable = false,
-}) {
+function Alert({ type = 'info', message = 'This is an alert message', closable = false }) {
   const [visible, setVisible] = useState(true)
 
   if (!visible) return null
 
   return (
     <div className={`uiverse-alert uiverse-alert-${type}`}>
-      <span className="uiverse-alert-message">
-        {message}
-      </span>
+      <span className="uiverse-alert-message">{message}</span>
 
       {closable && (
-        <button
-          className="uiverse-alert-close"
-          onClick={() => setVisible(false)}
-        >
+        <button className="uiverse-alert-close" onClick={() => setVisible(false)}>
           ×
         </button>
       )}
     </div>
   )
+}
+
+Alert.propTypes = {
+  type: PropTypes.oneOf(['success', 'error', 'warning', 'info']),
+  message: PropTypes.string,
+  closable: PropTypes.bool,
 }
 
 export default Alert
