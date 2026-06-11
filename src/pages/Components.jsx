@@ -100,10 +100,55 @@ function Components() {
   const tabsRef = useRef(null)
   const allComponentsRef = useRef(null)
 
-  const handleCopy = (code) => {
+  const handleCopy = (code, componentId, componentName, category) => {
     navigator.clipboard.writeText(code)
     setCopied(true)
     setTimeout(() => setCopied(false), 1800)
+
+    if (componentId && componentName && category) {
+      setRecentlyCopied((prev) => {
+        const filtered = prev.filter((item) => item.id !== componentId)
+        const updated = [
+          { id: componentId, name: componentName, category, code, timestamp: Date.now() },
+          ...filtered,
+        ].slice(0, 5)
+        localStorage.setItem('uiverse_recent_copies', JSON.stringify(updated))
+        return updated
+      })
+    }
+  }
+
+  const handleQuickCopy = (e, code, componentId) => {
+    e.stopPropagation()
+    navigator.clipboard.writeText(code)
+    setCopiedCardId(componentId)
+    setTimeout(() => setCopiedCardId(null), 1800)
+
+    setRecentlyCopied((prev) => {
+      const target = prev.find((item) => item.id === componentId)
+      if (!target) return prev
+      const filtered = prev.filter((item) => item.id !== componentId)
+      const updated = [
+        { ...target, timestamp: Date.now() },
+        ...filtered,
+      ]
+      localStorage.setItem('uiverse_recent_copies', JSON.stringify(updated))
+      return updated
+    })
+  }
+
+  const removeRecentItem = (e, componentId) => {
+    e.stopPropagation()
+    setRecentlyCopied((prev) => {
+      const updated = prev.filter((item) => item.id !== componentId)
+      localStorage.setItem('uiverse_recent_copies', JSON.stringify(updated))
+      return updated
+    })
+  }
+
+  const clearHistory = () => {
+    setRecentlyCopied([])
+    localStorage.removeItem('uiverse_recent_copies')
   }
 
   const scrollTo = (id) => {
@@ -310,6 +355,78 @@ function Components() {
             </div>
           </div>
 
+          {/* ================= RECENTLY COPIED ================= */}
+          {recentlyCopied.length > 0 && (
+            <section className="recent-section">
+              <div className="recent-header">
+                <div className="recent-title-group">
+                  <svg className="recent-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <h2>Recently Copied</h2>
+                </div>
+                <button className="clear-all-btn" onClick={clearHistory} aria-label="Clear all recently copied history">
+                  Clear History
+                </button>
+              </div>
+
+              <div className="recent-grid">
+                {recentlyCopied.map((item) => (
+                  <div
+                    key={item.id}
+                    className="recent-card"
+                    onClick={() => scrollTo(item.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        scrollTo(item.id)
+                      }
+                    }}
+                    aria-label={`Recently copied component ${item.name}. Category: ${item.category}. Press Enter to scroll to component section.`}
+                  >
+                    <div className="recent-card-body">
+                      <div className="recent-card-info">
+                        <span className="recent-card-category">{item.category}</span>
+                        <strong className="recent-card-name">{item.name}</strong>
+                      </div>
+                      <div className="recent-card-actions">
+                        <button
+                          className="recent-card-action-btn copy-action-btn"
+                          onClick={(e) => handleQuickCopy(e, item.code, item.id)}
+                          aria-label={`Quick copy JSX snippet for ${item.name}`}
+                          title="Quick Copy JSX"
+                        >
+                          {copiedCardId === item.id ? (
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          ) : (
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <rect x="9" y="9" width="13" height="13" rx="2" />
+                              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                            </svg>
+                          )}
+                        </button>
+                        <button
+                          className="recent-card-action-btn remove-action-btn"
+                          onClick={(e) => removeRecentItem(e, item.id)}
+                          aria-label={`Remove ${item.name} from recently copied history`}
+                          title="Remove from history"
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* ================= BUTTONS ================= */}
           {shouldShowSection('buttons', 'Button') && (
             <section className="comp-section" id="buttons" ref={buttonsRef}>
@@ -336,7 +453,7 @@ function Components() {
                   <button
                     className="copy-btn"
                     onClick={() =>
-                      handleCopy(`<Button text="Primary" variant="primary" />`)
+                      handleCopy(`<Button text="Primary" variant="primary" />`, 'buttons', 'Button', 'Inputs')
                     }
                   >
                     {copied ? (
@@ -382,7 +499,7 @@ function Components() {
                   <button
                     className="copy-btn"
                     onClick={() =>
-                      handleCopy(`<Badge text="Primary" variant="primary" />`)
+                      handleCopy(`<Badge text="Primary" variant="primary" />`, 'badges', 'Badge', 'Display')
                     }
                   >
                     {copied ? (
@@ -438,7 +555,7 @@ function Components() {
 <Alert type="error" message="Something went wrong." />
 <Alert type="warning" message="Warning message here." />
 <Alert type="info" message="Information message." />
-<Alert type="info" message="Closable alert example." closable />`)
+<Alert type="info" message="Closable alert example." closable />`, 'alerts', 'Alert', 'Feedback')
                     }
                   >
                     {copied ? '✅ Copied!' : '📋 Copy'}
