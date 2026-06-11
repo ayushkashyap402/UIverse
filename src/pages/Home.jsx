@@ -108,8 +108,9 @@ const testimonials = [
     <div className="home-page">
       <Navbar />
 
-      {/* ── Hero ── */}
-      <section className="hero">
+      <main id="main-content">
+        {/* ── Hero ── */}
+        <section className="hero">
         <div className="hero-badge">
           <svg
             width="13"
@@ -243,37 +244,44 @@ const testimonials = [
 <section className="faq-section" id="faq">
   <h2 className="section-heading">Frequently Asked Questions</h2>
 
-  <p className="section-subheading">
-    Quick answers for contributors and developers getting started with UIverse.
-  </p>
+          <p className="section-subheading">
+            Quick answers for contributors and developers getting started with UIverse.
+          </p>
 
-  <div className="faq-container">
-    {faqs.map((faq, index) => (
-      <div
-        key={index}
-        className={`faq-item ${openFAQ === index ? "active" : ""}`}
-      >
-        <button
-          className="faq-question"
-          onClick={() =>
-            setOpenFAQ(openFAQ === index ? null : index)
-          }
-        >
-          <span>{faq.question}</span>
-          <span>{openFAQ === index ? "−" : "+"}</span>
-        </button>
+          <div className="faq-container">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className={`faq-item ${openFAQ === index ? "active" : ""}`}
+              >
+                <button
+                  className="faq-question"
+                  id={`faq-btn-${index}`}
+                  aria-expanded={openFAQ === index}
+                  aria-controls={`faq-panel-${index}`}
+                  onClick={() =>
+                    setOpenFAQ(openFAQ === index ? null : index)
+                  }
+                >
+                  <span>{faq.question}</span>
+                  <span>{openFAQ === index ? "−" : "+"}</span>
+                </button>
 
-        <div
-          className={`faq-answer ${
-            openFAQ === index ? "show" : ""
-          }`}
-        >
-          <p>{faq.answer}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
+                <div
+                  id={`faq-panel-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${index}`}
+                  className={`faq-answer ${
+                    openFAQ === index ? "show" : ""
+                  }`}
+                >
+                  <p>{faq.answer}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
 
       {/* ── Footer ── */}
       {showButton && (

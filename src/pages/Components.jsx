@@ -279,7 +279,7 @@ function Components() {
         </aside>
 
         {/* ================= MAIN ================= */}
-        <main className="comp-main">
+        <main id="main-content" className="comp-main">
 
           <div className="comp-header">
             <h1>Components</h1>
@@ -294,6 +294,7 @@ function Components() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="search-input"
+                  aria-label="Search components by name or category"
                 />
                 {searchQuery && (
                   <button onClick={clearSearch} className="clear-search-btn" aria-label="Clear search">
