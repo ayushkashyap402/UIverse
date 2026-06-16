@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar/Navbar.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert.jsx'
 import Tabs from '../components/Tabs/Tabs.jsx'
+import Input from '../components/Input/Input'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
 
@@ -15,8 +16,15 @@ const sections = [
     label: 'Buttons',
     componentName: 'Button',
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="3" y="8" width="18" height="8" rx="3"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <rect x="3" y="8" width="18" height="8" rx="3" />
       </svg>
     ),
   },
@@ -25,8 +33,15 @@ const sections = [
     label: 'Badges',
     componentName: 'Badge',
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2l4 7h7l-5.5 4.5L19 21l-7-4-7 4 1.5-7.5L1 9h7z"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <path d="M12 2l4 7h7l-5.5 4.5L19 21l-7-4-7 4 1.5-7.5L1 9h7z" />
       </svg>
     ),
   },
@@ -35,8 +50,15 @@ const sections = [
     label: 'Alerts',
     componentName: 'Alert',
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M10 2L2 22h20L14 2z"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <path d="M10 2L2 22h20L14 2z" />
       </svg>
     ),
   },
@@ -45,10 +67,35 @@ const sections = [
     label: 'Tabs',
     componentName: 'Tabs',
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="3" y="3" width="18" height="18" rx="2"/>
-        <line x1="3" y1="9" x2="21" y2="9"/>
-        <line x1="9" y1="21" x2="9" y2="9"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <line x1="3" y1="9" x2="21" y2="9" />
+        <line x1="9" y1="21" x2="9" y2="9" />
+      </svg>
+    ),
+  },
+  {
+    id: 'inputs',
+    label: 'Inputs',
+    componentName: 'Input',
+    icon: (
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <rect x="3" y="6" width="18" height="12" rx="2" />
+        <line x1="7" y1="12" x2="17" y2="12" />
       </svg>
     ),
   },
@@ -57,13 +104,20 @@ const sections = [
     label: 'All Components',
     componentName: null,
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <line x1="8" y1="6" x2="21" y2="6"/>
-        <line x1="8" y1="12" x2="21" y2="12"/>
-        <line x1="8" y1="18" x2="21" y2="18"/>
-        <line x1="3" y1="6" x2="3.01" y2="6"/>
-        <line x1="3" y1="12" x2="3.01" y2="12"/>
-        <line x1="3" y1="18" x2="3.01" y2="18"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <line x1="8" y1="6" x2="21" y2="6" />
+        <line x1="8" y1="12" x2="21" y2="12" />
+        <line x1="8" y1="18" x2="21" y2="18" />
+        <line x1="3" y1="6" x2="3.01" y2="6" />
+        <line x1="3" y1="12" x2="3.01" y2="12" />
+        <line x1="3" y1="18" x2="3.01" y2="18" />
       </svg>
     ),
   },
@@ -73,14 +127,21 @@ const sections = [
 
 const CopyIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <rect x="9" y="9" width="13" height="13" rx="2"/>
-    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    <rect x="9" y="9" width="13" height="13" rx="2" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
   </svg>
 )
 
 const CheckIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <polyline points="20 6 9 17 4 12"/>
+  <svg
+    width="13"
+    height="13"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+  >
+    <polyline points="20 6 9 17 4 12" />
   </svg>
 )
 
@@ -90,14 +151,16 @@ function Components() {
   const [activeSection, setActiveSection] = useState('buttons')
   const [copied, setCopied] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [inputValue, setInputValue] = useState('')
   // Mobile sidebar drawer state
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  
+
   // Refs for scrolling
   const buttonsRef = useRef(null)
   const badgesRef = useRef(null)
   const alertsRef = useRef(null)
   const tabsRef = useRef(null)
+  const inputsRef = useRef(null)
   const allComponentsRef = useRef(null)
 
   const handleCopy = (code) => {
@@ -109,8 +172,8 @@ function Components() {
   const scrollTo = (id) => {
     setActiveSection(id)
     let element = null
-    
-    switch(id) {
+
+    switch (id) {
       case 'buttons':
         element = buttonsRef.current
         break
@@ -123,13 +186,16 @@ function Components() {
       case 'tabs':
         element = tabsRef.current
         break
+      case 'input':
+        element = inputsRef.current
+        break
       case 'all-components':
         element = allComponentsRef.current
         break
       default:
         element = document.getElementById(id)
     }
-    
+
     if (element) {
       element.scrollIntoView({
         behavior: 'smooth',
@@ -141,43 +207,55 @@ function Components() {
   // Filter components based on search
   const filteredComponents = useMemo(() => {
     if (!searchQuery.trim()) return componentsList
-    
+
     const searchLower = searchQuery.toLowerCase()
-    return componentsList.filter(component => 
-      component.name.toLowerCase().includes(searchLower) ||
-      component.category.toLowerCase().includes(searchLower)
+    return componentsList.filter(
+      (component) =>
+        component.name.toLowerCase().includes(searchLower) ||
+        component.category.toLowerCase().includes(searchLower)
     )
   }, [searchQuery])
 
   // Check if a section should be shown based on search
   const shouldShowSection = (sectionId, componentName) => {
     if (!searchQuery.trim()) return true
-    
+
     const searchLower = searchQuery.toLowerCase()
-    
+
     // Check if component name matches search
     if (componentName && componentName.toLowerCase().includes(searchLower)) {
       return true
     }
-    
+
     // Check if any component in filtered list matches this section
-    return filteredComponents.some(c => c.name === componentName)
+    return filteredComponents.some((c) => c.name === componentName)
   }
 
   // Auto-scroll to first matching section when searching
   useEffect(() => {
     if (searchQuery.trim()) {
       const searchLower = searchQuery.toLowerCase()
-      
+
       // Find first matching section
-      if (searchLower.includes('button') || filteredComponents.some(c => c.name === 'Button')) {
+      if (searchLower.includes('button') || filteredComponents.some((c) => c.name === 'Button')) {
         scrollTo('buttons')
-      } else if (searchLower.includes('badge') || filteredComponents.some(c => c.name === 'Badge')) {
+      } else if (
+        searchLower.includes('badge') ||
+        filteredComponents.some((c) => c.name === 'Badge')
+      ) {
         scrollTo('badges')
-      } else if (searchLower.includes('alert') || filteredComponents.some(c => c.name === 'Alert')) {
+      } else if (
+        searchLower.includes('alert') ||
+        filteredComponents.some((c) => c.name === 'Alert')
+      ) {
         scrollTo('alerts')
-      } else if (searchLower.includes('tab') || filteredComponents.some(c => c.name === 'Tabs')) {
+      } else if (searchLower.includes('tab') || filteredComponents.some((c) => c.name === 'Tabs')) {
         scrollTo('tabs')
+      } else if (
+        searchLower.includes('input') ||
+        filteredComponents.some((c) => c.name === 'Inputs')
+      ) {
+        scrollTo('inputs')
       } else if (filteredComponents.length > 0) {
         scrollTo('all-components')
       }
@@ -196,6 +274,7 @@ function Components() {
     if (shouldShowSection('badges', 'Badge')) count++
     if (shouldShowSection('alerts', 'Alert')) count++
     if (shouldShowSection('tabs', 'Tabs')) count++
+    if (shouldShowSection('inputs', 'Inputs')) count++
     if (filteredComponents.length > 0) count++
     return count
   }, [searchQuery, filteredComponents])
@@ -205,9 +284,10 @@ function Components() {
       <Navbar />
 
       <div className="comp-layout">
-
         {/* ================= SIDEBAR ================= */}
-        <aside className={`comp-sidebar comp-sidebar--mobile ${sidebarOpen ? 'comp-sidebar--open' : ''}`}>
+        <aside
+          className={`comp-sidebar comp-sidebar--mobile ${sidebarOpen ? 'comp-sidebar--open' : ''}`}
+        >
           {/* Mobile toggle — hidden on desktop */}
           <button
             type="button"
@@ -242,11 +322,11 @@ function Components() {
                 if (s.id === 'all-components' && filteredComponents.length === 0) return null
                 if (s.componentName && !shouldShowSection(s.id, s.componentName)) return null
               }
-              
+
               return (
                 <button
                   key={s.id}
-                  className={`sidebar-item ${activeSection === s.id ? "sidebar-item--active" : ""}`}
+                  className={`sidebar-item ${activeSection === s.id ? 'sidebar-item--active' : ''}`}
                   onClick={() => {
                     scrollTo(s.id)
                     setSidebarOpen(false)
@@ -269,8 +349,15 @@ function Components() {
               className="sidebar-item sidebar-item--link"
             >
               <span className="sidebar-item-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                 </svg>
               </span>
               GitHub Repo
@@ -280,11 +367,10 @@ function Components() {
 
         {/* ================= MAIN ================= */}
         <main className="comp-main">
-
           <div className="comp-header">
             <h1>Components</h1>
             <p>Production-ready UI components. Copy the code, drop it in, done.</p>
-            
+
             {/* SEARCH INPUT */}
             <div className="search-wrapper">
               <div className="search-container">
@@ -296,15 +382,21 @@ function Components() {
                   className="search-input"
                 />
                 {searchQuery && (
-                  <button onClick={clearSearch} className="clear-search-btn" aria-label="Clear search">
+                  <button
+                    onClick={clearSearch}
+                    className="clear-search-btn"
+                    aria-label="Clear search"
+                  >
                     ✕
                   </button>
                 )}
               </div>
               {searchQuery && (
                 <p className="search-results-info">
-                  Found {filteredComponents.length} component{filteredComponents.length !== 1 ? 's' : ''} matching "{searchQuery}"
-                  {visibleSectionsCount > 0 && ` in ${visibleSectionsCount} section${visibleSectionsCount !== 1 ? 's' : ''}`}
+                  Found {filteredComponents.length} component
+                  {filteredComponents.length !== 1 ? 's' : ''} matching "{searchQuery}"
+                  {visibleSectionsCount > 0 &&
+                    ` in ${visibleSectionsCount} section${visibleSectionsCount !== 1 ? 's' : ''}`}
                 </p>
               )}
             </div>
@@ -335,9 +427,7 @@ function Components() {
 
                   <button
                     className="copy-btn"
-                    onClick={() =>
-                      handleCopy(`<Button text="Primary" variant="primary" />`)
-                    }
+                    onClick={() => handleCopy(`<Button text="Primary" variant="primary" />`)}
                   >
                     {copied ? (
                       <>
@@ -364,9 +454,7 @@ function Components() {
                 <span className="comp-badge comp-badge--stable">Stable</span>
               </div>
 
-              <p className="comp-section-desc">
-                Small status indicator badge with color variants.
-              </p>
+              <p className="comp-section-desc">Small status indicator badge with color variants.</p>
 
               <div className="comp-preview">
                 <Badge text="Primary" variant="primary" />
@@ -381,9 +469,7 @@ function Components() {
 
                   <button
                     className="copy-btn"
-                    onClick={() =>
-                      handleCopy(`<Badge text="Primary" variant="primary" />`)
-                    }
+                    onClick={() => handleCopy(`<Badge text="Primary" variant="primary" />`)}
                   >
                     {copied ? (
                       <>
@@ -411,9 +497,8 @@ function Components() {
               </div>
 
               <p className="comp-section-desc">
-                Reusable alert component with multiple variants
-                for success, error, warning, and informational
-                messages.
+                Reusable alert component with multiple variants for success, error, warning, and
+                informational messages.
               </p>
 
               <div className="comp-subsection">
@@ -465,21 +550,33 @@ function Components() {
                     </thead>
                     <tbody>
                       <tr>
-                        <td><code>type</code></td>
+                        <td>
+                          <code>type</code>
+                        </td>
                         <td>string</td>
-                        <td><code>"info"</code></td>
+                        <td>
+                          <code>"info"</code>
+                        </td>
                         <td>success · error · warning · info</td>
                       </tr>
                       <tr>
-                        <td><code>message</code></td>
+                        <td>
+                          <code>message</code>
+                        </td>
                         <td>string</td>
-                        <td><code>"This is an alert"</code></td>
+                        <td>
+                          <code>"This is an alert"</code>
+                        </td>
                         <td>Alert message text</td>
                       </tr>
                       <tr>
-                        <td><code>closable</code></td>
+                        <td>
+                          <code>closable</code>
+                        </td>
                         <td>boolean</td>
-                        <td><code>false</code></td>
+                        <td>
+                          <code>false</code>
+                        </td>
                         <td>Shows close button</td>
                       </tr>
                     </tbody>
@@ -498,35 +595,54 @@ function Components() {
               </div>
 
               <p className="comp-section-desc">
-                Accessible tabs component with animated indicators, supporting underline and pills variants.
+                Accessible tabs component with animated indicators, supporting underline and pills
+                variants.
               </p>
 
               <div className="comp-subsection">
                 <h3 className="comp-subsection-title">Underline Variant (Default)</h3>
-                <div className="comp-preview" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
+                <div
+                  className="comp-preview"
+                  style={{ flexDirection: 'column', alignItems: 'stretch' }}
+                >
                   <Tabs defaultValue="overview">
                     <Tabs.List>
                       <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
                       <Tabs.Trigger value="features">Features</Tabs.Trigger>
-                      <Tabs.Trigger value="disabled" disabled>Disabled Tab</Tabs.Trigger>
+                      <Tabs.Trigger value="disabled" disabled>
+                        Disabled Tab
+                      </Tabs.Trigger>
                       <Tabs.Trigger value="api">API Reference</Tabs.Trigger>
                     </Tabs.List>
                     <Tabs.Content value="overview">
                       <div className="tab-demo-content" style={{ padding: '8px 0' }}>
-                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Explore UIverse</h4>
-                        <p>UIverse is a collection of handcrafted, accessible React components designed to make building beautiful interfaces fast and simple.</p>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>
+                          Explore UIverse
+                        </h4>
+                        <p>
+                          UIverse is a collection of handcrafted, accessible React components
+                          designed to make building beautiful interfaces fast and simple.
+                        </p>
                       </div>
                     </Tabs.Content>
                     <Tabs.Content value="features">
                       <div className="tab-demo-content" style={{ padding: '8px 0' }}>
                         <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Key Features</h4>
-                        <p>Our components are responsive, support dark mode natively, are keyboard accessible, and follow standard WAI-ARIA guidelines.</p>
+                        <p>
+                          Our components are responsive, support dark mode natively, are keyboard
+                          accessible, and follow standard WAI-ARIA guidelines.
+                        </p>
                       </div>
                     </Tabs.Content>
                     <Tabs.Content value="api">
                       <div className="tab-demo-content" style={{ padding: '8px 0' }}>
-                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Compound API Pattern</h4>
-                        <p>Uses React Context to implicitly share state between components, making it flexible and easy to customise layouts.</p>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>
+                          Compound API Pattern
+                        </h4>
+                        <p>
+                          Uses React Context to implicitly share state between components, making it
+                          flexible and easy to customise layouts.
+                        </p>
                       </div>
                     </Tabs.Content>
                   </Tabs>
@@ -535,7 +651,10 @@ function Components() {
 
               <div className="comp-subsection">
                 <h3 className="comp-subsection-title">Pills Variant</h3>
-                <div className="comp-preview" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
+                <div
+                  className="comp-preview"
+                  style={{ flexDirection: 'column', alignItems: 'stretch' }}
+                >
                   <Tabs defaultValue="html" variant="pills">
                     <Tabs.List>
                       <Tabs.Trigger value="html">HTML5</Tabs.Trigger>
@@ -544,20 +663,35 @@ function Components() {
                     </Tabs.List>
                     <Tabs.Content value="html">
                       <div className="tab-demo-content" style={{ padding: '8px 0' }}>
-                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Semantic Markup</h4>
-                        <p>Write clean, structured, and search-engine friendly markup using HTML5 elements.</p>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>
+                          Semantic Markup
+                        </h4>
+                        <p>
+                          Write clean, structured, and search-engine friendly markup using HTML5
+                          elements.
+                        </p>
                       </div>
                     </Tabs.Content>
                     <Tabs.Content value="css">
                       <div className="tab-demo-content" style={{ padding: '8px 0' }}>
-                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Modern Layouts</h4>
-                        <p>Utilise modern CSS properties like Flexbox, Grid, Custom Properties, and Subgrid for layout.</p>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>
+                          Modern Layouts
+                        </h4>
+                        <p>
+                          Utilise modern CSS properties like Flexbox, Grid, Custom Properties, and
+                          Subgrid for layout.
+                        </p>
                       </div>
                     </Tabs.Content>
                     <Tabs.Content value="js">
                       <div className="tab-demo-content" style={{ padding: '8px 0' }}>
-                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Dynamic Interactivity</h4>
-                        <p>Add stateful behavior, async data loading, and interactive workflows with Javascript.</p>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>
+                          Dynamic Interactivity
+                        </h4>
+                        <p>
+                          Add stateful behavior, async data loading, and interactive workflows with
+                          Javascript.
+                        </p>
                       </div>
                     </Tabs.Content>
                   </Tabs>
@@ -615,28 +749,226 @@ function Components() {
                     </thead>
                     <tbody>
                       <tr>
-                        <td><code>defaultValue</code></td>
+                        <td>
+                          <code>defaultValue</code>
+                        </td>
                         <td>string</td>
-                        <td><code>-</code></td>
+                        <td>
+                          <code>-</code>
+                        </td>
                         <td>The value of the active tab on initial render.</td>
                       </tr>
                       <tr>
-                        <td><code>value</code></td>
+                        <td>
+                          <code>value</code>
+                        </td>
                         <td>string</td>
-                        <td><code>-</code></td>
+                        <td>
+                          <code>-</code>
+                        </td>
                         <td>Controlled active tab value.</td>
                       </tr>
                       <tr>
-                        <td><code>onValueChange</code></td>
+                        <td>
+                          <code>onValueChange</code>
+                        </td>
                         <td>function</td>
-                        <td><code>-</code></td>
+                        <td>
+                          <code>-</code>
+                        </td>
                         <td>Event handler called when the active tab changes.</td>
                       </tr>
                       <tr>
-                        <td><code>variant</code></td>
+                        <td>
+                          <code>variant</code>
+                        </td>
                         <td>string</td>
-                        <td><code>"underline"</code></td>
-                        <td>Visual style: <code>"underline"</code> or <code>"pills"</code>.</td>
+                        <td>
+                          <code>"underline"</code>
+                        </td>
+                        <td>
+                          Visual style: <code>"underline"</code> or <code>"pills"</code>.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ================= INPUTS ================= */}
+          {shouldShowSection('inputs', 'Input') && (
+            <section className="comp-section" id="inputs">
+              <div className="comp-section-header">
+                <h2>Input</h2>
+                <span className="comp-badge comp-badge--stable">Stable</span>
+              </div>
+
+              <p className="comp-section-desc">
+                A customizable controlled input field with support for labels, validation states,
+                and accessibility best practices.
+              </p>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Default Input</h3>
+
+                <div className="comp-preview">
+                  <Input
+                    label="Username"
+                    placeholder="Enter your username"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Validation Variants</h3>
+
+                <div
+                  className="comp-preview"
+                  style={{
+                    flexDirection: 'column',
+                    alignItems: 'stretch',
+                    gap: '16px',
+                  }}
+                >
+                  <Input
+                    label="Success Input"
+                    placeholder="Everything looks good"
+                    value=""
+                    variant="success"
+                  />
+
+                  <Input
+                    label="Error Input"
+                    placeholder="Something went wrong"
+                    value=""
+                    variant="error"
+                  />
+                </div>
+              </div>
+
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <button
+                    className="copy-btn"
+                    onClick={() =>
+                      handleCopy(`<Input
+  label="Username"
+  placeholder="Enter your username"
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+/>`)
+                    }
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <pre>{`<Input
+  label="Username"
+  placeholder="Enter your username"
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+/>`}</pre>
+              </div>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Props</h3>
+
+                <div className="props-table-wrap">
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>
+                          <code>label</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>"Label"</code>
+                        </td>
+                        <td>Label displayed above the input.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>placeholder</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>"Enter text..."</code>
+                        </td>
+                        <td>Placeholder text shown when empty.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>value</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>""</code>
+                        </td>
+                        <td>Controlled input value.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>onChange</code>
+                        </td>
+                        <td>function</td>
+                        <td>
+                          <code>-</code>
+                        </td>
+                        <td>Called whenever the input value changes.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>type</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>"text"</code>
+                        </td>
+                        <td>
+                          Input type: <code>text</code>, <code>email</code>,<code>password</code>,{' '}
+                          <code>number</code>.
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>variant</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>"default"</code>
+                        </td>
+                        <td>
+                          Visual style: <code>default</code>,<code>success</code>, or{' '}
+                          <code>error</code>.
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -670,7 +1002,9 @@ function Components() {
                   <tbody>
                     {filteredComponents.map((c) => (
                       <tr key={c.id}>
-                        <td><strong>{c.name}</strong></td>
+                        <td>
+                          <strong>{c.name}</strong>
+                        </td>
                         <td>{c.category}</td>
                         <td>
                           <span className={`status-badge status-${c.status.toLowerCase()}`}>
@@ -689,15 +1023,26 @@ function Components() {
           {/* NO RESULTS MESSAGE */}
           {searchQuery && filteredComponents.length === 0 && (
             <div className="no-results">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="11" cy="11" r="8"/>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
-              <p>🔍 No components found matching <strong>"{searchQuery}"</strong></p>
-              <p>Try searching for "Button", "Alert", "Badge", or a category like "Inputs" or "Feedback"</p>
+              <p>
+                🔍 No components found matching <strong>"{searchQuery}"</strong>
+              </p>
+              <p>
+                Try searching for "Button", "Alert", "Badge", or a category like "Inputs" or
+                "Feedback"
+              </p>
             </div>
           )}
-
         </main>
       </div>
     </div>
