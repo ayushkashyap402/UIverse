@@ -613,10 +613,6 @@
   }
 }
 
-
-
-/* Add these styles to Components.css */
-
 .filtered-badge {
   display: inline-flex;
   align-items: center;
@@ -672,4 +668,48 @@
 /* Smooth scrolling for the whole page */
 html {
   scroll-behavior: smooth;
+}
+
+/* ── Category Filter Buttons ── */
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.category-filter-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.category-filter-btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.category-filter-btn--active {
+  background: var(--brand);
+  color: white;
+  border-color: var(--brand);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .category-filters {
+    gap: 6px;
+  }
+
+  .category-filter-btn {
+    padding: 5px 11px;
+    font-size: 0.78rem;
+  }
 }
