@@ -90,6 +90,7 @@ function Components() {
   const [activeSection, setActiveSection] = useState('buttons')
   const [copied, setCopied] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [activeCategory, setActiveCategory] = useState('All')
   // Mobile sidebar drawer state
   const [sidebarOpen, setSidebarOpen] = useState(false)
   
@@ -140,27 +141,34 @@ function Components() {
 
   // Filter components based on search
   const filteredComponents = useMemo(() => {
-    if (!searchQuery.trim()) return componentsList
-    
-    const searchLower = searchQuery.toLowerCase()
-    return componentsList.filter(component => 
-      component.name.toLowerCase().includes(searchLower) ||
-      component.category.toLowerCase().includes(searchLower)
-    )
-  }, [searchQuery])
+    return componentsList.filter(component => {
+      const matchesSearch = !searchQuery.trim() ||
+        component.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        component.category.toLowerCase().includes(searchQuery.toLowerCase())
 
-  // Check if a section should be shown based on search
+      const matchesCategory = activeCategory === 'All' ||
+        component.category === activeCategory
+
+      return matchesSearch && matchesCategory
+    })
+  }, [searchQuery, activeCategory])
+
+  // Check if a section should be shown based on search and category
   const shouldShowSection = (sectionId, componentName) => {
-    if (!searchQuery.trim()) return true
-    
-    const searchLower = searchQuery.toLowerCase()
-    
-    // Check if component name matches search
-    if (componentName && componentName.toLowerCase().includes(searchLower)) {
-      return true
+    if (!componentName) return true
+
+    // Check category filter first
+    if (activeCategory !== 'All') {
+      const componentInCategory = filteredComponents.some(c => c.name === componentName)
+      if (!componentInCategory) return false
     }
-    
-    // Check if any component in filtered list matches this section
+
+    // Then check search
+    if (!searchQuery.trim()) return true
+
+    const searchLower = searchQuery.toLowerCase()
+    if (componentName.toLowerCase().includes(searchLower)) return true
+
     return filteredComponents.some(c => c.name === componentName)
   }
 
@@ -294,13 +302,27 @@ function Components() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="search-input"
-                />
+                  />
                 {searchQuery && (
-                  <button onClick={clearSearch} className="clear-search-btn" aria-label="Clear search">
+                  <button on Click={clearSearch} className="clear-search-btn" aria-label="Clear search">
                     ✕
                   </button>
-                )}
+                  )}
               </div>
+
+              {/* CATEGORY FILTER BUTTONS */}
+              <div className="category-filters">
+              {['All', 'Inputs', 'Layout', 'Overlay', 'Display', 'Navigation', 'Feedback'].map(cat => (
+                  <button
+                    key={cat}
+                    className={`category-filter-btn ${activeCategory === cat ? 'category-filter-btn--active' : ''}`}
+                    onClick={() => setActiveCategory(cat)}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
               {searchQuery && (
                 <p className="search-results-info">
                   Found {filteredComponents.length} component{filteredComponents.length !== 1 ? 's' : ''} matching "{searchQuery}"
@@ -309,7 +331,6 @@ function Components() {
               )}
             </div>
           </div>
-
           {/* ================= BUTTONS ================= */}
           {shouldShowSection('buttons', 'Button') && (
             <section className="comp-section" id="buttons" ref={buttonsRef}>
@@ -687,7 +708,7 @@ function Components() {
           )}
 
           {/* NO RESULTS MESSAGE */}
-          {searchQuery && filteredComponents.length === 0 && (
+          {(searchQuery || activeCategory !== 'All') && filteredComponents.length === 0 && (
             <div className="no-results">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="11" cy="11" r="8"/>
