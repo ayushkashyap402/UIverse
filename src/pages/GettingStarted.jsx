@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import Button from '../components/Button/Button.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Navbar from '../components/Navbar/Navbar.jsx'
+import gssocLogo from '../assets/program/gssoc-logo.png'
 import './Components.css' // shared layout + code-block + table styles
 import './GettingStarted.css'
 
@@ -25,6 +26,7 @@ const sections = [
   { id: 'project-structure', label: 'Project Structure' },
   { id: 'using-a-component', label: 'Using a Component' },
   { id: 'add-component', label: 'Add Your Own' },
+  { id: 'open-source', label: 'Open Source Programs' },
   { id: 'next-steps', label: 'Next Steps' },
 ]
 
@@ -108,19 +110,41 @@ function GettingStarted() {
   // item lands on the clicked section instead of flickering through others.
   const clickScrolling = useRef(false)
 
-  const activeLabel =
-    sections.find((s) => s.id === activeSection)?.label ?? sections[0].label
+  const activeLabel = sections.find((s) => s.id === activeSection)?.label ?? sections[0].label
 
   const scrollTo = (id) => {
     clickScrolling.current = true
     setActiveSection(id)
     setTocOpen(false) // collapse the mobile TOC after picking a section
-    document
-      .getElementById(id)
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     window.setTimeout(() => {
       clickScrolling.current = false
     }, 700)
+  }
+
+  const openSourcePrograms = {
+    title: 'Open Source Programs',
+    badge: 'Community',
+    description:
+      'UIverse proudly participates in community-driven open source initiatives that help improve the project through collaboration and contributions.',
+
+    note: {
+      label: 'Community',
+      text: 'We sincerely thank all contributors and partner organizations for supporting UIverse. This section is completely data-driven—future programs can be added by simply appending another object to the programs array.',
+    },
+
+    programs: [
+      {
+        id: 'gssoc-2026',
+        name: 'GirlScript Summer of Code',
+        year: '2026',
+        logo: gssocLogo,
+        description:
+          "One of India's largest open-source programs where contributors collaborate on real-world software projects.",
+
+        tags: ['Open Source', 'Community', 'GSSoC 2026'],
+      },
+    ],
   }
 
   // Scroll-spy: highlight the section currently in view
@@ -165,24 +189,17 @@ function GettingStarted() {
               <span className="doc-toc-toggle-current">{activeLabel}</span>
             </span>
             <span
-              className={`doc-toc-caret ${
-                tocOpen ? 'doc-toc-caret--open' : ''
-              }`}
+              className={`doc-toc-caret ${tocOpen ? 'doc-toc-caret--open' : ''}`}
               aria-hidden="true"
             />
           </button>
 
-          <div
-            id="doc-toc-list"
-            className={`doc-toc-list ${tocOpen ? 'doc-toc-list--open' : ''}`}
-          >
+          <div id="doc-toc-list" className={`doc-toc-list ${tocOpen ? 'doc-toc-list--open' : ''}`}>
             <p className="sidebar-label">GETTING STARTED</p>
             {sections.map((s) => (
               <button
                 key={s.id}
-                className={`sidebar-item ${
-                  activeSection === s.id ? 'sidebar-item--active' : ''
-                }`}
+                className={`sidebar-item ${activeSection === s.id ? 'sidebar-item--active' : ''}`}
                 aria-current={activeSection === s.id ? 'true' : undefined}
                 onClick={() => scrollTo(s.id)}
               >
@@ -218,10 +235,9 @@ function GettingStarted() {
             </div>
             <div className="doc-prose">
               <p>
-                <strong>UIverse</strong> is a beginner-friendly, open-source
-                React component library built with plain CSS and zero extra
-                dependencies. Components are designed to be copied, dropped in,
-                and customized — no build configuration or wrappers required.
+                <strong>UIverse</strong> is a beginner-friendly, open-source React component library
+                built with plain CSS and zero extra dependencies. Components are designed to be
+                copied, dropped in, and customized — no build configuration or wrappers required.
               </p>
               <p>This guide covers everything you need to:</p>
               <ul className="doc-list">
@@ -232,8 +248,7 @@ function GettingStarted() {
               </ul>
               <Note label="Tip">
                 Already have the repo running? Jump straight to the{' '}
-                <Link to="/components">Components</Link> page to browse
-                copy-paste ready UI.
+                <Link to="/components">Components</Link> page to browse copy-paste ready UI.
               </Note>
             </div>
           </section>
@@ -249,14 +264,12 @@ function GettingStarted() {
             <ul className="doc-list">
               <li>
                 <span>
-                  <strong>Node.js 18 or newer</strong> — verify with{' '}
-                  <code>node -v</code>.
+                  <strong>Node.js 18 or newer</strong> — verify with <code>node -v</code>.
                 </span>
               </li>
               <li>
                 <span>
-                  <strong>npm</strong> (bundled with Node) — verify with{' '}
-                  <code>npm -v</code>.
+                  <strong>npm</strong> (bundled with Node) — verify with <code>npm -v</code>.
                 </span>
               </li>
               <li>
@@ -276,8 +289,7 @@ function GettingStarted() {
               <h2>Installation</h2>
             </div>
             <p className="comp-section-desc">
-              Clone the repository, install dependencies, and start the dev
-              server.
+              Clone the repository, install dependencies, and start the dev server.
             </p>
 
             <div className="comp-subsection">
@@ -293,9 +305,8 @@ npm install`}
               <h3 className="comp-subsection-title">2 · Start the dev server</h3>
               <CodeBlock code={`npm run dev`} />
               <Note>
-                Vite prints a local URL — open{' '}
-                <code>http://localhost:5173</code> in your browser. Edits
-                hot-reload instantly.
+                Vite prints a local URL — open <code>http://localhost:5173</code> in your browser.
+                Edits hot-reload instantly.
               </Note>
             </div>
 
@@ -339,9 +350,7 @@ npm install`}
             <div className="comp-section-header">
               <h2>Project Structure</h2>
             </div>
-            <p className="comp-section-desc">
-              A quick map of the folders you will work with most.
-            </p>
+            <p className="comp-section-desc">A quick map of the folders you will work with most.</p>
             <CodeBlock
               label="STRUCTURE"
               code={`src/
@@ -359,8 +368,8 @@ npm install`}
 └─ main.jsx           App entry point`}
             />
             <Note>
-              Each component lives in its own folder with a co-located{' '}
-              <code>.css</code> file — keep that pattern when adding new ones.
+              Each component lives in its own folder with a co-located <code>.css</code> file — keep
+              that pattern when adding new ones.
             </Note>
           </section>
 
@@ -370,8 +379,8 @@ npm install`}
               <h2>Using a Component</h2>
             </div>
             <p className="comp-section-desc">
-              Import a component and render it with props. Below is a working
-              example using <code>Button</code> and <code>Badge</code>.
+              Import a component and render it with props. Below is a working example using{' '}
+              <code>Button</code> and <code>Badge</code>.
             </p>
 
             <div className="comp-subsection">
@@ -412,8 +421,8 @@ function App() {
 
             <Note label="Reference">
               Full prop tables and every variant live on the{' '}
-              <Link to="/components">Components</Link> page — each block has a
-              one-click copy button.
+              <Link to="/components">Components</Link> page — each block has a one-click copy
+              button.
             </Note>
           </section>
 
@@ -430,23 +439,20 @@ function App() {
               <div className="doc-step">
                 <span className="doc-step-num">1</span>
                 <span>
-                  Create your component folder in{' '}
-                  <code>src/components/</code> with a co-located{' '}
+                  Create your component folder in <code>src/components/</code> with a co-located{' '}
                   <code>.jsx</code> and <code>.css</code> file.
                 </span>
               </div>
               <div className="doc-step">
                 <span className="doc-step-num">2</span>
                 <span>
-                  Register its metadata in{' '}
-                  <code>src/data/componentsList.js</code>.
+                  Register its metadata in <code>src/data/componentsList.js</code>.
                 </span>
               </div>
               <div className="doc-step">
                 <span className="doc-step-num">3</span>
                 <span>
-                  Showcase it by adding a section in{' '}
-                  <code>src/pages/Components.jsx</code>.
+                  Showcase it by adding a section in <code>src/pages/Components.jsx</code>.
                 </span>
               </div>
             </div>
@@ -468,14 +474,59 @@ export default Card`}
             />
           </section>
 
+          {/* ── Open Source Programs ── */}
+          <section className="comp-section" id="open-source">
+            <div className="comp-section-header">
+              <h2>{openSourcePrograms.title}</h2>
+              <span className="comp-badge comp-badge--stable">{openSourcePrograms.badge}</span>
+            </div>
+
+            <div className="doc-prose">
+              <p>{openSourcePrograms.description}</p>
+            </div>
+
+            {/* Unified Container Wrapper Box */}
+            <div className="program-box-container">
+              <div className="programs-grid">
+                {openSourcePrograms.programs.map((program) => (
+                  <article key={program.id} className="program-card">
+                    <div className="comp-preview">
+                      <div className="program-logo">
+                        <img src={program.logo} alt={program.name} />
+                      </div>
+
+                      <div className="program-details">
+                        <div className="program-header">
+                          <h3>{program.name}</h3>
+                          <span className="program-year">{program.year}</span>
+                        </div>
+
+                        <p className="program-description">{program.description}</p>
+
+                        <div className="program-tags">
+                          {program.tags.map((tag) => (
+                            <span key={tag} className="comp-badge comp-badge--stable">
+                              {' '}
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <Note label={openSourcePrograms.note.label}>{openSourcePrograms.note.text}</Note>
+          </section>
+
           {/* ── Next Steps ── */}
           <section className="comp-section" id="next-steps">
             <div className="comp-section-header">
               <h2>Next Steps</h2>
             </div>
-            <p className="comp-section-desc">
-              You are set up — here is where to go from here.
-            </p>
+            <p className="comp-section-desc">You are set up — here is where to go from here.</p>
             <div className="doc-link-row">
               <Link to="/components">
                 <Button text="Browse Components" variant="primary" />

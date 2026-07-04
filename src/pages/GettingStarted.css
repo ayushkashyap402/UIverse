@@ -20,14 +20,16 @@
   transform-origin: left center;
   transform: scaleX(0);
   transition: transform 0.12s ease-out;
-  box-shadow: 0 0 8px rgba(99, 102, 241, 0.5),
-              0 0 2px rgba(139, 92, 246, 0.3);
+  box-shadow:
+    0 0 8px rgba(99, 102, 241, 0.5),
+    0 0 2px rgba(139, 92, 246, 0.3);
 }
 
-[data-theme="dark"] .scroll-progress-bar {
+[data-theme='dark'] .scroll-progress-bar {
   background: linear-gradient(90deg, #818cf8, #a78bfa, #c4b5fd);
-  box-shadow: 0 0 12px rgba(129, 140, 248, 0.6),
-              0 0 4px rgba(167, 139, 250, 0.4);
+  box-shadow:
+    0 0 12px rgba(129, 140, 248, 0.6),
+    0 0 4px rgba(167, 139, 250, 0.4);
 }
 
 /* ── Prose ── */
@@ -263,5 +265,119 @@
 
   .doc-link-row {
     flex-direction: column;
+  }
+
+  /* ==========================================================
+   Open Source Programs Unified Wrapper Box
+========================================================== */
+
+  .program-box-container {
+    background: #fafafa; /* Soft container background matching UIverse layouts */
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 2rem;
+    margin-top: 1.5rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  }
+
+  .programs-grid {
+    display: grid;
+    /* Switched minmax to 1fr handling to prevent container spill-over on tablets */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 24px;
+  }
+
+  .program-card {
+    display: flex;
+    align-items: flex-start; /* Changed to flex-start for multi-line description alignment */
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    transition: all 0.25s ease;
+  }
+
+  .program-card:hover {
+    transform: translateY(-2px);
+    border-color: #6366f1;
+    box-shadow: 0 10px 24px rgba(99, 102, 241, 0.12);
+  }
+
+  /* Image/Logo Constraints */
+  .program-logo {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 0.5rem;
+  }
+
+  .program-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Typography Controls */
+  .program-details {
+    flex: 1;
+    min-width: 0; /* Important: prevents long continuous text strings from snapping the flex width */
+  }
+
+  .program-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .program-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #0f172a;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Gracefully truncates extreme names on narrow views */
+  }
+
+  .program-year {
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .program-description {
+    margin: 0.75rem 0 1rem 0;
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+
+  /* Badge/Tag Systems */
+  .program-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .program-tags span {
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid #e2e8f0;
   }
 }
