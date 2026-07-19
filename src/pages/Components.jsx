@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar/Navbar.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert.jsx'
 import Tabs from '../components/Tabs/Tabs.jsx'
+import Dropdown from '../components/Dropdown/Dropdown.jsx'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
 
@@ -81,6 +82,26 @@ const sections = [
     ),
   },
   {
+    id: 'dropdown',
+    label: 'Dropdown',
+    componentName: 'Dropdown',
+    icon: (
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <polyline points="10 10 12 12 14 10" />
+      </svg>
+    ),
+  },
+  {
     id: 'all-components',
     label: 'All Components',
     componentName: null,
@@ -101,6 +122,141 @@ const sections = [
         <line x1="3" y1="18" x2="3.01" y2="18" />
       </svg>
     ),
+  },
+]
+
+/* ================= Dropdown Demo Data ================= */
+
+const frameworkOptions = [
+  { label: 'React', value: 'react' },
+  { label: 'Vue', value: 'vue' },
+  { label: 'Angular', value: 'angular' },
+  { label: 'Svelte', value: 'svelte' },
+  { label: 'Next.js', value: 'nextjs' },
+]
+
+const countryOptions = [
+  {
+    label: 'India',
+    value: 'india',
+    flag: '🇮🇳',
+  },
+  {
+    label: 'United States',
+    value: 'usa',
+    flag: '🇺🇸',
+  },
+  {
+    label: 'United Kingdom',
+    value: 'uk',
+    flag: '🇬🇧',
+  },
+  {
+    label: 'Germany',
+    value: 'germany',
+    flag: '🇩🇪',
+  },
+  {
+    label: 'Japan',
+    value: 'japan',
+    flag: '🇯🇵',
+  },
+  {
+    label: 'Australia',
+    value: 'australia',
+    flag: '🇦🇺',
+  },
+]
+
+const iconOptions = [
+  {
+    label: 'Documents',
+    value: 'documents',
+    icon: '📄',
+  },
+  {
+    label: 'Photos',
+    value: 'photos',
+    icon: '🖼️',
+  },
+  {
+    label: 'Music',
+    value: 'music',
+    icon: '🎵',
+  },
+  {
+    label: 'Videos',
+    value: 'videos',
+    icon: '🎬',
+  },
+  {
+    label: 'Downloads',
+    value: 'downloads',
+    icon: '⬇️',
+  },
+]
+
+const avatarOptions = [
+  {
+    label: 'John Doe',
+    value: 'john',
+    avatar: 'https://i.pravatar.cc/150?img=1',
+  },
+  {
+    label: 'Jane Smith',
+    value: 'jane',
+    avatar: 'https://i.pravatar.cc/150?img=2',
+  },
+  {
+    label: 'Alex Johnson',
+    value: 'alex',
+    avatar: 'https://i.pravatar.cc/150?img=3',
+  },
+  {
+    label: 'Emily Brown',
+    value: 'emily',
+    avatar: 'https://i.pravatar.cc/150?img=4',
+  },
+]
+
+const groupedOptions = [
+  {
+    label: '🌏 Asia',
+    group: true,
+  },
+  {
+    label: 'India',
+    value: 'india',
+    flag: '🇮🇳',
+  },
+  {
+    label: 'Japan',
+    value: 'japan',
+    flag: '🇯🇵',
+  },
+  {
+    label: 'China',
+    value: 'china',
+    flag: '🇨🇳',
+  },
+  {
+    label: '🌍 Europe',
+    group: true,
+  },
+  {
+    label: 'Germany',
+    value: 'germany',
+    flag: '🇩🇪',
+  },
+  {
+    label: 'France',
+    value: 'france',
+    flag: '🇫🇷',
+  },
+  {
+    label: 'United Kingdom',
+    value: 'uk',
+    flag: '🇬🇧',
   },
 ]
 
@@ -134,12 +290,22 @@ function Components() {
   const [searchQuery, setSearchQuery] = useState('')
   // Mobile sidebar drawer state
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [basicDropdown, setBasicDropdown] = useState('')
+  const [searchDropdown, setSearchDropdown] = useState('')
+  const [countryDropdown, setCountryDropdown] = useState('')
+  const [iconDropdown, setIconDropdown] = useState('')
+  const [avatarDropdown, setAvatarDropdown] = useState('')
+  const [multiDropdown, setMultiDropdown] = useState([])
+  const [successDropdown, setSuccessDropdown] = useState('')
+  const [groupDropdown, setGroupDropdown] = useState('')
+  const [clearableDropdown, setClearableDropdown] = useState('')
 
   // Refs for scrolling
   const buttonsRef = useRef(null)
   const badgesRef = useRef(null)
   const alertsRef = useRef(null)
   const tabsRef = useRef(null)
+  const dropdownRef = useRef(null)
   const allComponentsRef = useRef(null)
 
   const toastTimeout = useRef(null)
@@ -178,6 +344,9 @@ function Components() {
         break
       case 'tabs':
         element = tabsRef.current
+        break
+      case 'dropdown':
+        element = dropdownRef.current
         break
       case 'all-components':
         element = allComponentsRef.current
@@ -241,6 +410,11 @@ function Components() {
         scrollTo('alerts')
       } else if (searchLower.includes('tab') || filteredComponents.some((c) => c.name === 'Tabs')) {
         scrollTo('tabs')
+      } else if (
+        searchLower.includes('dropdown') ||
+        filteredComponents.some((c) => c.name === 'Dropdown')
+      ) {
+        scrollTo('dropdown')
       } else if (filteredComponents.length > 0) {
         scrollTo('all-components')
       }
@@ -267,6 +441,7 @@ function Components() {
     if (shouldShowSection('badges', 'Badge')) count++
     if (shouldShowSection('alerts', 'Alert')) count++
     if (shouldShowSection('tabs', 'Tabs')) count++
+    if (shouldShowSection('dropdown', 'Dropdown')) count++
     if (filteredComponents.length > 0) count++
     return count
   }, [searchQuery, filteredComponents])
@@ -773,6 +948,754 @@ function Components() {
             </section>
           )}
 
+          {/* ================= DROPDOWN ================= */}
+
+          {shouldShowSection('dropdown', 'Dropdown') && (
+            <section className="comp-section" id="dropdown" ref={dropdownRef}>
+              <div className="comp-section-header">
+                <h2>Dropdown</h2>
+                <span className="comp-badge comp-badge--stable">Stable</span>
+              </div>
+
+              <p className="comp-section-desc">
+                A highly customizable dropdown component supporting search, multi-select, avatars,
+                country flags, icons, loading, validation states, and more.
+              </p>
+
+              {/* ================= Basic ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Basic Dropdown</h3>
+                <div className="comp-preview">
+                  <Dropdown
+                    label="Framework"
+                    options={frameworkOptions}
+                    value={basicDropdown}
+                    onChange={setBasicDropdown}
+                  />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          label="Framework"
+          options={frameworkOptions}
+          value={value}
+          onChange={setValue}
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          label="Framework"
+          options={frameworkOptions}
+          value={value}
+          onChange={setValue}
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Searchable ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Searchable Dropdown</h3>
+
+                <div className="comp-preview">
+                  <Dropdown
+                    searchable
+                    label="Search Framework"
+                    options={frameworkOptions}
+                    value={searchDropdown}
+                    onChange={setSearchDropdown}
+                  />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          searchable
+          options={frameworkOptions}
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          searchable
+          options={frameworkOptions}
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Multi Select ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Multi Select</h3>
+
+                <div className="comp-preview">
+                  <Dropdown
+                    multiple
+                    searchable
+                    clearable
+                    label="Frameworks"
+                    options={frameworkOptions}
+                    value={multiDropdown}
+                    onChange={setMultiDropdown}
+                  />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          multiple
+          searchable
+          clearable
+          options={frameworkOptions}
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          multiple
+          searchable
+          clearable
+          options={frameworkOptions}
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Country Selector ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Country Selector</h3>
+
+                <div className="comp-preview">
+                  <Dropdown
+                    searchable
+                    clearable
+                    label="Country"
+                    options={countryOptions}
+                    value={countryDropdown}
+                    onChange={setCountryDropdown}
+                  />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          searchable
+          clearable
+          options={countryOptions}
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          searchable
+          clearable
+          options={countryOptions}
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Icon Dropdown ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Icon Dropdown</h3>
+
+                <div className="comp-preview">
+                  <Dropdown
+                    label="Categories"
+                    options={iconOptions}
+                    value={iconDropdown}
+                    onChange={setIconDropdown}
+                  />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          label="Categories"
+          options={iconOptions}
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          label="Categories"
+          options={iconOptions}
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Avatar Dropdown ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Avatar Dropdown</h3>
+
+                <div className="comp-preview">
+                  <Dropdown
+                    searchable
+                    label="Assign User"
+                    options={avatarOptions}
+                    value={avatarDropdown}
+                    onChange={setAvatarDropdown}
+                  />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          searchable
+          options={avatarOptions}
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          searchable
+          options={avatarOptions}
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Disabled ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Disabled</h3>
+
+                <div className="comp-preview">
+                  <Dropdown disabled label="Disabled Dropdown" options={frameworkOptions} />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          disabled
+          options={frameworkOptions}
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          disabled
+          options={frameworkOptions}
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Loading ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Loading State</h3>
+
+                <div className="comp-preview">
+                  <Dropdown loading label="Loading" options={frameworkOptions} />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          loading
+          options={frameworkOptions}
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          loading
+          options={frameworkOptions}
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Error ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Error State</h3>
+
+                <div className="comp-preview">
+                  <Dropdown
+                    error
+                    label="Framework"
+                    options={frameworkOptions}
+                    helperText="Please select a framework."
+                  />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          error
+          helperText="Please select a framework."
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          error
+          helperText="Please select a framework."
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Success ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Success State</h3>
+
+                <div className="comp-preview">
+                  <Dropdown
+                    success
+                    label="Framework"
+                    options={frameworkOptions}
+                    value={successDropdown}
+                    onChange={setSuccessDropdown}
+                    helperText="Framework selected successfully."
+                  />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          success
+          helperText="Framework selected successfully."
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          success
+          helperText="Framework selected successfully."
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Clearable ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Clearable Dropdown</h3>
+
+                <div className="comp-preview">
+                  <Dropdown
+                    clearable
+                    searchable
+                    label="Country"
+                    options={countryOptions}
+                    value={clearableDropdown}
+                    onChange={setClearableDropdown}
+                  />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          clearable
+          searchable
+          options={countryOptions}
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          clearable
+          searchable
+          options={countryOptions}
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Grouped Dropdown ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Grouped Options</h3>
+
+                <div className="comp-preview">
+                  <Dropdown
+                    label="Country"
+                    options={groupedOptions}
+                    value={groupDropdown}
+                    onChange={setGroupDropdown}
+                  />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() =>
+                        handleCopy(`<Dropdown
+          options={groupedOptions}
+          />`)
+                      }
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<Dropdown
+          options={groupedOptions}
+          />`}</pre>
+                </div>
+              </div>
+
+              {/* ================= Props ================= */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Props</h3>
+
+                <div className="props-table-wrap">
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+
+                        <th>Type</th>
+
+                        <th>Default</th>
+
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>
+                          <code>label</code>
+                        </td>
+                        <td>string</td>
+                        <td>""</td>
+                        <td>Dropdown label.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>options</code>
+                        </td>
+                        <td>array</td>
+                        <td>[]</td>
+                        <td>Options displayed in the dropdown.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>value</code>
+                        </td>
+                        <td>string | array</td>
+                        <td>""</td>
+                        <td>Current selected value(s).</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>onChange</code>
+                        </td>
+                        <td>function</td>
+                        <td>-</td>
+                        <td>Triggered whenever the selection changes.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>placeholder</code>
+                        </td>
+                        <td>string</td>
+                        <td>"Select..."</td>
+                        <td>Placeholder text.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>searchable</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Shows a search field inside the dropdown.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>multiple</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Enables multi-select mode.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>clearable</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Shows a clear selection button.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>disabled</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Disables user interaction.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>loading</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Displays a loading state.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>error</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Displays the error style.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>success</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Displays the success style.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>helperText</code>
+                        </td>
+                        <td>string</td>
+                        <td>""</td>
+                        <td>Helper or validation message.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="doc-callout">
+                <strong>Tip:</strong> The Dropdown component is designed to be reusable across
+                forms, country selectors, user pickers, category selectors, filters, settings pages,
+                and any custom option list. Simply pass a different
+                <code>options</code> array to adapt it for your use case.
+              </div>
+            </section>
+          )}
           {/* ================= ALL COMPONENTS TABLE ================= */}
           {filteredComponents.length > 0 && (
             <section className="comp-section" id="all-components" ref={allComponentsRef}>
