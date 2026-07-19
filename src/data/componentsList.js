@@ -6,7 +6,7 @@
 // To register a new component:
 //   1. Add a new object to the array below
 //   2. Fill in: id, name, category, status, description
-//   3. Status options: "Stable" | "Beta" | "Planned" 
+//   3. Status options: "Stable" | "Beta" | "Planned"
 
 export const componentsList = [
   {
@@ -20,8 +20,30 @@ export const componentsList = [
     id: 2,
     name: 'Input',
     category: 'Inputs',
-    status: 'Planned',
+    status: 'Stable',
     description: 'Text input field with label and validation support.',
+    inputs: [
+      'Text',
+      'Password',
+      'Email',
+      'Number',
+      'Search',
+      'Telephone',
+      'URL',
+      'Date',
+      'Time',
+      'Datetime Local',
+      'Month',
+      'Week',
+      'Color Picker',
+      'Range Slider',
+      'File Upload',
+      'Hidden',
+      'Image',
+      'Button',
+      'Submit',
+      'Reset',
+    ],
   },
   {
     id: 3,
@@ -51,7 +73,6 @@ export const componentsList = [
     status: 'Planned',
     description: 'Responsive top navigation bar with logo and links.',
   },
-
 
   // New Alert component
   {
