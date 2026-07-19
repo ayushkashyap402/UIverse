@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar/Navbar.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert.jsx'
 import Tabs from '../components/Tabs/Tabs.jsx'
+import FileUpload from '../components/FileUpload/FileUpload.jsx'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
 
@@ -81,6 +82,27 @@ const sections = [
     ),
   },
   {
+    id: 'fileupload',
+    label: 'FileUpload',
+    componentName: 'FileUpload',
+    icon: (
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M12 16V4" />
+        <path d="M8 8l4-4 4 4" />
+        <path d="M20 16.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.5" />
+      </svg>
+    ),
+  },
+  {
     id: 'all-components',
     label: 'All Components',
     componentName: null,
@@ -140,6 +162,7 @@ function Components() {
   const badgesRef = useRef(null)
   const alertsRef = useRef(null)
   const tabsRef = useRef(null)
+  const fileuploadRef = useRef(null)
   const allComponentsRef = useRef(null)
 
   const toastTimeout = useRef(null)
@@ -178,6 +201,9 @@ function Components() {
         break
       case 'tabs':
         element = tabsRef.current
+        break
+      case 'fileupload':
+        element = fileuploadRef.current
         break
       case 'all-components':
         element = allComponentsRef.current
@@ -241,6 +267,11 @@ function Components() {
         scrollTo('alerts')
       } else if (searchLower.includes('tab') || filteredComponents.some((c) => c.name === 'Tabs')) {
         scrollTo('tabs')
+      } else if (
+        searchLower.includes('fileupload') ||
+        filteredComponents.some((c) => c.name === 'Fileupload')
+      ) {
+        scrollTo('fileupload')
       } else if (filteredComponents.length > 0) {
         scrollTo('all-components')
       }
@@ -267,6 +298,7 @@ function Components() {
     if (shouldShowSection('badges', 'Badge')) count++
     if (shouldShowSection('alerts', 'Alert')) count++
     if (shouldShowSection('tabs', 'Tabs')) count++
+    if (shouldShowSection('fileupload', 'Fileupload')) count++
     if (filteredComponents.length > 0) count++
     return count
   }, [searchQuery, filteredComponents])
@@ -274,8 +306,6 @@ function Components() {
   return (
     <div className="comp-page">
       <Navbar />
-
-      {showToast && <div className="copy-toast">Code copied successfully!</div>}
 
       <div className="comp-layout">
         {/* ================= SIDEBAR ================= */}
@@ -758,6 +788,270 @@ function Components() {
                         <td>
                           <code>variant</code>
                         </td>
+                        <td>string</td>
+                        <td>
+                          <code>"underline"</code>
+                        </td>
+                        <td>
+                          Visual style: <code>"underline"</code> or <code>"pills"</code>.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ================= FILE UPLOAD ================= */}
+
+          {shouldShowSection('file-upload', 'File Upload') && (
+            <section className="comp-section" id="file-upload" ref={fileuploadRef}>
+              <div className="comp-section-header">
+                <h2>File Upload</h2>
+
+                <span className="comp-badge comp-badge--stable">Stable</span>
+              </div>
+
+              <p className="comp-section-desc">
+                Upload files by clicking or dragging them into the dropzone. Supports image
+                previews, multiple files, validation and drag & drop interactions.
+              </p>
+
+              {/* Basic */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Basic Upload</h3>
+
+                <div className="comp-preview">
+                  <FileUpload />
+                </div>
+              </div>
+
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX</span>
+
+                  <button className="copy-btn" onClick={() => handleCopy(`<FileUpload />`)}>
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <pre>{`<FileUpload />`}</pre>
+              </div>
+
+              {/* Multiple */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Multiple Files</h3>
+
+                <div className="comp-preview">
+                  <FileUpload multiple />
+                </div>
+              </div>
+
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX</span>
+
+                  <button
+                    className="copy-btn"
+                    onClick={() => handleCopy(`<FileUpload multiple />`)}
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <pre>{`<FileUpload multiple />`}</pre>
+              </div>
+
+              {/* Image */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Image Upload</h3>
+
+                <div className="comp-preview">
+                  <FileUpload accept="image/*" />
+                </div>
+              </div>
+
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX</span>
+
+                  <button
+                    className="copy-btn"
+                    onClick={() => handleCopy(`<FileUpload accept="image/*" />`)}
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <pre>{`<FileUpload accept="image/*" />`}</pre>
+              </div>
+
+              {/* Disabled */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Disabled</h3>
+
+                <div className="comp-preview">
+                  <FileUpload disabled />
+                </div>
+              </div>
+
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX</span>
+
+                  <button
+                    className="copy-btn"
+                    onClick={() => handleCopy(`<FileUpload disabled />`)}
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <pre>{`<FileUpload disabled />`}</pre>
+              </div>
+
+              {/* Props */}
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Props</h3>
+
+                <div className="props-table-wrap">
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>
+                          <code>label</code>
+                        </td>
+                        <td>string</td>
+                        <td>"Upload Files"</td>
+                        <td>Label displayed above the uploader.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>accept</code>
+                        </td>
+                        <td>string</td>
+                        <td>"*"</td>
+                        <td>Accepted file types.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>multiple</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Allows multiple file selection.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>disabled</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Disables the upload area.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>maxSize</code>
+                        </td>
+                        <td>number</td>
+                        <td>5</td>
+                        <td>Maximum file size in MB.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>maxFiles</code>
+                        </td>
+                        <td>number</td>
+                        <td>10</td>
+                        <td>Maximum number of files.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>showPreview</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>true</td>
+                        <td>Shows image/file previews.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>dragAndDrop</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>true</td>
+                        <td>Enables drag & drop.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>helperText</code>
+                        </td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>Helper text below the uploader.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>onChange</code>
+                        </td>
+                        <td>function</td>
+                        <td>-</td>
+                        <td>Called whenever selected files change.</td>
                         <td>string</td>
                         <td>
                           <code>"underline"</code>

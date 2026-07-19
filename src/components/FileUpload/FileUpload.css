@@ -1,0 +1,348 @@
+/* ==========================================
+   File Upload Component
+========================================== */
+
+.fu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* ==========================================
+   Label
+========================================== */
+
+.fu-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+}
+
+/* ==========================================
+   Dropzone
+========================================== */
+
+.fu-dropzone {
+  width: 100%;
+
+  min-height: 220px;
+
+  border: 2px dashed #cbd5e1;
+
+  border-radius: 16px;
+
+  background: #fafafa;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 0.75rem;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+
+  padding: 2rem;
+}
+
+.fu-dropzone:hover {
+  border-color: #6366f1;
+
+  background: #f8f8ff;
+}
+
+.fu-dropzone.dragging {
+  border-color: #6366f1;
+
+  background: rgba(99, 102, 241, 0.08);
+
+  transform: scale(1.01);
+}
+
+.fu-dropzone.disabled {
+  cursor: not-allowed;
+
+  opacity: 0.6;
+
+  background: #f5f5f5;
+}
+
+.fu-icon {
+  font-size: 3rem;
+}
+
+.fu-dropzone h3 {
+  margin: 0;
+
+  font-size: 1.1rem;
+}
+
+.fu-dropzone p {
+  margin: 0;
+
+  color: #64748b;
+}
+
+.fu-dropzone small {
+  color: #94a3b8;
+}
+
+/* ==========================================
+   Helper
+========================================== */
+
+.fu-helper {
+  color: #64748b;
+
+  font-size: 0.82rem;
+}
+
+/* ==========================================
+   Error
+========================================== */
+
+.fu-error {
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #fef2f2;
+
+  color: #dc2626;
+
+  font-size: 0.9rem;
+}
+
+/* ==========================================
+   File List
+========================================== */
+
+.fu-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.fu-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.fu-header h4 {
+  margin: 0;
+
+  font-size: 16px;
+}
+
+/* ==========================================
+   Clear Button
+========================================== */
+
+.fu-clear {
+  background: #ef4444;
+
+  border: none;
+
+  color: white;
+
+  padding: 8px 14px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.fu-clear:hover {
+  background: #dc2626;
+}
+
+/* ==========================================
+   File Card
+========================================== */
+
+.fu-item {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 14px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  background: white;
+
+  transition: 0.25s;
+}
+
+.fu-item:hover {
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================
+   Left Side
+========================================== */
+
+.fu-left {
+  display: flex;
+
+  gap: 14px;
+
+  align-items: center;
+}
+
+/* ==========================================
+   Image Preview
+========================================== */
+
+.fu-preview {
+  width: 64px;
+
+  height: 64px;
+
+  border-radius: 10px;
+
+  object-fit: cover;
+
+  border: 1px solid #ddd;
+}
+
+/* ==========================================
+   File Icon
+========================================== */
+
+.fu-file-icon {
+  width: 64px;
+
+  height: 64px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 30px;
+
+  background: #f8fafc;
+
+  border-radius: 10px;
+}
+
+/* ==========================================
+   Name
+========================================== */
+
+.fu-name {
+  font-weight: 600;
+
+  word-break: break-word;
+}
+
+/* ==========================================
+   Size
+========================================== */
+
+.fu-size {
+  font-size: 0.85rem;
+
+  color: #64748b;
+
+  margin-top: 4px;
+}
+
+/* ==========================================
+   Remove
+========================================== */
+
+.fu-remove {
+  width: 36px;
+
+  height: 36px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #fee2e2;
+
+  color: #dc2626;
+
+  cursor: pointer;
+
+  font-size: 18px;
+
+  transition: 0.2s;
+}
+
+.fu-remove:hover {
+  background: #fecaca;
+}
+
+/* ==========================================
+   Mobile
+========================================== */
+
+@media (max-width: 768px) {
+  .fu-item {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+  .fu-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+  .fu-remove {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .fu-dropzone {
+    padding: 1.5rem;
+
+    min-height: 180px;
+  }
+
+  .fu-icon {
+    font-size: 2.4rem;
+  }
+
+  .fu-preview {
+    width: 52px;
+
+    height: 52px;
+  }
+
+  .fu-file-icon {
+    width: 52px;
+
+    height: 52px;
+  }
+}
