@@ -149,7 +149,7 @@ const CheckIcon = () => (
 
 function Components() {
   const [activeSection, setActiveSection] = useState('buttons')
-  const [copied, setCopied] = useState(false)
+  const [showToast, setShowToast] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   // Mobile sidebar drawer state
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -162,10 +162,24 @@ function Components() {
   const cameracaptureRef = useRef(null)
   const allComponentsRef = useRef(null)
 
-  const handleCopy = (code) => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1800)
+  const toastTimeout = useRef(null)
+
+  const handleCopy = async (code) => {
+    try {
+      await navigator.clipboard.writeText(code)
+
+      setShowToast(true)
+
+      if (toastTimeout.current) {
+        clearTimeout(toastTimeout.current)
+      }
+
+      toastTimeout.current = setTimeout(() => {
+        setShowToast(false)
+      }, 3000)
+    } catch (error) {
+      console.error('Copy failed:', error)
+    }
   }
 
   const scrollTo = (id) => {
@@ -261,6 +275,14 @@ function Components() {
     }
   }, [searchQuery])
 
+  useEffect(() => {
+    return () => {
+      if (toastTimeout.current) {
+        clearTimeout(toastTimeout.current)
+      }
+    }
+  }, [])
+
   // Clear search function
   const clearSearch = () => {
     setSearchQuery('')
@@ -281,6 +303,8 @@ function Components() {
   return (
     <div className="comp-page">
       <Navbar />
+
+      {showToast && <div className="copy-toast">Code copied successfully!</div>}
 
       <div className="comp-layout">
         {/* ================= SIDEBAR ================= */}
@@ -428,15 +452,9 @@ function Components() {
                     className="copy-btn"
                     onClick={() => handleCopy(`<Button text="Primary" variant="primary" />`)}
                   >
-                    {copied ? (
-                      <>
-                        <CheckIcon /> Copied
-                      </>
-                    ) : (
-                      <>
-                        <CopyIcon /> Copy
-                      </>
-                    )}
+                    <>
+                      <CopyIcon /> Copy
+                    </>
                   </button>
                 </div>
 
@@ -470,15 +488,9 @@ function Components() {
                     className="copy-btn"
                     onClick={() => handleCopy(`<Badge text="Primary" variant="primary" />`)}
                   >
-                    {copied ? (
-                      <>
-                        <CheckIcon /> Copied
-                      </>
-                    ) : (
-                      <>
-                        <CopyIcon /> Copy
-                      </>
-                    )}
+                    <>
+                      <CopyIcon /> Copy
+                    </>
                   </button>
                 </div>
 
@@ -525,7 +537,7 @@ function Components() {
 <Alert type="info" message="Closable alert example." closable />`)
                     }
                   >
-                    {copied ? '✅ Copied!' : '📋 Copy'}
+                    📋 Copy
                   </button>
                 </div>
                 <pre>{`<Alert type="success" message="Action completed successfully!" />
@@ -713,15 +725,9 @@ function Components() {
 </Tabs>`)
                     }
                   >
-                    {copied ? (
-                      <>
-                        <CheckIcon /> Copied
-                      </>
-                    ) : (
-                      <>
-                        <CopyIcon /> Copy
-                      </>
-                    )}
+                    <>
+                      <CopyIcon /> Copy
+                    </>
                   </button>
                 </div>
                 <pre>{`<Tabs defaultValue="tab1">
