@@ -1,0 +1,340 @@
+/* ==========================================
+   Camera Capture
+========================================== */
+
+.camera-capture {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* ==========================================
+   Toolbar
+========================================== */
+
+.camera-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.camera-toolbar h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ==========================================
+   Camera Preview
+========================================== */
+
+.camera-preview {
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 16px;
+
+  border: 2px solid #e5e7eb;
+
+  background: #111827;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.camera-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================
+   Overlay
+========================================== */
+
+.camera-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(17, 24, 39, 0.82);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  gap: 16px;
+
+  color: white;
+
+  padding: 2rem;
+}
+
+.camera-icon {
+  font-size: 60px;
+}
+
+.camera-overlay h2 {
+  margin: 0;
+}
+
+.camera-overlay p {
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* ==========================================
+   Face Guide
+========================================== */
+
+.camera-guide {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  pointer-events: none;
+}
+
+.camera-face {
+  width: 220px;
+  height: 290px;
+
+  border: 3px dashed white;
+
+  border-radius: 50%;
+
+  animation: pulse 2s infinite;
+
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+}
+
+/* ==========================================
+   Countdown
+========================================== */
+
+.camera-count {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  color: white;
+
+  font-size: 96px;
+
+  font-weight: bold;
+
+  text-shadow: 0 0 20px black;
+
+  animation: zoom 0.9s ease-in-out infinite;
+}
+
+/* ==========================================
+   Result
+========================================== */
+
+.camera-result {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.camera-result img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ==========================================
+   Actions
+========================================== */
+
+.camera-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ==========================================
+   Buttons
+========================================== */
+
+.camera-btn,
+.camera-switch {
+  border: none;
+
+  cursor: pointer;
+
+  border-radius: 10px;
+
+  padding: 12px 18px;
+
+  font-size: 0.95rem;
+
+  font-weight: 600;
+
+  transition: 0.25s;
+}
+
+.camera-btn:hover,
+.camera-switch:hover {
+  transform: translateY(-2px);
+}
+
+/* Primary */
+
+.camera-btn.primary {
+  background: #4f46e5;
+  color: white;
+}
+
+/* Capture */
+
+.camera-btn.capture {
+  background: #2563eb;
+  color: white;
+}
+
+/* Success */
+
+.camera-btn.success {
+  background: #16a34a;
+  color: white;
+}
+
+/* Danger */
+
+.camera-btn.danger {
+  background: #dc2626;
+  color: white;
+}
+
+/* Default */
+
+.camera-btn {
+  background: #e5e7eb;
+}
+
+/* Switch */
+
+.camera-switch {
+  background: #111827;
+  color: white;
+}
+
+/* ==========================================
+   Error
+========================================== */
+
+.camera-error {
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #fef2f2;
+
+  color: #dc2626;
+
+  font-size: 0.9rem;
+}
+
+/* ==========================================
+   Animations
+========================================== */
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.98);
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.98);
+    opacity: 0.75;
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+/* ==========================================
+   Tablet
+========================================== */
+
+@media (max-width: 768px) {
+  .camera-toolbar {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .camera-actions {
+    flex-direction: column;
+  }
+
+  .camera-btn,
+  .camera-switch {
+    width: 100%;
+  }
+
+  .camera-face {
+    width: 170px;
+    height: 230px;
+  }
+
+  .camera-count {
+    font-size: 72px;
+  }
+}
+
+/* ==========================================
+   Mobile
+========================================== */
+
+@media (max-width: 480px) {
+  .camera-preview {
+    border-radius: 12px;
+  }
+
+  .camera-result {
+    border-radius: 12px;
+  }
+
+  .camera-face {
+    width: 140px;
+    height: 190px;
+  }
+
+  .camera-overlay {
+    padding: 1rem;
+  }
+
+  .camera-icon {
+    font-size: 48px;
+  }
+
+  .camera-count {
+    font-size: 56px;
+  }
+}

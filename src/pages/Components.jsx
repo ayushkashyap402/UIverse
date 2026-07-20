@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar/Navbar.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert.jsx'
 import Tabs from '../components/Tabs/Tabs.jsx'
+import CameraCapture from '../components/CameraCapture/CameraCapture'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
 
@@ -81,6 +82,24 @@ const sections = [
     ),
   },
   {
+    id: 'cameracapture',
+    label: 'Camera Capture',
+    componentName: 'CameraCapture',
+    icon: (
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <path d="M23 19V7a2 2 0 0 0-2-2h-4l-2-2H9L7 5H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2z" />
+        <circle cx="12" cy="13" r="4" />
+      </svg>
+    ),
+  },
+  {
     id: 'all-components',
     label: 'All Components',
     componentName: null,
@@ -140,6 +159,7 @@ function Components() {
   const badgesRef = useRef(null)
   const alertsRef = useRef(null)
   const tabsRef = useRef(null)
+  const cameracaptureRef = useRef(null)
   const allComponentsRef = useRef(null)
 
   const toastTimeout = useRef(null)
@@ -178,6 +198,9 @@ function Components() {
         break
       case 'tabs':
         element = tabsRef.current
+        break
+      case 'cameracapture':
+        element = cameracaptureRef.current
         break
       case 'all-components':
         element = allComponentsRef.current
@@ -241,6 +264,11 @@ function Components() {
         scrollTo('alerts')
       } else if (searchLower.includes('tab') || filteredComponents.some((c) => c.name === 'Tabs')) {
         scrollTo('tabs')
+      } else if (
+        searchLower.includes('cameracapture') ||
+        filteredComponents.some((c) => c.name === 'Camera Capture')
+      ) {
+        scrollTo('cameracaptures')
       } else if (filteredComponents.length > 0) {
         scrollTo('all-components')
       }
@@ -267,6 +295,7 @@ function Components() {
     if (shouldShowSection('badges', 'Badge')) count++
     if (shouldShowSection('alerts', 'Alert')) count++
     if (shouldShowSection('tabs', 'Tabs')) count++
+    if (shouldShowSection('cameracapture', 'Camera Capture')) count++
     if (filteredComponents.length > 0) count++
     return count
   }, [searchQuery, filteredComponents])
@@ -765,6 +794,222 @@ function Components() {
                         <td>
                           Visual style: <code>"underline"</code> or <code>"pills"</code>.
                         </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ================= CAMERA CAPTURE ================= */}
+
+          {shouldShowSection('cameracapture', 'Camera Capture') && (
+            <section className="comp-section" id="camera-capture" ref={cameracaptureRef}>
+              <div className="comp-section-header">
+                <h2>Camera Capture</h2>
+                <span className="comp-badge comp-badge--planned">Planned</span>
+              </div>
+              <p className="comp-section-desc">
+                Capture live photos directly from the user's webcam with support for retake,
+                download and camera switching.
+              </p>
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Basic Camera</h3>
+                <div className="comp-preview">
+                  <CameraCapture />
+                </div>
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+                    <button className="copy-btn" onClick={() => handleCopy(`<CameraCapture />`)}>
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+                  <pre>{`<CameraCapture />`}</pre>
+                </div>
+              </div>
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Rear Camera</h3>
+
+                <div className="comp-preview">
+                  <CameraCapture facingMode="environment" />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() => handleCopy(`<CameraCapture facingMode="environment" />`)}
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<CameraCapture
+          facingMode="environment"
+          />`}</pre>
+                </div>
+              </div>
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Disabled</h3>
+
+                <div className="comp-preview">
+                  <CameraCapture disabled />
+                </div>
+
+                <div className="code-block">
+                  <div className="code-block-header">
+                    <span>JSX</span>
+
+                    <button
+                      className="copy-btn"
+                      onClick={() => handleCopy(`<CameraCapture disabled />`)}
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <pre>{`<CameraCapture
+          disabled
+          />`}</pre>
+                </div>
+              </div>
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Props</h3>
+
+                <div className="props-table-wrap">
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>
+                          <code>width</code>
+                        </td>
+                        <td>string</td>
+                        <td>"100%"</td>
+                        <td>Width of the camera preview.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>height</code>
+                        </td>
+                        <td>number</td>
+                        <td>420</td>
+                        <td>Height of the preview area.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>facingMode</code>
+                        </td>
+                        <td>string</td>
+                        <td>"user"</td>
+                        <td>User or environment camera.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>disabled</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Disables camera interaction.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>countdown</code>
+                        </td>
+                        <td>number</td>
+                        <td>0</td>
+                        <td>Countdown before taking the photo.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>showFaceGuide</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>true</td>
+                        <td>Displays the face alignment guide.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>allowCameraSwitch</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>true</td>
+                        <td>Shows the front/rear camera switch.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>allowDownload</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>true</td>
+                        <td>Allows downloading the captured image.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>onCapture</code>
+                        </td>
+                        <td>function</td>
+                        <td>-</td>
+                        <td>Called after a photo is captured.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>onError</code>
+                        </td>
+                        <td>function</td>
+                        <td>-</td>
+                        <td>Called if camera access fails.</td>
                       </tr>
                     </tbody>
                   </table>
