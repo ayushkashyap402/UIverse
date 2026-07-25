@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar/Navbar.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert.jsx'
 import Tabs from '../components/Tabs/Tabs.jsx'
+import Input from '../components/Input/Input'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
 
@@ -140,6 +141,7 @@ function Components() {
   const badgesRef = useRef(null)
   const alertsRef = useRef(null)
   const tabsRef = useRef(null)
+  const inputRef = useRef(null)
   const allComponentsRef = useRef(null)
 
   const toastTimeout = useRef(null)
@@ -178,6 +180,9 @@ function Components() {
         break
       case 'tabs':
         element = tabsRef.current
+        break
+      case 'inputs':
+        element = inputRef.current
         break
       case 'all-components':
         element = allComponentsRef.current
@@ -239,6 +244,11 @@ function Components() {
         filteredComponents.some((c) => c.name === 'Alert')
       ) {
         scrollTo('alerts')
+      } else if (
+        searchLower.includes('input') ||
+        filteredComponents.some((c) => c.name === 'Inputs')
+      ) {
+        scrollTo('inputs')
       } else if (searchLower.includes('tab') || filteredComponents.some((c) => c.name === 'Tabs')) {
         scrollTo('tabs')
       } else if (filteredComponents.length > 0) {
@@ -267,6 +277,7 @@ function Components() {
     if (shouldShowSection('badges', 'Badge')) count++
     if (shouldShowSection('alerts', 'Alert')) count++
     if (shouldShowSection('tabs', 'Tabs')) count++
+    if (shouldShowSection('inputs', 'Input')) count++
     if (filteredComponents.length > 0) count++
     return count
   }, [searchQuery, filteredComponents])
@@ -758,6 +769,367 @@ function Components() {
                         <td>
                           <code>variant</code>
                         </td>
+                        <td>string</td>
+                        <td>
+                          <code>"underline"</code>
+                        </td>
+                        <td>
+                          Visual style: <code>"underline"</code> or <code>"pills"</code>.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ================= INPUT ================= */}
+          {shouldShowSection('input', 'Input') && (
+            <section className="comp-section" id="input" ref={inputRef}>
+              <div className="comp-section-header">
+                <h2>Input</h2>
+                <span className="comp-badge comp-badge--planned">Planned</span>
+              </div>
+
+              <p className="comp-section-desc">
+                Reusable input component supporting multiple HTML input types, validation states,
+                helper text, labels, and accessibility.
+              </p>
+
+              {/* Basic Inputs */}
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Basic Input Types</h3>
+
+                <div className="comp-preview" style={{ flexDirection: 'column', gap: '1rem' }}>
+                  <Input label="Text" placeholder="Enter text" />
+
+                  <Input label="Email" type="email" placeholder="example@email.com" />
+
+                  <Input label="Password" type="password" placeholder="Enter password" />
+
+                  <Input label="Search" type="search" placeholder="Search..." />
+
+                  <Input label="Number" type="number" placeholder="Enter number" />
+
+                  <Input label="Phone" type="tel" placeholder="+91 9876543210" />
+
+                  <Input label="Website" type="url" placeholder="https://example.com" />
+                </div>
+              </div>
+
+              {/* Date & Time */}
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Date & Time Inputs</h3>
+
+                <div className="comp-preview">
+                  <Input label="Date" type="date" />
+
+                  <Input label="Time" type="time" />
+
+                  <Input label="Date & Time" type="datetime-local" />
+
+                  <Input label="Month" type="month" />
+
+                  <Input label="Week" type="week" />
+                </div>
+              </div>
+
+              {/* Other Inputs */}
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Other Input Types</h3>
+
+                <div className="comp-preview">
+                  <Input label="Color" type="color" />
+
+                  <Input label="Range" type="range" />
+
+                  <Input label="File Upload" type="file" />
+                </div>
+              </div>
+
+              {/* States */}
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">States</h3>
+
+                <div className="comp-preview" style={{ flexDirection: 'column', gap: '1rem' }}>
+                  <Input label="Disabled" placeholder="Disabled" disabled />
+
+                  <Input label="Required" placeholder="Required field" required />
+
+                  <Input
+                    label="Error"
+                    placeholder="Invalid email"
+                    error
+                    helperText="Please enter a valid email."
+                  />
+
+                  <Input
+                    label="Success"
+                    placeholder="Looks good!"
+                    success
+                    helperText="Email verified successfully."
+                  />
+                </div>
+              </div>
+
+              {/* Code */}
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX</span>
+
+                  <button
+                    className="copy-btn"
+                    onClick={() =>
+                      handleCopy(`<Input
+  label="Email"
+  type="email"
+  placeholder="example@email.com"
+/>`)
+                    }
+                  >
+                    {copied ? '✅ Copied!' : '📋 Copy'}
+                  </button>
+                </div>
+
+                <pre>{`<Input
+  label="Email"
+  type="email"
+  placeholder="example@email.com"
+/>`}</pre>
+              </div>
+
+              {/* Props */}
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Props</h3>
+
+                <div className="props-table-wrap">
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>
+                          <code>label</code>
+                        </td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>Label displayed above the input.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>type</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>"text"</code>
+                        </td>
+                        <td>
+                          text, password, email, number, search, tel, url, date, time,
+                          datetime-local, month, week, color, range, file, hidden, image, button,
+                          submit, reset
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>placeholder</code>
+                        </td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>Placeholder text displayed when the field is empty.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>value</code>
+                        </td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>Controlled input value.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>onChange</code>
+                        </td>
+                        <td>function</td>
+                        <td>-</td>
+                        <td>Triggered whenever the input value changes.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>disabled</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Disables user interaction.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>required</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Marks the field as required.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>readOnly</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Makes the input read-only.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>error</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Displays the input in an error state.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>success</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Displays the input in a success state.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>helperText</code>
+                        </td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>Displays helper or validation text below the input.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>size</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>"md"</code>
+                        </td>
+                        <td>
+                          Input size: <code>sm</code>, <code>md</code>, or <code>lg</code>.
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>fullWidth</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>true</td>
+                        <td>Makes the input stretch to the width of its container.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>min</code>
+                        </td>
+                        <td>number</td>
+                        <td>-</td>
+                        <td>Minimum value for numeric and date-based inputs.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>max</code>
+                        </td>
+                        <td>number</td>
+                        <td>-</td>
+                        <td>Maximum value for numeric and date-based inputs.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>step</code>
+                        </td>
+                        <td>number</td>
+                        <td>-</td>
+                        <td>Increment step for number and range inputs.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>minLength</code>
+                        </td>
+                        <td>number</td>
+                        <td>-</td>
+                        <td>Minimum number of characters allowed.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>maxLength</code>
+                        </td>
+                        <td>number</td>
+                        <td>-</td>
+                        <td>Maximum number of characters allowed.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>autoFocus</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Automatically focuses the input on mount.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>accept</code>
+                        </td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>Accepted file types for file inputs.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>multiple</code>
+                        </td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Allows selecting multiple files.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>name</code>
+                        </td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>Name attribute for form submission.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>id</code>
+                        </td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>Unique identifier used to associate the label with the input.</td>
                         <td>string</td>
                         <td>
                           <code>"underline"</code>
