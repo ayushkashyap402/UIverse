@@ -1,8 +1,30 @@
 /* index.css – Global base styles + theme tokens */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-/* ── Light theme (default) ── */
+/* ── Light theme ── */
 :root {
+
+  --bg: #f4f6fb;
+  --bg-alt: #eef2ff;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --border: #e2e8f0;
+  --border-2: #e8ecf5;
+
+  --text: #1a1a2e;
+  --text-2: #374151;
+  --muted: #6b7280;
+  --muted-2: #9ca3af;
+
+  --brand: #4f46e5;
+  --brand-dark: #4338ca;
+  --brand-2: #a855f7;
+
+  --accent: #eef2ff;
+  --accent-2: #f5f3ff;
+
+  --code-bg: #13131f;
+
   --bg:          #f4f6fb;
   --bg-alt:      #eef2ff;
   --surface:     #ffffff;
@@ -19,41 +41,57 @@
   --accent:      #eef2ff;
   --accent-2:    #f5f3ff;
   --code-bg:     #13131f;
+
   --code-header: #1a1a2e;
   --code-border: #2a2a3e;
-  --code-text:   #e2e8f0;
-  --shadow-sm:   0 1px 4px rgba(0,0,0,0.06);
-  --shadow-md:   0 4px 20px rgba(0,0,0,0.08);
-  --shadow-brand:0 8px 28px rgba(79,70,229,0.18);
+  --code-text: #e2e8f0;
+
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-brand: 0 8px 28px rgba(79,70,229,0.18);
 }
 
 /* ── Dark theme ── */
 [data-theme="dark"] {
-  --bg:          #0f1117;
-  --bg-alt:      #1a1a2e;
-  --surface:     #161b27;
-  --surface-2:   #1e2535;
-  --border:      #2a3347;
-  --border-2:    #2a3347;
-  --text:        #f1f5f9;
-  --text-2:      #cbd5e1;
-  --muted:       #94a3b8;
-  --muted-2:     #64748b;
-  --accent:      rgba(79,70,229,0.15);
-  --accent-2:    rgba(168,85,247,0.12);
-  --code-bg:     #0d1117;
+  --bg: #0f1117;
+  --bg-alt: #1a1a2e;
+  --surface: #161b27;
+  --surface-2: #1e2535;
+  --border: #2a3347;
+  --border-2: #2a3347;
+
+  --text: #f1f5f9;
+  --text-2: #cbd5e1;
+  --muted: #94a3b8;
+  --muted-2: #64748b;
+
+  --accent: rgba(79,70,229,0.15);
+  --accent-2: rgba(168,85,247,0.12);
+
+  --code-bg: #0d1117;
   --code-header: #161b27;
   --code-border: #2a3347;
-  --code-text:   #e2e8f0;
-  --shadow-sm:   0 1px 4px rgba(0,0,0,0.3);
-  --shadow-md:   0 4px 20px rgba(0,0,0,0.4);
-  --shadow-brand:0 8px 28px rgba(79,70,229,0.3);
+  --code-text: #e2e8f0;
+
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
+  --shadow-brand: 0 8px 28px rgba(79,70,229,0.3);
 }
 
-*, *::before, *::after {
+/* ── Reset ── */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* ── Layout Fix ── */
+html,
+body,
+#root {
+  min-height: 100%;
 }
 
 html {
@@ -66,8 +104,63 @@ body {
   background-color: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* main grows, footer stays bottom */
+main {
+  flex: 1;
+}
+
+/* ── Typography ── */
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
+p {
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* ── Links ── */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── Focus States ── */
+:focus {
+  outline: none;
+=======
   line-height: 1.6;
 }
 
@@ -78,18 +171,28 @@ body {
 
 [data-theme="dark"] body {
   color: #f1f5f9;
+
 }
 
-:focus { outline: none; }
 :focus-visible {
   outline: 3px solid rgba(79,70,229,0.4);
   outline-offset: 2px;
   border-radius: 6px;
 }
 
-a { text-decoration: none; color: inherit; }
+/* ── Buttons ── */
+.uiverse-btn {
+  border-radius: 14px;
+  font-weight: 600;
+}
 
-/* ── Theme transition (circular ripple from toggle button) ── */
+/* IMPORTANT:
+No global section padding here.
+Each component handles its own spacing.
+This fixes footer + layout issues.
+*/
+
+/* ── Theme transition ── */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -97,20 +200,49 @@ a { text-decoration: none; color: inherit; }
 }
 
 ::view-transition-new(root) {
-  animation: theme-reveal 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-[data-theme="dark"]::view-transition-new(root) {
-  animation: theme-reveal 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: theme-reveal 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
 }
 
 @keyframes theme-reveal {
   from {
-    clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
+    clip-path: circle(
+      0px at var(--vt-x,50%)
+      var(--vt-y,50%)
+    );
   }
   to {
-    clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 50%));
+    clip-path: circle(
+      var(--vt-r,150vmax)
+      at var(--vt-x,50%)
+      var(--vt-y,50%)
+    );
   }
+}
+
+
+/* ── Smooth theme transitions ── */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+/* ── Interactive components ── */
+.uiverse-btn,
+.navbar-link,
+.theme-toggle,
+.feature-card,
+.sidebar-item {
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease,
+    opacity 0.18s ease;
 }
 
 /* Fallback: smooth CSS transition on themed properties — only on surfaces */
@@ -128,3 +260,4 @@ html, body {
 .category-tag, .comp-badge--planned {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
+
