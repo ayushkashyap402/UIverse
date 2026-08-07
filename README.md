@@ -157,7 +157,9 @@ import './YourComponent.css'
 
 function YourComponent({ propName }) {
   return (
-    <div className="your-component">
+   // Updated class name to follow the project's required
+   // CSS naming convention: uiverse-<componentname>
+   <div className="uiverse-yourcomponent">
       {/* your JSX here */}
     </div>
   )
