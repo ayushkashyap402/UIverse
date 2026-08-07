@@ -132,6 +132,18 @@ function Navbar() {
           className={`navbar-link ${location.pathname === '/components' ? 'active' : ''}`}>
           Components
         </Link>
+
+        {/* color wall page */}
+        <Link to="/color-wall" onClick={closeMenu}
+          className={`navbar-link ${location.pathname === '/color-wall' ? 'active' : ''}`}>
+          Color Wall
+        </Link>
+
+        {/* GitHub */}
+        <a
+          href="https://github.com/ayushkashyap402/UIverse"
+          target="_blank"
+          rel="noreferrer"
         {/* Get Started CTA (links to docs page) */}
         <Link
           to="/docs"
@@ -149,6 +161,8 @@ function Navbar() {
         >
           <SunIcon />
         </button>
+
+
 
       </div>
 
