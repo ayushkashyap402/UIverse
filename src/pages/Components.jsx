@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar/Navbar.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert.jsx'
 import Tabs from '../components/Tabs/Tabs.jsx'
+import Input from '../components/Input/Input'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
 
@@ -81,6 +82,24 @@ const sections = [
     ),
   },
   {
+    id: 'inputs',
+    label: 'Inputs',
+    componentName: 'Input',
+    icon: (
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <rect x="3" y="6" width="18" height="12" rx="2" />
+        <line x1="7" y1="12" x2="17" y2="12" />
+      </svg>
+    ),
+  },
+  {
     id: 'all-components',
     label: 'All Components',
     componentName: null,
@@ -132,6 +151,7 @@ function Components() {
   const [activeSection, setActiveSection] = useState('buttons')
   const [showToast, setShowToast] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [inputValue, setInputValue] = useState('')
   // Mobile sidebar drawer state
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -140,6 +160,7 @@ function Components() {
   const badgesRef = useRef(null)
   const alertsRef = useRef(null)
   const tabsRef = useRef(null)
+  const inputsRef = useRef(null)
   const allComponentsRef = useRef(null)
 
   const toastTimeout = useRef(null)
@@ -178,6 +199,9 @@ function Components() {
         break
       case 'tabs':
         element = tabsRef.current
+        break
+      case 'input':
+        element = inputsRef.current
         break
       case 'all-components':
         element = allComponentsRef.current
@@ -241,6 +265,11 @@ function Components() {
         scrollTo('alerts')
       } else if (searchLower.includes('tab') || filteredComponents.some((c) => c.name === 'Tabs')) {
         scrollTo('tabs')
+      } else if (
+        searchLower.includes('input') ||
+        filteredComponents.some((c) => c.name === 'Inputs')
+      ) {
+        scrollTo('inputs')
       } else if (filteredComponents.length > 0) {
         scrollTo('all-components')
       }
@@ -267,6 +296,7 @@ function Components() {
     if (shouldShowSection('badges', 'Badge')) count++
     if (shouldShowSection('alerts', 'Alert')) count++
     if (shouldShowSection('tabs', 'Tabs')) count++
+    if (shouldShowSection('inputs', 'Inputs')) count++
     if (filteredComponents.length > 0) count++
     return count
   }, [searchQuery, filteredComponents])
@@ -758,6 +788,192 @@ function Components() {
                         <td>
                           <code>variant</code>
                         </td>
+                        <td>string</td>
+                        <td>
+                          <code>"underline"</code>
+                        </td>
+                        <td>
+                          Visual style: <code>"underline"</code> or <code>"pills"</code>.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ================= INPUTS ================= */}
+          {shouldShowSection('inputs', 'Input') && (
+            <section className="comp-section" id="inputs">
+              <div className="comp-section-header">
+                <h2>Input</h2>
+                <span className="comp-badge comp-badge--stable">Stable</span>
+              </div>
+
+              <p className="comp-section-desc">
+                A customizable controlled input field with support for labels, validation states,
+                and accessibility best practices.
+              </p>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Default Input</h3>
+
+                <div className="comp-preview">
+                  <Input
+                    label="Username"
+                    placeholder="Enter your username"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Validation Variants</h3>
+
+                <div
+                  className="comp-preview"
+                  style={{
+                    flexDirection: 'column',
+                    alignItems: 'stretch',
+                    gap: '16px',
+                  }}
+                >
+                  <Input
+                    label="Success Input"
+                    placeholder="Everything looks good"
+                    value=""
+                    variant="success"
+                  />
+
+                  <Input
+                    label="Error Input"
+                    placeholder="Something went wrong"
+                    value=""
+                    variant="error"
+                  />
+                </div>
+              </div>
+
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX</span>
+                  <button
+                    className="copy-btn"
+                    onClick={() =>
+                      handleCopy(`<Input
+  label="Username"
+  placeholder="Enter your username"
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+/>`)
+                    }
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <pre>{`<Input
+  label="Username"
+  placeholder="Enter your username"
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+/>`}</pre>
+              </div>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Props</h3>
+
+                <div className="props-table-wrap">
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>
+                          <code>label</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>"Label"</code>
+                        </td>
+                        <td>Label displayed above the input.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>placeholder</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>"Enter text..."</code>
+                        </td>
+                        <td>Placeholder text shown when empty.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>value</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>""</code>
+                        </td>
+                        <td>Controlled input value.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>onChange</code>
+                        </td>
+                        <td>function</td>
+                        <td>
+                          <code>-</code>
+                        </td>
+                        <td>Called whenever the input value changes.</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>type</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>"text"</code>
+                        </td>
+                        <td>
+                          Input type: <code>text</code>, <code>email</code>,<code>password</code>,{' '}
+                          <code>number</code>.
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>variant</code>
+                        </td>
+                        <td>string</td>
+                        <td>
+                          <code>"default"</code>
+                        </td>
+                        <td>
+                          Visual style: <code>default</code>,<code>success</code>, or{' '}
+                          <code>error</code>.
                         <td>string</td>
                         <td>
                           <code>"underline"</code>

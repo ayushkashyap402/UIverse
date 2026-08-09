@@ -1,0 +1,64 @@
+/* Input.css */
+
+.uiverse-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.uiverse-input-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.uiverse-input {
+  width: 100%;
+  padding: 10px 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-family: inherit;
+
+  background-color: #ffffff;
+  color: #111827;
+
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.uiverse-input::placeholder {
+  color: #9ca3af;
+}
+
+.uiverse-input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Success */
+
+.uiverse-input--success {
+  border-color: #22c55e;
+}
+
+.uiverse-input--success:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+}
+
+/* Error */
+
+.uiverse-input--error {
+  border-color: #ef4444;
+}
+
+.uiverse-input--error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
