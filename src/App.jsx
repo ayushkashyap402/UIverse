@@ -5,7 +5,8 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Components from './pages/Components.jsx'
-import GettingStarted from './pages/GettingStarted.jsx'
+import "./App.css";
+
 
 function App() {
   return (
